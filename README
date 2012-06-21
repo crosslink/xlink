@@ -1,0 +1,26 @@
+##################################################################################
+#
+# Link-The-Wiki
+#
+# Author: Andrew Trotman
+# Copyright (c) 2012 University of Otago
+# License: BSD
+#
+###################################################################################
+
+The code in the Link-The-Wiki directory is the implementation of Kelly's algorithm published in paper:
+Itakura, K. Y. and Clarke, C. L. 2007. University of Waterloo at INEX2007: Adhoc and Link-the-Wiki Tracks. In Focused Access To XML Documents: 6th international Workshop of the initiative For the Evaluation of XML Retrieval, INEX 2007 Dagstuhl Castle, Germany, December 17-19, 2007. Selected Papers, N. Fuhr, J. Kamps, M. Lalmas, and A. Trotman, Eds. Lecture Notes In Computer Science, vol. 4862. Springer-Verlag, Berlin, Heidelberg, 417-425. DOI= http://dx.doi.org/10.1007/978-3-540-85902-4_35
+http://www.springerlink.com/content/b213h30n3rj1x61n/
+
+
+##################################################################################
+#
+# xlink
+#
+# Author: Eric Tang
+#
+###################################################################################
+
+The xlink code is an adaption of Link-The-Wiki for producing cross-lingual links. The QUT runs created with this framework and submitted to NTCIR-9 Crosslink are described in paper:
+Ling-Xiang Tang, Daniel Cavanagh, Andrew Trotman, Shlomo Geva, Yue Xu and Laurianne Sitbon, Automated Cross-lingual Link Discovery in Wikipedia
+http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings9/NTCIR/11-NTCIR9-CROSSLINK-TangL.pdf
