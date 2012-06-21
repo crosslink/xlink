@@ -1,7 +1,8 @@
 /*
 	LINK_LENGTH_CORRELATE.C
 	-----------------------
-	Written (w) 2008 by Andrew Trotman, University of Otago
+	Copyright (c) 2012 University of Otago
+	Designed and implemented by Andrew Trotman
 */
 #include <stdio.h>
 #include <stdlib.h>

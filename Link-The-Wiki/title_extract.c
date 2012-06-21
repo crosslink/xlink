@@ -1,6 +1,7 @@
 /*
 	TITLE_EXTRACT.C
 	--------------
+	Copyright (c) 2012 University of Otago
 	Written (w) 2009 by Andrew Trotman & David Alexander, University of Otago
 */
 #include <stdio.h>

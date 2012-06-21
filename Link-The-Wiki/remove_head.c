@@ -1,6 +1,8 @@
 /*
 	REMOVE_HEAD.C
 	-------------
+		Copyright (c) 2012 University of Otago
+	Designed and implemented by Andrew Trotman
 */
 #include <stdio.h>
 #include <stdlib.h>
