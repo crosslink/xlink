@@ -27,27 +27,27 @@
 #include <string>
 
 namespace stpl {
-	typedef Document<Property<> > 						Properties;
-	typedef Properties::entity_type 					PropertyEntityType;
-	typedef Scanner<PropertyEntityType> 				PropertiesScanner;
-	typedef GeneralGrammar<Properties > 				PropertiesGrammar;
+	typedef Document<Property<> > 											Properties;
+	typedef Properties::entity_type 										PropertyEntityType;
+	typedef Scanner<PropertyEntityType> 									PropertiesScanner;
+	typedef GeneralGrammar<Properties > 									PropertiesGrammar;
 
 	typedef Parser<PropertiesGrammar
 					, Properties
 					, PropertyEntityType
 					, PropertiesScanner
-					> 									PropertiesParser;
+					> 														PropertiesParser;
 
-	typedef Document<Property<std::string, char *> >	PropertyDocument;
-	typedef FileStream<PropertyDocument>				PropertiesFile;
-	typedef PropertiesFile::entity_type 				PropertiesFileEntityType;
-	typedef Scanner<PropertiesFileEntityType> 			PropertiesFileScanner;
-	typedef GeneralGrammar<PropertiesFile> 				PropertiesFileGrammar;
+	typedef Document<Property<std::string, char *> >						PropertyDocument;
+	typedef FileStream<std::string, char *, PropertyDocument>				PropertiesFile;
+	typedef PropertiesFile::entity_type 									PropertiesFileEntityType;
+	typedef Scanner<PropertiesFileEntityType> 								PropertiesFileScanner;
+	typedef GeneralGrammar<PropertiesFile> 									PropertiesFileGrammar;
 
 	typedef Parser<PropertiesFileGrammar
 					, PropertiesFile
 					, PropertiesFileEntityType
 					, PropertiesFileScanner
-					> 									PropertiesFileParser;
+					> 														PropertiesFileParser;
 }
 #endif /* PROPERTY_H_ */

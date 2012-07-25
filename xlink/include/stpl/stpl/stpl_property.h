@@ -64,7 +64,7 @@ namespace stpl {
 			}
 
 			virtual bool is_start(IteratorT& it) {
-				skip_whitespace(it);
+				this->skip_whitespace(it);
 				name_.begin(it);
 				name_.end(it);
 				value_.begin(it);
@@ -73,7 +73,7 @@ namespace stpl {
 			}
 
 			virtual bool is_end(IteratorT& it) {
-				bool ret = eow(it);
+				bool ret = this->eow(it);
 				//	ret = (has_equal_ && (value_.begin() != value_.end()));
 
 				if (!ret) {
@@ -113,18 +113,18 @@ namespace stpl {
 							bool has_space = isspace(*it);
 
 							if (has_space)
-								skip_whitespace(it);
+								this->skip_whitespace(it);
 
 							if (*it == '=') {
 								has_equal_ = true;
 
 								// deside where is the end of name
 								IteratorT pre = it;
-								skip_whitespace_backward(--pre);
+								this->skip_whitespace_backward(--pre);
 								name_.end(++pre);
 
 								++it;
-								skip_whitespace(it);
+								this->skip_whitespace(it);
 								if (*it == '\"' || *it == '\'') {
 									is_single_quote_ = (*it == '\'');
 									has_quote_ = true;
@@ -162,7 +162,7 @@ namespace stpl {
 					if (has_quote_) {
 						IteratorT pre = end;
 						pre--;
-						skip_whitespace_backward(pre);
+						this->skip_whitespace_backward(pre);
 						if ( (*pre == '\"')	|| (*pre == '\'')) {
 							  value_.end(pre);
 						}

@@ -1,0 +1,65 @@
+####################################################################
+#
+#  STS (simple text system) - Change Log
+#
+#  Author : Eric
+####################################################################
+0.9.14a (23-NOV-2008)
+--------------------------------------
+* Minor bug fixed in utils/fs.h. When appending a char for std::string should use push_back method
+
+0.9.8a (23-MAR-2008)
+--------------------------------------
+* fixed bug for memory leak
+* Change the find the attribute function, abondoned the map.find() function which could not find the last element
+
+
+0.9.8 (21-MAR-2008)
+--------------------------------------
+* adding the features for installation of stpl in Makefile.am configure.ac under the source root path
+* making it simpler and easier to parse html or xml file, use a single parser and return a parsed tree like dom
+
+
+0.9.7a (13-MAR-2008)
+--------------------------------------
+* Add a function for transform different charset to another
+
+
+0.9.7 (09-MAR-2008)
+--------------------------------------
+* made the parser be able to gererate a node tree, and getting the specific attribute for certain tag
+
+
+0.9.6a (08-MAR-2008)
+--------------------------------------
+* minor change on the html element tag class, with regarding to where to stop for the element with a optional end tag
+
+
+0.9.6 (06-MAR-2008)
+--------------------------------------
+* More bugs were fixed regarding the end of attributes of the Elements
+
+
+0.9.5 (19-FEB-2008)
+--------------------------------------
+* Reorganized the stucture of nodes of the Xml and Html
+* Many many bugs fixed for dealing with the start or end of a node
+
+
+0.9.4 (15-FEB-2008)
+--------------------------------------
+* Basically finished attributes reading of element (HTML or XML), bugs might exist.
+
+0.9.3
+--------------------------------------
+# started date: 31-JAN-2008
+# finished date: 12-FEB-2008
+
+* Finished properties reading (file or string)
+
+0.9.2 (31-JAN-2008)
+---------------------
+* Fixed segment fault bug because last_tag_ptr null pointer 
+* Fixed bug for the begin_ of content_ not being correctly assigned in this case <case>
+* Added new subscript overridden function in Entity
+* The HTML parser was basically done
