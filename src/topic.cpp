@@ -10,7 +10,7 @@
 #include "sys_file.h"
 #include "application_out.h"
 
-#include <libgen.h>
+//#include <libgen.h>
 #include <stdio.h>
 #include <string.h>
 

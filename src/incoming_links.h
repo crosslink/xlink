@@ -9,6 +9,7 @@
 #define INCOMING_LINKS_H_
 
 #include "links.h"
+#include <stdio.h>
 
 namespace QLINK {
 

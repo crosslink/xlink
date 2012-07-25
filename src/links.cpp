@@ -15,6 +15,7 @@
 #include "corpus_txt.h"
 #include "application_out.h"
 #include "run_config.h"
+#include "ant_link_parts.h"
 
 #include <stdio.h>
 #include <string.h>

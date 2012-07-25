@@ -7,6 +7,7 @@
 
 #include "link_print.h"
 #include "string_utils.h"
+#include "extralib.h"
 
 #include <string>
 #include <iostream>

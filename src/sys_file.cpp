@@ -11,9 +11,14 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include <stdexcept>
 #include <string>
+
+#include <glob.h>
+
+#define GLOB_ONLYDIR    (1<<13)
 
 #if defined(WINDOWS) || defined(_WIN32) || defined(_WIN64)
 	const char *sys_file::SEPARATOR = "\\";
@@ -103,7 +108,11 @@ if (file_length == NULL)
 	if ((fp = fopen(filename, "rb")) == NULL)
 		return NULL;
 
+#if _POSIX_C_SOURCE >= 1 || _XOPEN_SOURCE || _POSIX_SOURCE
 	if (fstat(fileno(fp), &details) == 0)
+#else
+	if (::stat(filename, &details) == 0)
+#endif
 		if ((*file_length = details.st_size) != 0)
 			if ((block = new (std::nothrow) char [(long)(details.st_size + 1)]) != NULL)		// +1 for the '\0' on the end
 				if (fread(block, (long)details.st_size, 1, fp) == 1)

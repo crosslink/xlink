@@ -8,13 +8,15 @@
 #define __LINK_PARTS_H__
 
 #include <ctype.h>
-#include <cstring>
+//#include <cstring>
+#include <string.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
 #include "language.h"
 #include "string_utils.h"
+#include "extralib.h"
 
 #define INEX_ARCHIVE_ARTICLE_ID_SIGNITURE "<name id="
 #define ARTICLE_ID_SIGNITURE "<id>"
@@ -30,6 +32,31 @@
 #endif
 
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
+
+/*
+
+#if defined (CYGWIN) || defined(cygwin) || defined(__WIN32__) || defined(__CYGWIN32__) || defined(_MSC_VER)
+
+char *strndup(char const *s, size_t len)
+{
+ char *pc = NULL ;
+ if (s != NULL) {
+   pc = (char*) malloc((len + 1) * sizeof *pc ) ;
+   if (pc != NULL) { strcpy (pc,s) ; }
+ }
+ return pc ;
+}
+
+char *strdup(char const *s)
+{
+  return strndup(s, strlen(s));
+}
+
+#define _strdup strdup
+//#define _strdup strdup
+#endif
+*/
+
 
 /*
 	STRING_CLEAN()

@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdio.h>
 
 using namespace QLINK;
 
@@ -31,6 +32,9 @@ void system_call::cmd(char *cmd_str)
 
 char *system_call::execute(const char *cmd)
 {
+#if defined (CYGWIN) || defined(cygwin) || defined(__WIN32__) || defined(__CYGWIN32__) || defined(_MSC_VER)
+
+#else
 	reset();
 	dl_ = popen(cmd, "r");
 	if(!dl_){
@@ -50,5 +54,6 @@ char *system_call::execute(const char *cmd)
 			break;
 		--idx;
 	}
+#endif
 	return result_buf_;
 }

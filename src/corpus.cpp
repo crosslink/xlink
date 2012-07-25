@@ -8,6 +8,7 @@
 #include "corpus.h"
 #include "ant_link_parts.h"
 #include "sys_files.h"
+#include "extralib.h"
 
 #include <string>
 #include <fstream>
@@ -15,6 +16,9 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace QLINK;
 using namespace std;
