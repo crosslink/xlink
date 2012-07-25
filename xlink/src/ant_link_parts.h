@@ -16,9 +16,10 @@
 #include "language.h"
 #include "string_utils.h"
 
-#define INEX_ARCHIVE_ARTICLE_ID_SIGNITURE "name id="
-#define ARTICLE_ID_SIGNITURE "id"
-#define ARTICLE_NAME_SIGNITURE "title"
+#define INEX_ARCHIVE_ARTICLE_ID_SIGNITURE "<name id="
+#define ARTICLE_ID_SIGNITURE "<id>"
+#define ARTICLE_NAME_SIGNITURE_OPEN "<title"
+#define ARTICLE_NAME_SIGNITURE_CLOSED "</title"
 
 #ifndef FALSE
 	#define FALSE 0
@@ -159,9 +160,9 @@ inline static long get_doc_id(const char *file)
 {
 char *pos;
 
-pos = strstr((char*)file, "<"INEX_ARCHIVE_ARTICLE_ID_SIGNITURE);
+pos = strstr((char*)file, INEX_ARCHIVE_ARTICLE_ID_SIGNITURE);
 if (pos == NULL)
-	pos = strstr((char*)file, "<"ARTICLE_ID_SIGNITURE">");
+	pos = strstr((char*)file, ARTICLE_ID_SIGNITURE);
 if (pos == NULL) {
 	fprintf(stderr, "Cannot find DOC id <name id=...> or <id> in file\n");
 	return -1;
@@ -199,7 +200,7 @@ inline char *get_doc_name(char *file, char *to)
 	char *pos, *start, *end;
 	long len = 0;
 
-	pos = strstr(file, "<"ARTICLE_NAME_SIGNITURE);
+	pos = strstr(file, ARTICLE_NAME_SIGNITURE_OPEN);
 	if (pos == NULL) {
 		fprintf(stderr, "Cannot find DOC title in file\n");
 		return to;
@@ -207,7 +208,7 @@ inline char *get_doc_name(char *file, char *to)
 
 	start = strchr(pos, '>');
 	start++;
-	end = strstr(file, "</"ARTICLE_NAME_SIGNITURE);
+	end = strstr(file, ARTICLE_NAME_SIGNITURE_CLOSED);
 	len = end - start;
 	strncpy(to, start, len);
 	to[len] = '\0';

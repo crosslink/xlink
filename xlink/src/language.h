@@ -141,10 +141,10 @@ if ((*here & 0xF8) == 0xF0)		// 4-byte sequence
 	return 4;
 return 1;		// dunno so make it 1
 }
-
-int language::is_cjk_punctuation(const unsigned char* here)
-{
-}
+//
+//int language::is_cjk_punctuation(const unsigned char* here)
+//{
+//}
 
 inline void language::codepoint_to_utf8(char *buf, long cp)
 {

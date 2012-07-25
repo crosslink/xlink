@@ -166,6 +166,7 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 		else
 			ret = false;
 
+#ifdef WITH_ATIRE
 		how_many_left = beps_to_print - count;
 		if (fill_anchor_with_ir_results && how_many_left > 0) {
 			long long result = 0;
@@ -201,6 +202,8 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 				--how_many_left;
 			}
 		}
+#endif
+
 		//puts("\t\t\t</anchor>\n");
 		if (anchor_printed)
 			stringbuffer << "\t\t\t</anchor>\n";

@@ -5,9 +5,11 @@
  *      Author: monfee
  */
 
+
 #ifndef SEARCH_ENGINE_ANT_H_
 #define SEARCH_ENGINE_ANT_H_
 
+#ifdef WITH_ATIRE
 #include "pattern_singleton.h"
 
 #include <string>
@@ -48,4 +50,7 @@ private:
 	void init();
 };
 
+#endif
+
 #endif /* SEARCH_ENGINE_ANT_H_ */
+

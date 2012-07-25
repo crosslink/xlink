@@ -31,10 +31,12 @@
 #include <iostream>
 
 #ifdef INEX_ARCHIVE
-	#define COLLECTION_LINK_TAG_NAME "collectionlink"
+	#define COLLECTION_LINK_TAG_NAME "<collectionlink"
+	#define COLLECTION_LINK_TAG_NAME_CLOSED "</collectionlink"
 	#define TOPIC_SIGNITURE "<topic file=\"%d.xml\" name=\"%s\"><outgoing>\n"
 #else
-	#define COLLECTION_LINK_TAG_NAME "link"
+	#define COLLECTION_LINK_TAG_NAME "<link"
+	#define COLLECTION_LINK_TAG_NAME_CLOSED "</link"
 	#define TOPIC_SIGNITURE "<topic file=\"%d\" name=\"%s\"><outgoing>\n"
 #endif
 
@@ -256,11 +258,11 @@ std::vector<link *>& links_in_orphan = links_->orphan_links();
 file = _strdup(original_file);
 link *orphan_link = NULL;
 
-pos = strstr(file, "<"COLLECTION_LINK_TAG_NAME);
+pos = strstr(file, COLLECTION_LINK_TAG_NAME);
 int count = 0;
 while (pos != NULL)
 	{
-	end = strstr(pos, "</"COLLECTION_LINK_TAG_NAME);
+	end = strstr(pos, COLLECTION_LINK_TAG_NAME_CLOSED);
 	pos = strstr(pos, "xlink:href=");
 	if (pos != NULL && pos < end)
 		{
@@ -294,7 +296,7 @@ while (pos != NULL)
 		if (links_->orphan_links_length() >= MAX_LINKS_IN_FILE)
 			exit(printf("Too many links present in orphan a priori\n"));
 		}
-	pos = strstr(end, "<"COLLECTION_LINK_TAG_NAME);
+	pos = strstr(end, COLLECTION_LINK_TAG_NAME);
 	}
 
 //link *link_ptr;

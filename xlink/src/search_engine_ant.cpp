@@ -8,6 +8,7 @@
 #include "search_engine_ant.h"
 #include "sys_file.h"
 
+#ifdef WITH_ATIRE
 #include <atire_api.h>
 
 using namespace QLINK;
@@ -94,3 +95,4 @@ const char **search_engine_ant::search(const char * term)
 //	docids_ = (const char **)ant_search(ant_, &hits_, (char *)term);
 	return docids_;
 }
+#endif
