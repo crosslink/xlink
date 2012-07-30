@@ -40,4 +40,4 @@ if [ -f $OUT ]; then
   pause "The run file is already existing, are you sure to override it? Press Ctrl-C to stop running me"
 fi
 
-ltw -lowercase -targets:1 -anchors:250 -index /home/monfee/corpus/inex/2009/ltw/index/links.idx /home/monfee/corpus/inex/2009/ltw/2009_33Topics/*.xml > $OUT
+./ltw -lowercase -targets:1 -anchors:250 ~/experiments/ntcir-10-crosslink/topics/official/ko-10crosslink-topics/*.xml > $OUT

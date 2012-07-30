@@ -1,0 +1,35 @@
+##############################################################
+#
+#                            XLINK 
+#
+###############################################################
+
+This is a cross-lingual link discovery framework
+
+1. how to create a triagulation title mapping table
+
+for example, building a English / Chinese title mapping table:
+
+1) download a copy of Link-the-Wiki code
+
+https://github.com/crosslink/Link-the-Wiki
+
+build it to have following programs:
+* link_extract
+
+
+wc -l ../en-zh/zh2en_table.txt 
+169974 ../en-zh/zh2en_table.txt
+
+wc -l ../zh-en/zh2en_table.txt 
+170637 ../zh-en/zh2en_table.txt
+
+cat ../zh-en/zh2en_table.txt ../en-zh/zh2en_table.txt | awk -F : '{print $1":"$2}' | sort -n | uniq > both_zh2en_table_uniq.txt.2
+
+cat ../zh-en/zh2en_table.txt | awk -F : '{print $1":"$2}' | sort -n | uniq > zh_corpus_zh2en_table.txt.2
+
+cat both_zh2en_table_uniq.txt.2 zh_corpus_zh2en_table.txt.2 | sort -n | uniq -u > en_corpus_zh2en_table_uniq.txt.2
+
+cat en_corpus_zh2en_table_uniq.txt.2 | while read line; do grep "^${line}:" ../en-zh/zh2en_table.txt ; done > en_corpus_zh2en_table_uniq.txt
+
+cat ../zh-en/zh2en_table.txt en_corpus_zh2en_table_uniq.txt | sort -n | uniq > both_zh2en_table.txt
