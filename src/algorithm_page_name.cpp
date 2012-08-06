@@ -74,7 +74,9 @@ namespace QLINK
 				if (line.length() == 0 || line.find("Portal:") != string::npos)
 					continue;
 #ifdef DEBUG
-				cerr << "loading : " << line << endl;
+				if ((count % 5000) == 0) {
+					cerr << "#" << count << ", loading : " << line << endl;
+				}
 #endif
 				string::size_type pos = line.find_first_of(':');
 				if (pos != string::npos) {

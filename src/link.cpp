@@ -166,8 +166,8 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 		else
 			ret = false;
 
-#ifdef WITH_ATIRE
 		how_many_left = beps_to_print - count;
+#ifdef WITH_ATIRE
 		if (fill_anchor_with_ir_results && how_many_left > 0) {
 			long long result = 0;
 			string lang_pair = string(source_lang) + "|" + string(target_lang);
@@ -209,7 +209,7 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 			stringbuffer << "\t\t\t</anchor>\n";
 	}
 	if (how_many_left == beps_to_print) {
-		cerr << "Something funny happened for anchor \"" << term << "\" with " << this_link_term->postings.size() << " links."<< endl;
+		cerr << "No link outputed: there must be something funny happened for anchor \"" << term << "\" even with " << this_link_term->postings.size() << " links."<< endl;
 		ret = false;
 	}
 
