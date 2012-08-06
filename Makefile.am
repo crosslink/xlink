@@ -35,8 +35,6 @@ ltw_headers = \
 	$(SRC_DIR)/sys_files.h \
 	$(SRC_DIR)/ir_task.h \
 	$(SRC_DIR)/ltw_task.h \
-	$(SRC_DIR)/task_a2b.h \
-	$(SRC_DIR)/task_f2f.h \
 	$(SRC_DIR)/links.h \
 	$(SRC_DIR)/outgoing_links.h \
 	$(SRC_DIR)/incoming_links.h \
@@ -93,8 +91,6 @@ ltw_sources = \
 	$(SRC_DIR)/algorithm_ltara_base.cpp \
 	$(SRC_DIR)/cmdline_options.cpp \
 	$(SRC_DIR)/ltw_task.cpp \
-	$(SRC_DIR)/task_a2b.cpp \
-	$(SRC_DIR)/task_f2f.cpp \
 	$(SRC_DIR)/links.cpp \
 	$(SRC_DIR)/outgoing_links.cpp \
 	$(SRC_DIR)/incoming_links.cpp \

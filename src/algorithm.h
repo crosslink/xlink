@@ -9,6 +9,7 @@
 #define ALGORITHM_H_
 
 #include "links.h"
+#include "config.h"
 
 namespace QLINK {
 	class algorithm_config;
@@ -55,6 +56,8 @@ namespace QLINK {
 
 		ltw_topic 				*current_topic_;
 
+		config					*system_config_;
+
 	public:
 		algorithm(ltw_task *task);
 //		algorithm() {}
@@ -82,6 +85,7 @@ namespace QLINK {
 		virtual ANT_link_term *find_term_in_list(const char *value) {}
 
 		void set_stage(long stage) { stage_ = stage; }
+		void set_system_config(config *config_ptr) {system_config_ = config_ptr; }
 
 	protected:
 		virtual void process_terms(char **term_list, const char *source) {}

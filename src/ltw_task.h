@@ -74,7 +74,7 @@ namespace QLINK {
 	    ltw_task(std::string & name, std::string & out_algor_name, std::string & in_algor_name);
 	    virtual ~ltw_task();
 	    virtual void init();
-	    virtual void perform();
+	    virtual void perform(config& config_ref);
 	    virtual void print_links();
 	    bool is_f2f_task();
 	    bool is_a2b_task();

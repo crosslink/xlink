@@ -66,8 +66,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	algorithm_ltw_incoming_a2b_search_tn.$(OBJEXT) \
 	algorithm_bep.$(OBJEXT) algorithm_out.$(OBJEXT) \
 	algorithm_ltara_base.$(OBJEXT) cmdline_options.$(OBJEXT) \
-	ltw_task.$(OBJEXT) task_a2b.$(OBJEXT) task_f2f.$(OBJEXT) \
-	links.$(OBJEXT) outgoing_links.$(OBJEXT) \
+	ltw_task.$(OBJEXT) links.$(OBJEXT) outgoing_links.$(OBJEXT) \
 	incoming_links.$(OBJEXT) topic.$(OBJEXT) ltw_topic.$(OBJEXT) \
 	xml2txt_client.$(OBJEXT) xml2txt.$(OBJEXT) corpus.$(OBJEXT) \
 	corpus_txt.$(OBJEXT) system_call.$(OBJEXT) language.$(OBJEXT) \
@@ -235,8 +234,6 @@ ltw_headers = \
 	$(SRC_DIR)/sys_files.h \
 	$(SRC_DIR)/ir_task.h \
 	$(SRC_DIR)/ltw_task.h \
-	$(SRC_DIR)/task_a2b.h \
-	$(SRC_DIR)/task_f2f.h \
 	$(SRC_DIR)/links.h \
 	$(SRC_DIR)/outgoing_links.h \
 	$(SRC_DIR)/incoming_links.h \
@@ -292,8 +289,6 @@ ltw_sources = \
 	$(SRC_DIR)/algorithm_ltara_base.cpp \
 	$(SRC_DIR)/cmdline_options.cpp \
 	$(SRC_DIR)/ltw_task.cpp \
-	$(SRC_DIR)/task_a2b.cpp \
-	$(SRC_DIR)/task_f2f.cpp \
 	$(SRC_DIR)/links.cpp \
 	$(SRC_DIR)/outgoing_links.cpp \
 	$(SRC_DIR)/incoming_links.cpp \
@@ -420,8 +415,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sys_files.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_call.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_info.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/task_a2b.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/task_f2f.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/topic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/translation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/webpage_retriever.Po@am__quote@
@@ -821,34 +814,6 @@ ltw_task.obj: $(SRC_DIR)/ltw_task.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/ltw_task.cpp' object='ltw_task.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ltw_task.obj `if test -f '$(SRC_DIR)/ltw_task.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/ltw_task.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/ltw_task.cpp'; fi`
-
-task_a2b.o: $(SRC_DIR)/task_a2b.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT task_a2b.o -MD -MP -MF $(DEPDIR)/task_a2b.Tpo -c -o task_a2b.o `test -f '$(SRC_DIR)/task_a2b.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/task_a2b.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/task_a2b.Tpo $(DEPDIR)/task_a2b.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/task_a2b.cpp' object='task_a2b.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o task_a2b.o `test -f '$(SRC_DIR)/task_a2b.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/task_a2b.cpp
-
-task_a2b.obj: $(SRC_DIR)/task_a2b.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT task_a2b.obj -MD -MP -MF $(DEPDIR)/task_a2b.Tpo -c -o task_a2b.obj `if test -f '$(SRC_DIR)/task_a2b.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/task_a2b.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/task_a2b.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/task_a2b.Tpo $(DEPDIR)/task_a2b.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/task_a2b.cpp' object='task_a2b.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o task_a2b.obj `if test -f '$(SRC_DIR)/task_a2b.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/task_a2b.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/task_a2b.cpp'; fi`
-
-task_f2f.o: $(SRC_DIR)/task_f2f.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT task_f2f.o -MD -MP -MF $(DEPDIR)/task_f2f.Tpo -c -o task_f2f.o `test -f '$(SRC_DIR)/task_f2f.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/task_f2f.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/task_f2f.Tpo $(DEPDIR)/task_f2f.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/task_f2f.cpp' object='task_f2f.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o task_f2f.o `test -f '$(SRC_DIR)/task_f2f.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/task_f2f.cpp
-
-task_f2f.obj: $(SRC_DIR)/task_f2f.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT task_f2f.obj -MD -MP -MF $(DEPDIR)/task_f2f.Tpo -c -o task_f2f.obj `if test -f '$(SRC_DIR)/task_f2f.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/task_f2f.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/task_f2f.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/task_f2f.Tpo $(DEPDIR)/task_f2f.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/task_f2f.cpp' object='task_f2f.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o task_f2f.obj `if test -f '$(SRC_DIR)/task_f2f.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/task_f2f.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/task_f2f.cpp'; fi`
 
 links.o: $(SRC_DIR)/links.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT links.o -MD -MP -MF $(DEPDIR)/links.Tpo -c -o links.o `test -f '$(SRC_DIR)/links.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/links.cpp

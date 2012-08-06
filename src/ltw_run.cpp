@@ -101,7 +101,7 @@ void ltw_run::create()
 	print_header();
 
 	if (task_) {
-		task_->perform();
+		task_->perform(get_config());
 	}
 
 	print_footer();

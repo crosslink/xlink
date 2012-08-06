@@ -97,8 +97,9 @@ void ltw_task::init()
 		break;
 	}
 
-	if (algor_out_)
+	if (algor_out_) {
 		this->topic_param_start = algor_out_->init_params();
+	}
 
 	switch (get_algorithm_incoming_type()) {
 	case LTW_A2B_INCOMING_SEARCH_TN:
@@ -123,7 +124,7 @@ void ltw_task::set_alorithm_bep(string name)
 		algor_bep_ = new algorithm_bep(name);
 }
 
-void ltw_task::perform()
+void ltw_task::perform(config& config_ref)
 {
 	int count = 0;
 	long param = topic_param_start;
@@ -149,14 +150,16 @@ void ltw_task::perform()
 			a_topic.print_header();
 
 			if (algor_out_) {
+				algor_out_->set_system_config(&config_ref);
+
 				if (outgoings_) {
 					delete outgoings_;
 					outgoings_ = NULL;
 				}
 				outgoings_ = new outgoing_links(&a_topic);
 				outgoings_->set_bep_algorithm(algor_bep_);
-
 				outgoings_->set_algorithm(algor_out_);
+
 				if (links_to_print_ > 0)
 					outgoings_->set_links_to_print(links_to_print_);
 				if (beps_to_print_ > 0)

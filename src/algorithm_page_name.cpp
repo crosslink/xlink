@@ -59,6 +59,9 @@ namespace QLINK
 
 		string filename(config_->get_value("titles_file"));
 		if (filename.length() <= 0)
+			filename = system_config_->get_value("titles_file");
+
+		if (filename.length() <= 0)
 			return;
 
 		ifstream myfile (filename.c_str());
