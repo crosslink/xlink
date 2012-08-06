@@ -6,8 +6,6 @@
  */
 
 #include "ltw_run.h"
-#include "task_a2b.h"
-#include "task_f2f.h"
 #include "corpus_txt.h"
 #include "corpus.h"
 #include "sys_file.h"
@@ -62,7 +60,7 @@ void ltw_run::init()
 //		task_ = new task_a2b(taskname, out_algor_name, in_algor_name);
 //	else
 //		throw std::runtime_error("No recognizable task given.");
-	task_ = new ltw_task(taskname, out_algor_name, in_algor_name);
+	task_ = new ltw_task(get_config(), taskname, out_algor_name, in_algor_name);
 
 	task_->set_alorithm_bep(get_config().get_value("algorithm_bep"));
 
@@ -84,7 +82,6 @@ void ltw_run::init()
 	lang = get_config().get_value("target_lang");
 	task_->set_target_lang(lang.length() > 0 ? lang : task_->get_source_lang());
 
-
 }
 
 std::string ltw_run::get_home(const char *name)
@@ -101,7 +98,7 @@ void ltw_run::create()
 	print_header();
 
 	if (task_) {
-		task_->perform(get_config());
+		task_->perform();
 	}
 
 	print_footer();

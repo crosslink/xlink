@@ -30,8 +30,8 @@ using namespace QLINK;
 
 int ltw_task::topic_param_start = 1;
 
-ltw_task::ltw_task(std::string& name, std::string& out_algor_name, std::string& in_algor_name)
-	: name_(name), 	algor_out_name_(out_algor_name), algor_in_name_(in_algor_name)
+ltw_task::ltw_task(config& config_ref, std::string& name, std::string& out_algor_name, std::string& in_algor_name)
+	: system_config_(&config_ref), name_(name), algor_out_name_(out_algor_name), algor_in_name_(in_algor_name)
 {
 	outgoings_ = NULL;
 	incomings_ = NULL;
@@ -124,7 +124,7 @@ void ltw_task::set_alorithm_bep(string name)
 		algor_bep_ = new algorithm_bep(name);
 }
 
-void ltw_task::perform(config& config_ref)
+void ltw_task::perform()
 {
 	int count = 0;
 	long param = topic_param_start;
@@ -150,8 +150,6 @@ void ltw_task::perform(config& config_ref)
 			a_topic.print_header();
 
 			if (algor_out_) {
-				algor_out_->set_system_config(&config_ref);
-
 				if (outgoings_) {
 					delete outgoings_;
 					outgoings_ = NULL;

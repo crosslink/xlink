@@ -17,6 +17,7 @@
 
 #include "ir_task.h"
 #include "algorithm.h"
+#include "config.h"
 
 namespace QLINK {
 	class algorithm_out;
@@ -69,12 +70,13 @@ namespace QLINK {
 	    std::string target_lang_;
 
 	    bool is_cjk_lang_;
+		config					*system_config_;
 
 	public:
-	    ltw_task(std::string & name, std::string & out_algor_name, std::string & in_algor_name);
+	    ltw_task(config& config_ref, std::string & name, std::string & out_algor_name, std::string & in_algor_name);
 	    virtual ~ltw_task();
 	    virtual void init();
-	    virtual void perform(config& config_ref);
+	    virtual void perform();
 	    virtual void print_links();
 	    bool is_f2f_task();
 	    bool is_a2b_task();
@@ -111,6 +113,9 @@ namespace QLINK {
 
 	    bool is_cjk_lang() { return is_cjk_lang_; }
 	    void is_cjk_lang(bool value) { is_cjk_lang_ = value; }
+
+		void set_system_config(config *config_ptr) {system_config_ = config_ptr; }
+		config *get_system_config() { return system_config_; }
 
 	private:
 		ltw_algorithm get_algorithm_outgoing_type();

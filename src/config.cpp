@@ -6,6 +6,8 @@
  */
 
 #include "config.h"
+#include "sys_file.h"
+
 #include <stpl/stpl_property.h>
 #include <stpl/stpl_parser.h>
 #include <iostream>
@@ -33,10 +35,16 @@ void config::load(const char *name)
 void config::load()
 {
 	// create a STPL parser for reading the property file
-	properties_.read(name_);
-	PropertiesFileParser property_parser(&properties_);
+	if (sys_file::exist(name_.c_str())) {
+		properties_.read(name_);
+		PropertiesFileParser property_parser(&properties_);
 
-	property_parser.parse();
+		property_parser.parse();
+	}
+	else {
+		cerr << "WARNING:" << endl;
+		cerr << name_ << " doesn't exist." << endl;
+	}
 }
 
 void config::show()
