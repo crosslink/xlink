@@ -32,8 +32,6 @@ void run::init()
 	task = get_config().get_value("task");
 	id = get_config().get_value("id");
 
-	run_id = affiliation + "_" + task + "_" + run_name + "_" + id;
-
 	header = get_config().get_value("header");
 	footer = get_config().get_value("footer");
 

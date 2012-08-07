@@ -45,8 +45,8 @@ void ltw_run::init()
 		corpus_txt::instance().load_teara_map();
 	}
 
-	string lang = get_config().get_value("target_lang");
-	corpus::instance().lang(lang.length() > 0 ? lang : "en");
+	string target_lang = get_config().get_value("target_lang");
+	corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
 	assert(corpus::instance().lang().length() <= 4);
 
 	string taskname = get_config().get_value("task");
@@ -72,16 +72,43 @@ void ltw_run::init()
 	if (beps_to_print_str.length() > 0)
 		task_->set_beps_to_print(atol(beps_to_print_str.c_str()));
 
-	lang = get_config().get_value("source_lang");
-	task_->set_source_lang(lang.length() > 0 ? lang : "en");
-	if (lang == "zh" || lang == "ko" || lang == "ja")
+	string source_lang = get_config().get_value("source_lang");
+	task_->set_source_lang(source_lang.length() > 0 ? source_lang : "en");
+	if (source_lang == "zh" || source_lang == "ko" || source_lang == "ja")
 		task_->is_cjk_lang(true);
 	else
 		task_->is_cjk_lang(false);
 
-	lang = get_config().get_value("target_lang");
-	task_->set_target_lang(lang.length() > 0 ? lang : task_->get_source_lang());
+//	lang = get_config().get_value("target_lang");
+	task_->set_target_lang(target_lang.length() > 0 ? target_lang : task_->get_source_lang());
 
+	string s_code;
+	string t_code;
+
+	if (source_lang == "zh")
+	  s_code="C";
+	else if (source_lang == "en")
+	  s_code="E";
+	else if (source_lang == "ja")
+	  s_code="J";
+	else if (source_lang == "ko")
+	  s_code="K";
+	else
+		s_code = toupper(source_lang[0]);
+
+
+	if (target_lang == "zh")
+	  t_code="C";
+	else if (target_lang == "en")
+	  t_code="E";
+	else if (target_lang == "ja")
+	  t_code="J";
+	else if (target_lang == "ko")
+	  t_code="K";
+	else
+		t_code = toupper(target_lang[0]);
+
+	run_id = affiliation + "_" + s_code + "2" + t_code + "_" + task + "_" + id + "_" + run_name;
 }
 
 std::string ltw_run::get_home(const char *name)
@@ -118,7 +145,7 @@ void ltw_run::print()
 void ltw_run::print_header()
 {
 	char *local_buf = new char[1024 * 1024]; // = {""};
-	sprintf(local_buf, header.c_str(), affiliation.c_str(), task.c_str(), task_->get_target_lang().c_str(), task_->get_source_lang().c_str());
+	sprintf(local_buf, header.c_str(), affiliation.c_str(), run_id.c_str(), task.c_str(), task_->get_target_lang().c_str(), task_->get_source_lang().c_str());
 	aout << local_buf;
 	delete [] local_buf;
 }
