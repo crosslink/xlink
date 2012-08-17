@@ -81,8 +81,11 @@ namespace QLINK
 				string::size_type pos = line.find_first_of(':');
 				if (pos != string::npos) {
 					unsigned long doc_id = atol(line.c_str());
-					if (!corpus::instance().exist(doc_id))
-						continue;
+					/*
+					 * Not gonna check it
+					 */
+//					if (!corpus::instance().exist(doc_id))
+//						continue;
 					string wiki_title(line, ++pos);
 					if (use_utf8_token_matching_ && strchr(wiki_title.c_str(), ' ') != NULL)
 						find_and_replace(wiki_title, string(" "), string(""));

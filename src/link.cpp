@@ -105,7 +105,7 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 		ret = true;
 
 	string tran;
-	char *this_term = term;
+	string this_term = term;
 	long this_offset = offset;
 	ANT_link_term *this_link_term = link_term;
 	int how_many_left = beps_to_print;
@@ -113,7 +113,7 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 	stringstream stringbuffer;
 
 	if (ret && translate_anchor_for_linking == 2) {
-		tran = translation::instance().translate(this_term, (std::string(source_lang) + "|" + std::string(target_lang)).c_str());
+		tran = translation::instance().translate(this_term.c_str(), (std::string(source_lang) + "|" + std::string(target_lang)).c_str());
 
 		ANT_link_term *crossterm = NULL;
 		if ((crossterm = algor->find_term_in_list(tran.c_str())) != NULL && string_compare(crossterm->term, tran.c_str(), TRUE) == 0)
@@ -124,10 +124,12 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 
 	if (ret || fill_anchor_with_ir_results) {
 		const char *format = link_print::target_format.c_str();
-		if (strcmp(term, "\"") == 0)
-			sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, 1, "&quot;");
-		else
-			sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, strlen(this_term), this_term);
+
+//		if (strcmp(term, "\"") == 0)
+//			sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, 1, "&quot;");
+//		else
+		sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, this_term.length(), this_term.c_str());
+
 		std::string anchor_tag(buf);
 		if ((fill_anchor_with_ir_results && fill_anchor_with_ir_results != 2) || (!fill_anchor_with_ir_results && this_link_term->postings.size() > 0)) {
 			stringbuffer << anchor_tag;
