@@ -45,10 +45,6 @@ void ltw_run::init()
 		corpus_txt::instance().load_teara_map();
 	}
 
-	string target_lang = get_config().get_value("target_lang");
-	corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
-	assert(corpus::instance().lang().length() <= 4);
-
 	string taskname = get_config().get_value("task");
 	string out_algor_name = get_config().get_algorithm_outgoing_name();
 	string in_algor_name = get_config().get_algorithm_incoming_name();
@@ -62,25 +58,12 @@ void ltw_run::init()
 //		throw std::runtime_error("No recognizable task given.");
 	task_ = new ltw_task(get_config(), taskname, out_algor_name, in_algor_name);
 
-	task_->set_alorithm_bep(get_config().get_value("algorithm_bep"));
+	string source_lang = task_->get_source_lang();
+	string target_lang = task_->get_target_lang();
 
-	string links_to_print_str = get_config().get_value("anchors_number");
-	if (links_to_print_str.length() > 0)
-		task_->set_links_to_print(atol(links_to_print_str.c_str()));
-
-	string beps_to_print_str = get_config().get_value("anchor_links_number");
-	if (beps_to_print_str.length() > 0)
-		task_->set_beps_to_print(atol(beps_to_print_str.c_str()));
-
-	string source_lang = get_config().get_value("source_lang");
-	task_->set_source_lang(source_lang.length() > 0 ? source_lang : "en");
-	if (source_lang == "zh" || source_lang == "ko" || source_lang == "ja")
-		task_->is_cjk_lang(true);
-	else
-		task_->is_cjk_lang(false);
-
-//	lang = get_config().get_value("target_lang");
-	task_->set_target_lang(target_lang.length() > 0 ? target_lang : task_->get_source_lang());
+//	string target_lang = get_config().get_value("target_lang");
+	corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
+	assert(corpus::instance().lang().length() <= 4);
 
 	string s_code;
 	string t_code;

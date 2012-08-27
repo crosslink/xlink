@@ -65,6 +65,12 @@ void algorithm::init()
 		segmented_ = TRUE;
 	else
 		segmented_ = FALSE;
+
+
+	if (ltw_task_->get_source_lang().length() == 0 || ltw_task_->get_source_lang() == "en")
+		use_utf8_token_matching_ = false;
+	else
+		use_utf8_token_matching_ = true;
 }
 
 int algorithm::init_params()
@@ -145,11 +151,6 @@ void algorithm::process_topic(ltw_topic *a_topic)
 	orphan_docid_ = a_topic->get_id();
 	text_ = a_topic->get_text();
 	xml_ = a_topic->get_content();
-
-	if (ltw_task_->get_source_lang().length() == 0 || ltw_task_->get_source_lang() == "en")
-		use_utf8_token_matching_ = false;
-	else
-		use_utf8_token_matching_ = true;
 
 	process_topic_text();
 }

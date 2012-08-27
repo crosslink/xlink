@@ -68,6 +68,27 @@ void ltw_task::init()
 //	incomings_ = new links();
 //	outgoings_ = new links();
 
+	set_alorithm_bep(system_config_->get_value("algorithm_bep"));
+
+	string links_to_print_str = system_config_->get_value("anchors_number");
+	if (links_to_print_str.length() > 0)
+		set_links_to_print(atol(links_to_print_str.c_str()));
+
+	string beps_to_print_str = system_config_->get_value("anchor_links_number");
+	if (beps_to_print_str.length() > 0)
+		set_beps_to_print(atol(beps_to_print_str.c_str()));
+
+	string source_lang = system_config_->get_value("source_lang");
+	set_source_lang(source_lang.length() > 0 ? source_lang : "en");
+	if (source_lang == "zh" || source_lang == "ko" || source_lang == "ja")
+		is_cjk_lang(true);
+	else
+		is_cjk_lang(false);
+
+//	lang = system_config_->get_value("target_lang");
+	string target_lang = system_config_->get_value("target_lang");
+	set_target_lang(target_lang.length() > 0 ? target_lang : get_source_lang());
+
 	switch (get_algorithm_outgoing_type()) {
 	case LTW_ANT:
 		algor_out_ = new algorithm_ant_link_this(this);

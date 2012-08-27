@@ -104,7 +104,7 @@ namespace QLINK
 
 //					page_map_t::iterator iter = names_map_.find(title_pair.first);
 					ANT_link_term *index_term = this->find_term_in_list(title_pair.first.c_str());
-					if (index_term == NULL || string_compare(index_term->term, title_pair.first.c_str()) != 0) {
+					if (index_term == NULL || string_compare(index_term->term, title_pair.first.c_str(), lowercase_only, use_utf8_token_matching_) != 0) {
 //					if (iter == names_map_.end() || iter->second == NULL) {
 						//wiki_entry_array wea;
 //						if (index_term != NULL)
@@ -175,13 +175,13 @@ namespace QLINK
 	while (low < high)
 		{
 		mid = (low + high) / 2;
-		if (string_compare(name_array_[mid]->term, value, use_utf8_token_matching_) < 0)
+		if (string_compare(name_array_[mid]->term, value, lowercase_only, use_utf8_token_matching_) < 0)
 			low = mid + 1;
 		else
 			high = mid;
 		}
 
-	if ((low < name_array_.size()) && (string_compare(value, name_array_[low]->term, use_utf8_token_matching_) == 0))
+	if ((low < name_array_.size()) && (string_compare(value, name_array_[low]->term, lowercase_only, use_utf8_token_matching_) == 0))
 		return name_array_[low];		// match
 	else
 		{
