@@ -1,7 +1,7 @@
 #AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
-AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK 
+AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
 
-LTW_LIBS = -lpthread -L$(srcdir)  -lcurl
+LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api
 #LTW_LIBS ==-lgcj
 
 SRC_DIR = src
@@ -48,6 +48,7 @@ ltw_headers = \
 	$(SRC_DIR)/language.h \
 	$(SRC_DIR)/search_engine.h \
 	$(SRC_DIR)/search_engine_ant.h \
+	$(SRC_DIR)/search_engine_ant_remote.h \
 	$(SRC_DIR)/wikipedia.h \
 	$(SRC_DIR)/wikipedia_page.h \
 	$(SRC_DIR)/string_utils.h \
@@ -104,6 +105,7 @@ ltw_sources = \
 	$(SRC_DIR)/language.cpp \
 	$(SRC_DIR)/search_engine.cpp \
 	$(SRC_DIR)/search_engine_ant.cpp \
+	$(SRC_DIR)/search_engine_ant_remote.cpp \
 	$(SRC_DIR)/proxy.cpp \
 	$(SRC_DIR)/porter.cpp \
 	$(SRC_DIR)/wikipedia.cpp \

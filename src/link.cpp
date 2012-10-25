@@ -14,7 +14,7 @@
 #include "sys_file.h"
 #include "corpus.h"
 #include "algorithm.h"
-#include "search_engine_ant.h"
+#include "search_engine_ant_remote.h"
 #include "translation.h"
 #include "run_config.h"
 
@@ -23,6 +23,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace QLINK;
 using namespace std;
@@ -172,11 +173,24 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 #ifdef WITH_ATIRE
 		if (fill_anchor_with_ir_results && how_many_left > 0) {
 			long long result = 0;
-			string lang_pair = string(source_lang) + "|" + string(target_lang);
-			tran = translation::instance().translate(term, lang_pair.c_str());
-			const char **docids = search_engine_ant::instance().search(tran.c_str());
+			string query;
 
-			int hits = how_many_left > search_engine_ant::instance().hits() ? search_engine_ant::instance().hits() : how_many_left;
+			if (strlen(term) == 0)
+				cerr << " I got you" << endl;
+
+			if (true) { // TODO: create a conditon here
+				query = term;
+			}
+			else {
+				// old Google API no longer available, needed re-impremented
+				string lang_pair = string(source_lang) + "|" + string(target_lang);
+				query = translation::instance().translate(term, lang_pair.c_str());
+			}
+
+			vector<string> docids;
+			bool found_hits = search_engine_ant_remote::instance().search(query.c_str(), &docids);
+
+			int hits = docids.size(); // how_many_left > search_engine_ant::instance().hits() ? search_engine_ant::instance().hits() : how_many_left;
 			ret = hits > 0;
 			long doc_id = -1;
 			if (hits > 0) {
@@ -190,7 +204,7 @@ bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
 				ret = anchor_printed;
 			}
 			for (int i = 0; i < hits; ++i) {
-				doc_id = result_to_id(docids[i]);
+				doc_id = result_to_id(docids[i].c_str());
 				if (doc_id < 1)
 					continue;
 				string filename = corpus::instance().id2docpath(doc_id);

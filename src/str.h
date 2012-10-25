@@ -2,7 +2,7 @@
  * str.h
  *
  *  Created on: Oct 6, 2009
- *      Author: monfee
+ *      Adapted from code of Andrew Trotman and others
  */
 
 #ifndef STR_H_
@@ -32,6 +32,17 @@ inline const char *strfwd(const char *end, const char* start)
 //	if (isspace(*start))
 //		start--;
 	return start;
+}
+
+/*
+	STRNNEW()
+	---------
+*/
+inline char *strnnew(const char *str, long long len)
+{
+char *new_str;
+
+return (*((new_str = strncpy(new char [(size_t)(len + 1)], str, (size_t)len)) + len) = '\0'), new_str;
 }
 
 #endif /* STR_H_ */

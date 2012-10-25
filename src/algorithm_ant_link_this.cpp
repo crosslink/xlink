@@ -500,6 +500,9 @@ void algorithm_ant_link_this::add_link(ANT_link_term *term, char **term_list, lo
 				//lx->push_link(*first, offset, buffer_, term->postings[0]->docid, gamma, term);
 //		offset = assign_link_term(term, term_list);
 //		if (!links_->find(term->term)) {
+		/*
+		 * TODO buffer_ might be empty, make sure it got fixed
+		 */
 			links_->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
 			// debug
 	//					fprintf(stderr, "found a %s anchor\n", buffer__);

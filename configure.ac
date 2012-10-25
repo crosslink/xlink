@@ -9,8 +9,9 @@ AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CXX
-AC_PROG_CC
 AC_PROG_LN_S
+
+AC_LANG(C++)
 
 AC_ARG_WITH(stpl,
             AC_HELP_STRING([--with-stpl=DIR],
@@ -22,9 +23,17 @@ AC_ARG_WITH(stpl,
             AC_MSG_ERROR([Cannot stat directory $withval])
           fi ] )
           
+AC_ARG_WITH(atire,
+            AC_HELP_STRING([--with-atire]
+                    ),
+        [
+            CFLAGS="$CFLAGS -DWITH_ATIRE"
+            CXXFLAGS="$CXXFLAGS -DWITH_ATIRE"
+		] )          
+          
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lant':
-AC_CHECK_LIB([ant], [ant_easy_init])
+AC_CHECK_LIB([atire_api], [atire_api_check], [LIBS="$LIBS -latire_api"])
 # FIXME: Replace `main' with a function in `-ldl':
 #AC_CHECK_LIB([dl], [dlopen], [LIBS="$LIBS -ldl"])
 AC_CHECK_LIB([curl], [curl_easy_init], [LIBS="$LIBS -lcurl"])
