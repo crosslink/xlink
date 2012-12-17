@@ -44,6 +44,7 @@ int wordnet::check(char* searchword) {
 			}
 		}
 	}
+	return last_val;
 }
 
 
