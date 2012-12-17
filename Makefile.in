@@ -90,9 +90,9 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	search_engine.$(OBJEXT) search_engine_ant.$(OBJEXT) \
 	search_engine_ant_remote.$(OBJEXT) proxy.$(OBJEXT) \
 	porter.$(OBJEXT) wikipedia.$(OBJEXT) wikipedia_page.$(OBJEXT) \
-	translation.$(OBJEXT) google_translator.$(OBJEXT) \
-	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
-	link_print.$(OBJEXT) ltw.$(OBJEXT)
+	wordnet.$(OBJEXT) translation.$(OBJEXT) \
+	google_translator.$(OBJEXT) webpage_retriever.$(OBJEXT) \
+	application_out.$(OBJEXT) link_print.$(OBJEXT) ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -221,7 +221,7 @@ top_srcdir = @top_srcdir@
 
 #AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
 AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
-LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api
+LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN
 #LTW_LIBS ==-lgcj
 SRC_DIR = src
 TOOLS_DIR = tools
@@ -269,6 +269,7 @@ ltw_headers = \
 	$(SRC_DIR)/search_engine_ant_remote.h \
 	$(SRC_DIR)/wikipedia.h \
 	$(SRC_DIR)/wikipedia_page.h \
+	$(SRC_DIR)/wordnet.h \
 	$(SRC_DIR)/string_utils.h \
 	$(SRC_DIR)/str.h \
 	$(SRC_DIR)/singleton.h \
@@ -327,6 +328,7 @@ ltw_sources = \
 	$(SRC_DIR)/porter.cpp \
 	$(SRC_DIR)/wikipedia.cpp \
 	$(SRC_DIR)/wikipedia_page.cpp \
+	$(SRC_DIR)/wordnet.cpp \
 	$(SRC_DIR)/translation.cpp \
 	$(SRC_DIR)/google_translator.cpp \
 	$(SRC_DIR)/webpage_retriever.cpp \
@@ -442,6 +444,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/webpage_retriever.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia_page.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wordnet.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml2txt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml2txt_client.Po@am__quote@
 
@@ -1088,6 +1091,20 @@ wikipedia_page.obj: $(SRC_DIR)/wikipedia_page.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wikipedia_page.cpp' object='wikipedia_page.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikipedia_page.obj `if test -f '$(SRC_DIR)/wikipedia_page.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wikipedia_page.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wikipedia_page.cpp'; fi`
+
+wordnet.o: $(SRC_DIR)/wordnet.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wordnet.o -MD -MP -MF $(DEPDIR)/wordnet.Tpo -c -o wordnet.o `test -f '$(SRC_DIR)/wordnet.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/wordnet.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wordnet.Tpo $(DEPDIR)/wordnet.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wordnet.cpp' object='wordnet.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wordnet.o `test -f '$(SRC_DIR)/wordnet.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/wordnet.cpp
+
+wordnet.obj: $(SRC_DIR)/wordnet.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wordnet.obj -MD -MP -MF $(DEPDIR)/wordnet.Tpo -c -o wordnet.obj `if test -f '$(SRC_DIR)/wordnet.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wordnet.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wordnet.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wordnet.Tpo $(DEPDIR)/wordnet.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wordnet.cpp' object='wordnet.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wordnet.obj `if test -f '$(SRC_DIR)/wordnet.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wordnet.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wordnet.cpp'; fi`
 
 translation.o: $(SRC_DIR)/translation.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT translation.o -MD -MP -MF $(DEPDIR)/translation.Tpo -c -o translation.o `test -f '$(SRC_DIR)/translation.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/translation.cpp

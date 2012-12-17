@@ -1,7 +1,7 @@
 #AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
 AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
 
-LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api
+LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN
 #LTW_LIBS ==-lgcj
 
 SRC_DIR = src
@@ -51,6 +51,7 @@ ltw_headers = \
 	$(SRC_DIR)/search_engine_ant_remote.h \
 	$(SRC_DIR)/wikipedia.h \
 	$(SRC_DIR)/wikipedia_page.h \
+	$(SRC_DIR)/wordnet.h \
 	$(SRC_DIR)/string_utils.h \
 	$(SRC_DIR)/str.h \
 	$(SRC_DIR)/singleton.h \
@@ -110,6 +111,7 @@ ltw_sources = \
 	$(SRC_DIR)/porter.cpp \
 	$(SRC_DIR)/wikipedia.cpp \
 	$(SRC_DIR)/wikipedia_page.cpp \
+	$(SRC_DIR)/wordnet.cpp \
 	$(SRC_DIR)/translation.cpp \
 	$(SRC_DIR)/google_translator.cpp \
 	$(SRC_DIR)/webpage_retriever.cpp \
