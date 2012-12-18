@@ -243,7 +243,7 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 				}
 
 		if (topic_->get_ltw_task()->get_task_type() != ltw_task::LTW_LTAra_A2B) {
-			ret = current_link->print_anchor(beps_to_print_, true, algorithm_);
+			ret = current_link->print_anchor(topic_, beps_to_print_, true, algorithm_);
 			if (ret)
 				links_printed++;
 		}

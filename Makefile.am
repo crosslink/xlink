@@ -54,7 +54,6 @@ ltw_headers = \
 	$(SRC_DIR)/wordnet.h \
 	$(SRC_DIR)/string_utils.h \
 	$(SRC_DIR)/str.h \
-	$(SRC_DIR)/singleton.h \
 	$(SRC_DIR)/template_algo.h \
 	$(SRC_DIR)/google_translator.h \
 	$(SRC_DIR)/translation.h \

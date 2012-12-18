@@ -507,7 +507,9 @@ void algorithm_ant_link_this::add_link(ANT_link_term *term, char **term_list, lo
 		if (strlen(buffer_) == 0)
 			fprintf(stderr, "WARNING - empty anchor found: [%s], [%s], [%s]\n", term->term, current_term_, buffer_);
 #endif
-			links_->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
+
+		links_->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
+
 			// debug
 	//					fprintf(stderr, "found a %s anchor\n", buffer__);
 			links_count++;

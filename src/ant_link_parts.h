@@ -336,6 +336,25 @@ for (ch = buffer; *ch != '\0'; ch++)
 return times;
 }
 
+inline long count_word(char *buffer)
+{
+char *ch;
+long times;
+
+times = 0;
+for (ch = buffer; *ch != '\0'; ch++) {
+	if (isspace(*ch)) {
+		times++;
+		while (isspace(*ch))
+			++ch;
+	}
+}
+
+++times;
+
+return times;
+}
+
 /*
  * 	STRING_TO_LIST()
  * 	----------------

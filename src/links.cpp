@@ -16,6 +16,7 @@
 #include "application_out.h"
 #include "run_config.h"
 #include "ant_link_parts.h"
+#include "wordnet.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -254,23 +255,42 @@ void links::sort_orphan()
 
 QLINK::link *links::push_link(char *place_in_file, long offset, char *buffer, long docid, double gamma, ANT_link_term *node)
 {
-	link *current = create_new_link();
+	bool isnoun = true;
+	link *current = NULL;
+	if (count_word(buffer) == 1) {
+		wordnet::instance().check(buffer);
+		isnoun = wordnet::instance().is_noun();
+	}
+	if (isnoun ) {
+		if (find(buffer) != NULL) {
+			current = create_new_link();
 
-	//current = all_links_in_file + all_links_in_file_length;
-	current->place_in_file = place_in_file;
-	current->offset = offset;
-	current->term = strdup(buffer);
-	current->gamma = gamma;
-	current->target_document = docid;
-	current->link_term = node;
+			//current = all_links_in_file + all_links_in_file_length;
+			current->place_in_file = place_in_file;
+			current->offset = offset;
+			current->term = strdup(buffer);
+			current->gamma = gamma;
+			current->target_document = docid;
+			current->link_term = node;
 
-	std::string lang = run_config::instance().get_value("source_lang");
-	if (lang.length() > 0)
-		strcpy(current->source_lang, lang.c_str());
-	strcpy(current->target_lang, corpus::instance().lang().c_str());
-	//all_links_in_file_length++;
-	if ((all_links_in_file_.size()) >= MAX_LINKS_IN_FILE)
-		exit(printf("Too many links in this file (aborting)\n"));
+			std::string lang = run_config::instance().get_value("source_lang");
+			if (lang.length() > 0)
+				strcpy(current->source_lang, lang.c_str());
+			strcpy(current->target_lang, corpus::instance().lang().c_str());
+			//all_links_in_file_length++;
+			if ((all_links_in_file_.size()) >= MAX_LINKS_IN_FILE)
+				exit(printf("Too many links in this file (aborting)\n"));
+		}
+#ifdef DEBUG
+		else
+			fprintf(stderr, "%s already added\n", buffer);
+#endif
+	}
+#ifdef DEBUG
+	else
+		fprintf(stderr, "%s is not a noun word\n", buffer);
+#endif
+
 
 	return current;
 }

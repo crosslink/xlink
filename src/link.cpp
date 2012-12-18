@@ -81,7 +81,7 @@ bool link::print_target(long anchor, algorithm *algor)
 	return ret;
 }
 
-bool link::print_anchor(long beps_to_print, bool id_or_name, algorithm *algor)
+bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, algorithm *algor)
 {
 	char buf[1024 * 10];
 	int count = 0;

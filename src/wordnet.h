@@ -8,7 +8,7 @@
 #ifndef WORDNET_H_
 #define WORDNET_H_
 
-#include "singleton.h"
+#include "pattern_singleton.h"
 
 class wordnet : public pattern_singleton<wordnet>  {
 public:
@@ -25,10 +25,15 @@ public:
 	virtual ~wordnet();
 
 	int check(char *searchword);
-	bool is_noun() { return last_val & NOUN; }
-	bool is_verb() { return last_val & VERB; }
-	bool is_adjective() { return last_val & ADJECTIVE; }
-	bool is_adverb() { return last_val & ADVERB; }
+	bool is_noun() { return this->is_noun(last_val); }
+	bool is_verb() { return this->is_verb(last_val); }
+	bool is_adjective() { return this->is_adjective(last_val); }
+	bool is_adverb() { return this->is_adverb(last_val); }
+
+	bool is_noun(int val) { return val & NOUN; }
+	bool is_verb(int val) { return val & VERB; }
+	bool is_adjective(int val) { return val & ADJECTIVE; }
+	bool is_adverb(int val) { return val & ADVERB; }
 };
 
 #endif /* WORDNET_H_ */

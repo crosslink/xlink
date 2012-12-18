@@ -25,15 +25,15 @@ public:
 		return inst;
 	}
 
-	T& get_instance() {
+	T& get_instance_ptr() {
 		return *inst_ptr_;
 	}
 
-	void set_instance(T& instance) {
+	void set_instance_ptr(T& instance) {
 		inst_ptr_ = &instance;
 	}
 
-	void set_instance() {
+	void set_instance_ptr() {
 		inst_ptr_ = &instance();
 	}
 };

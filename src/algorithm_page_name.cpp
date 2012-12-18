@@ -216,7 +216,7 @@ namespace QLINK
 //			offset = assign_link_term(index_term, term_list);
 			//fprintf(stderr, "%s -> %d ", last_index_entry->second->term, last_index_entry->second->postings[0]->docid);
 //			if (!links_->find(buffer_))
-				link * lnk = links_->push_link(NULL, offset, buffer_, index_term->postings[0]->docid, 0.0, index_term);
+				link *lnk = links_->push_link(NULL, offset, buffer_, index_term->postings[0]->docid, 0.0, index_term);
 			}
 	}
 }
