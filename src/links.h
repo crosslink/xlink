@@ -99,6 +99,8 @@ namespace QLINK {
 		void set_bep_algorithm(algorithm_bep *bep_algor) { bep_algor_ = bep_algor; }
 		void set_algorithm(algorithm *algor) { algorithm_ = algor; }
 		virtual void find_anchor() {}
+
+		int size() { return all_links_in_file_.size(); }
 		//long find_bep(link *lnk);
 
 	protected:

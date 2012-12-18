@@ -21,7 +21,7 @@ using namespace std;
 namespace QLINK
 {
 
-algorithm_ant_crosslink_this::algorithm_ant_crosslink_this(ltw_task *task) : find_anchors_with_this_(task), algorithm_ant_link_this::algorithm_ant_link_this(task), algorithm_out(task)
+algorithm_ant_crosslink_this::algorithm_ant_crosslink_this(ltw_task *task) : find_anchors_with_this_(task), algorithm_ant_link_this_and_page_name2::algorithm_ant_link_this_and_page_name2(task), algorithm_out(task)
 {
 
 }

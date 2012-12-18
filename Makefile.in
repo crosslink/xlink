@@ -78,6 +78,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	algorithm_ant_crosslink_this.$(OBJEXT) \
 	algorithm_page_name.$(OBJEXT) \
 	algorithm_ant_link_this_and_page_name.$(OBJEXT) \
+	algorithm_ant_link_this_and_page_name2.$(OBJEXT) \
 	algorithm_ltw_tang.$(OBJEXT) \
 	algorithm_ltw_incoming_search_tn.$(OBJEXT) \
 	algorithm_ltw_incoming_a2b_search_tn.$(OBJEXT) \
@@ -242,6 +243,7 @@ ltw_headers = \
 	$(SRC_DIR)/algorithm_ant_crosslink_this.h \
 	$(SRC_DIR)/algorithm_page_name.h \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.h \
+	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.h \
 	$(SRC_DIR)/algorithm_ltw_incoming_search_tn.h \
 	$(SRC_DIR)/algorithm_ltw_incoming_a2b_search_tn.h \
 	$(SRC_DIR)/algorithm_ltw_tang.h \
@@ -301,6 +303,7 @@ ltw_sources = \
 	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp \
 	$(SRC_DIR)/algorithm_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp \
+	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp \
 	$(SRC_DIR)/algorithm_ltw_tang.cpp \
 	$(SRC_DIR)/algorithm_ltw_incoming_search_tn.cpp \
 	$(SRC_DIR)/algorithm_ltw_incoming_a2b_search_tn.cpp \
@@ -398,6 +401,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ant_crosslink_this.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ant_link_this.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ant_link_this_and_page_name.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ant_link_this_and_page_name2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_bep.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_config.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ltara_base.Po@am__quote@
@@ -726,6 +730,20 @@ algorithm_ant_link_this_and_page_name.obj: $(SRC_DIR)/algorithm_ant_link_this_an
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp' object='algorithm_ant_link_this_and_page_name.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o algorithm_ant_link_this_and_page_name.obj `if test -f '$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp'; fi`
+
+algorithm_ant_link_this_and_page_name2.o: $(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT algorithm_ant_link_this_and_page_name2.o -MD -MP -MF $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Tpo -c -o algorithm_ant_link_this_and_page_name2.o `test -f '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Tpo $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp' object='algorithm_ant_link_this_and_page_name2.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o algorithm_ant_link_this_and_page_name2.o `test -f '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp
+
+algorithm_ant_link_this_and_page_name2.obj: $(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT algorithm_ant_link_this_and_page_name2.obj -MD -MP -MF $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Tpo -c -o algorithm_ant_link_this_and_page_name2.obj `if test -f '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Tpo $(DEPDIR)/algorithm_ant_link_this_and_page_name2.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp' object='algorithm_ant_link_this_and_page_name2.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o algorithm_ant_link_this_and_page_name2.obj `if test -f '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp'; fi`
 
 algorithm_ltw_tang.o: $(SRC_DIR)/algorithm_ltw_tang.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT algorithm_ltw_tang.o -MD -MP -MF $(DEPDIR)/algorithm_ltw_tang.Tpo -c -o algorithm_ltw_tang.o `test -f '$(SRC_DIR)/algorithm_ltw_tang.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/algorithm_ltw_tang.cpp

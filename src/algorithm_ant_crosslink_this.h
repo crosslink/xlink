@@ -8,12 +8,12 @@
 #ifndef ALOGRITHM_ANT_CROSSLINK_THIS_H_
 #define ALOGRITHM_ANT_CROSSLINK_THIS_H_
 
-#include "algorithm_ant_link_this.h"
+#include "algorithm_ant_link_this_and_page_name2.h"
 
 namespace QLINK
 {
 
-class algorithm_ant_crosslink_this: public QLINK::algorithm_ant_link_this
+class algorithm_ant_crosslink_this: public QLINK::algorithm_ant_link_this_and_page_name2
 {
 private:
 	algorithm_ant_link_this		find_anchors_with_this_;

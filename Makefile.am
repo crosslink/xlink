@@ -24,6 +24,7 @@ ltw_headers = \
 	$(SRC_DIR)/algorithm_ant_crosslink_this.h \
 	$(SRC_DIR)/algorithm_page_name.h \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.h \
+	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.h \
 	$(SRC_DIR)/algorithm_ltw_incoming_search_tn.h \
 	$(SRC_DIR)/algorithm_ltw_incoming_a2b_search_tn.h \
 	$(SRC_DIR)/algorithm_ltw_tang.h \
@@ -84,6 +85,7 @@ ltw_sources = \
 	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp \
 	$(SRC_DIR)/algorithm_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp \
+	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp \
 	$(SRC_DIR)/algorithm_ltw_tang.cpp \
 	$(SRC_DIR)/algorithm_ltw_incoming_search_tn.cpp \
 	$(SRC_DIR)/algorithm_ltw_incoming_a2b_search_tn.cpp \
