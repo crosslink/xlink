@@ -20,7 +20,11 @@ algorithm_ant_link_this_and_page_name2::~algorithm_ant_link_this_and_page_name2(
 
 ANT_link_term* algorithm_ant_link_this_and_page_name2::find_term_in_list(
 		const char* term) {
-	return QLINK::algorithm_ant_link_this::find_term_in_list(term);
+	if (mode == LINK_THIS)
+		return QLINK::algorithm_ant_link_this::find_term_in_list(term);
+	else if (mode == PAGE_NAME)
+		return QLINK::algorithm_page_name::find_term_in_list(term);
+	return NULL;
 }
 
 void algorithm_ant_link_this_and_page_name2::add_link(links* lx,
