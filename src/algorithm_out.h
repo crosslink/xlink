@@ -26,7 +26,7 @@ namespace QLINK
 
 	protected:
 		virtual void recommend_anchors(links* lx, char **term_list, const char *source);
-		virtual void add_link(ANT_link_term *term, char **term_list, long offset) {}
+		virtual void add_link(links* lx, ANT_link_term *term, char **term_list, long offset) {}
 		long assign_link_term(char *buffer, char **term_list);
 	};
 

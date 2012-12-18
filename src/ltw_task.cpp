@@ -9,6 +9,7 @@
 #include "algorithm_ant_link_this.h"
 #include "algorithm_ant_crosslink_this.h"
 #include "algorithm_ant_link_this_and_page_name.h"
+#include "algorithm_ant_link_this_and_page_name2.h"
 #include "algorithm_ltw_tang.h"
 #include "algorithm_page_name.h"
 #include "algorithm_bep.h"
@@ -104,6 +105,10 @@ void ltw_task::init()
 		break;
 	case LTW_ANT_AND_PAGE:
 		algor_out_ = new algorithm_ant_link_this_and_page_name(this);
+		//topic_param_start = algor_out_->init();
+		break;
+	case LTW_ANT_AND_PAGE2:
+		algor_out_ = new algorithm_ant_link_this_and_page_name2(this);
 		//topic_param_start = algor_out_->init();
 		break;
 	case LTW_TANG:

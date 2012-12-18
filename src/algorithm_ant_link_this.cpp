@@ -396,14 +396,7 @@ for (int index_argv_param = 1; *argv[index_argv_param] == '-';)
 	index_argv_param++;
 	}
 
-//if (!index_file) {
-//	fprintf(stderr, "the index file must be specified");
-//	exit(-1);
-//}
-
 /*link_index = */read_index(index_file, &terms_in_index);
-
-//print_header(runname);
 
 return basic_index_argv_param;
 }
@@ -452,7 +445,7 @@ void algorithm_ant_link_this::process_terms(char **term_list, const char *source
 	links_->sort_links();
 }
 
-void algorithm_ant_link_this::add_link(ANT_link_term *term, char **term_list, long offset)
+void algorithm_ant_link_this::add_link(links* lx, ANT_link_term *term, char **term_list, long offset)
 {
 	double gamma, numerator, denominator;
 	long /*terms_in_index, orphan_docid, */param, noom, index_argv_param;
@@ -508,7 +501,7 @@ void algorithm_ant_link_this::add_link(ANT_link_term *term, char **term_list, lo
 			fprintf(stderr, "WARNING - empty anchor found: [%s], [%s], [%s]\n", term->term, current_term_, buffer_);
 #endif
 
-		links_->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
+		lx->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
 
 			// debug
 	//					fprintf(stderr, "found a %s anchor\n", buffer__);

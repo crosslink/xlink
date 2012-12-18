@@ -107,7 +107,7 @@ void algorithm_out::recommend_anchors(links* lx, char **term_list, const char *s
 
 				if (!links_->find(buffer)) {
 					offset = assign_link_term(buffer, term_list);
-					add_link(index_term, term_list, offset);
+					add_link(lx, index_term, term_list, offset);
 				}
 				}
 			else
@@ -122,8 +122,8 @@ void algorithm_out::recommend_anchors(links* lx, char **term_list, const char *s
 			}
 		}
 	// debug
-	if (links_->all_links_length() > 0)
-		fprintf(stderr, "added %d links\n", links_->all_links_length());
+	if (lx->all_links_length() > 0)
+		fprintf(stderr, "added %d links\n", lx->all_links_length());
 }
 
 long algorithm_out::assign_link_term(char *buffer, char **term_list)

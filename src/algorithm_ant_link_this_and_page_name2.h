@@ -15,11 +15,18 @@ namespace QLINK {
 	class algorithm_ant_link_this_and_page_name2 : public QLINK::algorithm_ant_link_this, public QLINK::algorithm_page_name
 	{
 	public:
+		enum {PAGE_NAME, LINK_THIS};
+
+	private:
+		int mode;
+		links g_links_;
+
+	public:
 		algorithm_ant_link_this_and_page_name2(ltw_task *task);
 		virtual ~algorithm_ant_link_this_and_page_name2();
 
 		virtual ANT_link_term* find_term_in_list(const char *term);
-		virtual void add_link(ANT_link_term *link_term, char **term_list, long int offset);
+		virtual void add_link(links* lx, ANT_link_term *link_term, char **term_list, long int offset);
 
 	protected:
 		virtual void process_terms(char **term_list, const char *source);

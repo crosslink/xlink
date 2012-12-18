@@ -262,7 +262,7 @@ QLINK::link *links::push_link(char *place_in_file, long offset, char *buffer, lo
 		isnoun = wordnet::instance().is_noun();
 	}
 	if (isnoun ) {
-		if (find(buffer) != NULL) {
+		if (find(buffer) == NULL) {
 			current = create_new_link();
 
 			//current = all_links_in_file + all_links_in_file_length;

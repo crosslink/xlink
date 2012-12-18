@@ -45,6 +45,7 @@ public:
 	   ltw_task::alorithm_names["LTW_ANT"] = ltw_task::LTW_ANT;
 	   ltw_task::alorithm_names["LTW_PAGE_NAME"] = ltw_task::LTW_PAGE_NAME;
 	   ltw_task::alorithm_names["LTW_ANT_AND_PAGE"] = ltw_task::LTW_ANT_AND_PAGE;
+	   ltw_task::alorithm_names["LTW_ANT_AND_PAGE2"] = ltw_task::LTW_ANT_AND_PAGE2;
 	   ltw_task::alorithm_names["LTW_TEARA_BASE"] = ltw_task::LTW_TEARA_BASE;
 	   ltw_task::alorithm_names["LTW_TANG"] = ltw_task::LTW_TANG;
 	   ltw_task::alorithm_names["LTW_INCOMING_SEARCH_TN"] = ltw_task::LTW_INCOMING_SEARCH_TN;

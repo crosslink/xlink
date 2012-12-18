@@ -57,9 +57,16 @@ namespace QLINK
 		if (!config_ || loaded_)
 			return;
 
+		bool is_crosslink_table = false;
 		string filename(config_->get_value("titles_file"));
-		if (filename.length() <= 0)
+		if (filename.length() <= 0) {
 			filename = ltw_task_->get_system_config()->get_value("titles_file");
+			if (filename.length() <= 0) {
+				filename = ltw_task_->get_system_config()->get_value("crosslink_table");
+				is_crosslink_table = true;
+			}
+		}
+
 
 		if (filename.length() <= 0)
 			return;
@@ -78,15 +85,29 @@ namespace QLINK
 					cerr << "#" << count << ", loading : " << line << endl;
 				}
 #endif
-				string::size_type pos = line.find_first_of(':');
+				string::size_type pos;
+				pos = line.find_first_of(':');
+//				if (is_crosslink_table)
+//					pos = line.find(':', ++pos);
+
 				if (pos != string::npos) {
-					unsigned long doc_id = atol(line.c_str() + pos + 1);
-					/*
-					 * Not gonna check it
-					 */
-//					if (!corpus::instance().exist(doc_id))
-//						continue;
-					string wiki_title(line, 0, pos);
+
+					unsigned long doc_id;
+					string wiki_title;
+					doc_id = atol(line.c_str() + pos + 1);
+
+					if (!is_crosslink_table) {
+						/*
+						 * Not gonna check it
+						 */
+	//					if (!corpus::instance().exist(doc_id))
+	//						continue;
+						wiki_title = string(line, 0, pos);
+					}
+					else {
+						pos = line.find(':', ++pos);
+						wiki_title = string(line, ++pos);
+					}
 					if (use_utf8_token_matching_ && strchr(wiki_title.c_str(), ' ') != NULL)
 						find_and_replace(wiki_title, string(" "), string(""));
 
@@ -203,7 +224,7 @@ namespace QLINK
 		process_terms(links_, term_list, source);
 	}
 
-	void algorithm_page_name::add_link(ANT_link_term *index_term, char **term_list, long offset)
+	void algorithm_page_name::add_link(links* lx, ANT_link_term *index_term, char **term_list, long offset)
 	{
 		bool to_skip = false;
 		long term_len = 0;

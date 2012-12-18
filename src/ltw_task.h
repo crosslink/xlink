@@ -43,7 +43,8 @@ namespace QLINK {
 							  LTW_ANT_AND_PAGE = 5,
 							  LTW_TEARA_BASE = 6,
 							  LTW_PAGE_NAME = 7,
-							  LTW_ANT_CROSSLINK = 8
+							  LTW_ANT_CROSSLINK = 8,
+							  LTW_ANT_AND_PAGE2 = 9,
 							};
 	    //NUMBER_OF_LTW_ALGORITHMS
 	    typedef std::map<std::string,ltw_algorithm> ltw_algorithm_map;
