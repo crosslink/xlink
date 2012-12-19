@@ -98,17 +98,17 @@ void algorithm_out::recommend_anchors(links* lx, char **term_list, const char *s
 				cmp = utf8_token_compare(buffer, index_term->term, &is_substring);
 				}
 			else
-				cmp = string_compare(buffer, index_term->term);
+				cmp = string_compare(buffer, index_term->term, lowercase_only);
 
 			if (cmp == 0)		// we're a term in the list
 				{
-				if (strcmp("過年", buffer) == 0)
-					cerr << " I caught you" << endl;
+//				if (strcmp("過年", buffer) == 0)
+//					cerr << " I caught you" << endl;
 
-				if (!links_->find(buffer)) {
+//				if (!lx->find(buffer)) {
 					offset = assign_link_term(buffer, term_list);
 					add_link(lx, index_term, term_list, offset);
-				}
+//				}
 				}
 			else
 				{
