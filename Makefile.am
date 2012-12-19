@@ -56,7 +56,9 @@ ltw_headers = \
 	$(SRC_DIR)/string_utils.h \
 	$(SRC_DIR)/str.h \
 	$(SRC_DIR)/template_algo.h \
+	$(SRC_DIR)/database_mysql.h \
 	$(SRC_DIR)/google_translator.h \
+	$(SRC_DIR)/google_research_translator.h \
 	$(SRC_DIR)/translation.h \
 	$(SRC_DIR)/webpage_retriever.h \
 	$(SRC_DIR)/pattern_singleton.h \
@@ -114,7 +116,9 @@ ltw_sources = \
 	$(SRC_DIR)/wikipedia_page.cpp \
 	$(SRC_DIR)/wordnet.cpp \
 	$(SRC_DIR)/translation.cpp \
+	$(SRC_DIR)/database_mysql.cpp \
 	$(SRC_DIR)/google_translator.cpp \
+	$(SRC_DIR)/google_research_translator.cpp \
 	$(SRC_DIR)/webpage_retriever.cpp \
 	$(SRC_DIR)/application_out.cpp \
 	$(SRC_DIR)/link_print.cpp \

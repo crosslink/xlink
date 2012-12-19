@@ -212,5 +212,27 @@ while (ch != file.end())
 	}
 }
 
+template <typename T>
+inline std::string collection_to_list(T& collection) {
+	std::stringstream list;
+	if (collection.size() > 1) {
+		//std::copy(collection.begin(), collection.end(), std::ostream_iterator<typename T::value_type>(list, ","));
+		typename T::iterator it = collection.begin();
+		while (it != collection.end()) {
+			if (it != collection.begin())
+				list << ", ";
+			list << (typename T::value_type)*it;
+			++it;
+		}
+	}
+	else if (collection.size() == 1) {
+		typename T::value_type the_first = *(collection.begin());
+		list << the_first;
+	}
+//	std::string list_str = list.str();
+//	if (*list_str.end() == ',')
+//		list_str.erlist_str.end()
+	return list.str();
+}
 
 #endif /* STRING_UTILS_H_ */
