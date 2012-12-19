@@ -606,9 +606,11 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+MYSQL_CFLAGS
 EGREP
 GREP
 CXXCPP
+MYSQL_LIBS
 LN_S
 am__fastdepCXX_FALSE
 am__fastdepCXX_TRUE
@@ -694,6 +696,8 @@ enable_option_checking
 enable_dependency_tracking
 with_stpl
 with_atire
+with_mysql_lib_path
+with_mysql_include_path
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1331,6 +1335,10 @@ Optional Packages:
   --with-atire
 
 
+  --with-mysql-lib-path   location of the MySQL libraries
+  --with-mysql-include-path
+                          location of the MySQL headers, defaults to
+                          /usr/include/mysql
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -3515,6 +3523,16 @@ if test "x$ac_cv_lib_curl_curl_easy_init" = xyes; then :
 fi
 
 
+
+# Check whether --with-mysql-lib-path was given.
+if test "${with_mysql_lib_path+set}" = set; then :
+  withval=$with_mysql_lib_path; MYSQL_LIBS="-L$withval -lmysqlclient"
+else
+  MYSQL_LIBS='-lmysqlclient'
+fi
+
+
+
 # Checks for header files.
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
@@ -3921,6 +3939,18 @@ _ACEOF
 fi
 
 done
+
+
+
+# Get MySQL library and include locations
+
+# Check whether --with-mysql-include-path was given.
+if test "${with_mysql_include_path+set}" = set; then :
+  withval=$with_mysql_include_path; MYSQL_CFLAGS="-I$withval"
+else
+  MYSQL_CFLAGS='-I/usr/include/mysql'
+fi
+
 
 
 # Checks for typedefs, structures, and compiler characteristics.

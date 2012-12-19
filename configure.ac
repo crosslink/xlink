@@ -38,8 +38,23 @@ AC_CHECK_LIB([atire_api], [atire_api_check], [LIBS="$LIBS -latire_api"])
 #AC_CHECK_LIB([dl], [dlopen], [LIBS="$LIBS -ldl"])
 AC_CHECK_LIB([curl], [curl_easy_init], [LIBS="$LIBS -lcurl"])
 
+AC_ARG_WITH([mysql-lib-path],
+  [AS_HELP_STRING([--with-mysql-lib-path], [location of the MySQL libraries])],
+  [MYSQL_LIBS="-L$withval -lmysqlclient"],
+  [MYSQL_LIBS='-lmysqlclient'])
+AC_SUBST([MYSQL_LIBS])
+
 # Checks for header files.
 AC_CHECK_HEADERS([netdb.h netinet/in.h stddef.h stdlib.h string.h sys/socket.h unistd.h])
+
+          
+# Get MySQL library and include locations
+AC_ARG_WITH([mysql-include-path],
+  [AS_HELP_STRING([--with-mysql-include-path],
+    [location of the MySQL headers, defaults to /usr/include/mysql])],
+  [MYSQL_CFLAGS="-I$withval"],
+  [MYSQL_CFLAGS='-I/usr/include/mysql'])
+AC_SUBST([MYSQL_CFLAGS])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL

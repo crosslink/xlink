@@ -18,7 +18,7 @@
 
 #include "pattern_singleton.h"
 
-namespace QLINK {
+//namespace QLINK {
 	struct MemoryStruct {
 	  char *memory;
 	  size_t size;
@@ -28,19 +28,22 @@ namespace QLINK {
 	{
 	private:
 		  CURL *curl_handle;
-
+		  struct curl_slist *headers;
 		  struct MemoryStruct chunk;
 
 	public:
 		webpage_retriever();
 		virtual ~webpage_retriever();
 
-		char *retrieve(const char *url);
+		char *retrieve(const char *url, int *response_code);
+		void add_header(const char *header);
+
+		int get_response_code();
 
 	private:
 		void free_chunk();
 	};
 
-}
+//}
 
 #endif /* WEBPAGE_RETRIEVER_H_ */

@@ -7,7 +7,7 @@
 
 #include "webpage_retriever.h"
 
-namespace QLINK {
+//namespace QLINK {
 	static void *myrealloc(void *ptr, size_t size);
 
 	static void *myrealloc(void *ptr, size_t size)
@@ -37,6 +37,8 @@ namespace QLINK {
 
 	webpage_retriever::webpage_retriever()
 	{
+		headers = NULL;
+
 		  chunk.memory=NULL; /* we expect realloc(NULL, size) to work */
 		  chunk.size = 0;    /* no data at this point */
 
@@ -53,7 +55,7 @@ namespace QLINK {
 
 		  /* some servers don't like requests that are made without a user-agent
 			 field, so we provide one */
-		  curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "firefox/3.5.1");
+		  curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "CROSSLINK/1.0 (http://ntcir.nii.ac.jp/CrossLink/)");
 	}
 
 	webpage_retriever::~webpage_retriever()
@@ -67,7 +69,13 @@ namespace QLINK {
 		curl_global_cleanup();
 	}
 
-	void webpage_retriever::free_chunk()
+int webpage_retriever::get_response_code() {
+	int response_code = 0;
+	curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &response_code);
+	return response_code;
+}
+
+void webpage_retriever::free_chunk()
 	{
 		  if(chunk.memory) {
 			free(chunk.memory);
@@ -76,7 +84,7 @@ namespace QLINK {
 		  chunk.size = 0;
 	}
 
-	char *webpage_retriever::retrieve(const char *url)
+	char *webpage_retriever::retrieve(const char *url, int *response_code)
 	{
 		free_chunk();
 
@@ -85,7 +93,7 @@ namespace QLINK {
 
 	  /* get it! */
 	  curl_easy_perform(curl_handle);
-
+	  curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, response_code);
 	  /*
 	   * Now, our chunk.memory points to a memory block that is chunk.size
 	   * bytes big and contains the remote file.
@@ -99,4 +107,10 @@ namespace QLINK {
 	  return chunk.memory;
 	}
 
-}
+	void webpage_retriever::add_header(const char *header) {
+		//headers = curl_slist_append(headers, "Content-Type: text/xml");
+		headers = curl_slist_append(headers, header);
+		curl_easy_setopt(curl_handle, CURLOPT_HTTPHEADER, headers);
+	}
+
+//}

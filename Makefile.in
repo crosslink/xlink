@@ -95,7 +95,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	database_mysql.$(OBJEXT) google_translator.$(OBJEXT) \
 	google_research_translator.$(OBJEXT) \
 	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
-	link_print.$(OBJEXT) ltw.$(OBJEXT)
+	link_print.$(OBJEXT) urlcode.$(OBJEXT) ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -166,6 +166,8 @@ LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
+MYSQL_CFLAGS = @MYSQL_CFLAGS@
+MYSQL_LIBS = @MYSQL_LIBS@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -224,7 +226,7 @@ top_srcdir = @top_srcdir@
 
 #AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
 AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
-LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN
+LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @MYSQL_LIBS@
 #LTW_LIBS ==-lgcj
 SRC_DIR = src
 TOOLS_DIR = tools
@@ -285,6 +287,7 @@ ltw_headers = \
 	$(SRC_DIR)/pattern_singleton.h \
 	$(SRC_DIR)/application_out.h \
 	$(SRC_DIR)/link_print.h \
+	$(SRC_DIR)/urlcode.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -342,6 +345,7 @@ ltw_sources = \
 	$(SRC_DIR)/webpage_retriever.cpp \
 	$(SRC_DIR)/application_out.cpp \
 	$(SRC_DIR)/link_print.cpp \
+	$(SRC_DIR)/urlcode.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 ltw_SOURCES = $(ltw_sources)
@@ -452,6 +456,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/topic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/translation.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlcode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/webpage_retriever.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia_page.Po@am__quote@
@@ -1228,6 +1233,20 @@ link_print.obj: $(SRC_DIR)/link_print.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/link_print.cpp' object='link_print.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o link_print.obj `if test -f '$(SRC_DIR)/link_print.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/link_print.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/link_print.cpp'; fi`
+
+urlcode.o: $(SRC_DIR)/urlcode.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT urlcode.o -MD -MP -MF $(DEPDIR)/urlcode.Tpo -c -o urlcode.o `test -f '$(SRC_DIR)/urlcode.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/urlcode.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/urlcode.Tpo $(DEPDIR)/urlcode.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/urlcode.cpp' object='urlcode.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o urlcode.o `test -f '$(SRC_DIR)/urlcode.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/urlcode.cpp
+
+urlcode.obj: $(SRC_DIR)/urlcode.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT urlcode.obj -MD -MP -MF $(DEPDIR)/urlcode.Tpo -c -o urlcode.obj `if test -f '$(SRC_DIR)/urlcode.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/urlcode.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/urlcode.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/urlcode.Tpo $(DEPDIR)/urlcode.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/urlcode.cpp' object='urlcode.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o urlcode.obj `if test -f '$(SRC_DIR)/urlcode.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/urlcode.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/urlcode.cpp'; fi`
 
 ltw.o: $(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ltw.o -MD -MP -MF $(DEPDIR)/ltw.Tpo -c -o ltw.o `test -f '$(SRC_DIR)/ltw.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/ltw.cpp
