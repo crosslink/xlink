@@ -239,7 +239,7 @@ std::string database_mysql::escape_string(const char *in) {
 }
 
 void database_mysql::init() {
-	server = "localhost";
+	server = "centos6.qut.edu.au";
 	database = "google_translate_info";
 	user = "gt";
 	password = "gtproject";

@@ -62,7 +62,7 @@ std::string translation::translate(const char *word, const char *language_pair)
 	if (it != translations_.end())
 		return it->second;
 
-	std::string result = google_translator::instance().translate(word, language_pair);
+	std::string result = google_translator::instance().translate(word);
 	translations_[word] = result;
 
 	return result;

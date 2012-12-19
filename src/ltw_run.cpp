@@ -10,6 +10,7 @@
 #include "corpus.h"
 #include "sys_file.h"
 #include "application_out.h"
+#include "google_research_translator.h"
 
 #include <string>
 
@@ -64,6 +65,9 @@ void ltw_run::init()
 //	string target_lang = get_config().get_value("target_lang");
 	corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
 	assert(corpus::instance().lang().length() <= 4);
+
+	string lang_pair = string(source_lang) + ":" + string(target_lang);
+	google_research_translator::instance().set_lang_pair(lang_pair.c_str());
 
 	string s_code;
 	string t_code;

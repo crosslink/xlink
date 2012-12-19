@@ -11,6 +11,7 @@
 #include "cmdline_options.h"
 #include "application_out.h"
 #include "algorithm_out.h"
+#include "database_mysql.h"
 
 #include <string.h>
 
@@ -40,6 +41,8 @@ void create_run(int argc, char **argv)
 			break;
 	}
 	ltw_task::topic_param_start = index_argv_param;
+
+	database_mysql::instance().connect();
 
 	ltw_run *run = NULL;
 	if (config_file)

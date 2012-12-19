@@ -44,6 +44,7 @@ void algorithm_ant_link_this_and_page_name2::process_terms(
 //	if (links_->size() < 250)
 //	simply added the page name to end of link list
 	mode = PAGE_NAME;
+	g_links_.set_topic(current_topic_);
 	QLINK::algorithm_page_name::process_terms(&g_links_, term_list, source);
 	fprintf(stderr, "Total %d links found from page name matching\n", g_links_.all_links_length());
 

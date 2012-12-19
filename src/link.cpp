@@ -17,6 +17,8 @@
 #include "search_engine_ant_remote.h"
 #include "translation.h"
 #include "run_config.h"
+#include "database_mysql.h"
+#include "google_research_translator.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -175,16 +177,21 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 			long long result = 0;
 			string query;
 
-			if (strlen(term) == 0)
-				cerr << " I got you" << endl;
+//			if (strlen(term) == 0)
+//				cerr << " I got you" << endl;
 
-			if (true) { // TODO: create a conditon here
+			if (!translate_anchor_for_linking) { // TODO: create a conditon here
 				query = term;
 			}
 			else {
 				// old Google API no longer available, needed re-impremented
-				string lang_pair = string(source_lang) + "|" + string(target_lang);
-				query = translation::instance().translate(term, lang_pair.c_str());
+				if (!google_research_translator::instance().is_initialized()) {
+//					database_mysql::instance().connect();
+					google_research_translator::instance().initialize(google_translator::LOAD_KEY);
+					string lang_pair = string(source_lang) + ":" + string(target_lang);
+					google_research_translator::instance().set_lang_pair(lang_pair.c_str());
+				}
+				query = google_research_translator::instance().translate(term); //translation::instance().translate(term, lang_pair.c_str());
 			}
 
 			vector<string> docids;

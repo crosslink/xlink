@@ -101,6 +101,8 @@ namespace QLINK {
 		virtual void find_anchor() {}
 
 		int size() { return all_links_in_file_.size(); }
+
+		void set_topic(ltw_topic *topic) { this->topic_ = topic; }
 		//long find_bep(link *lnk);
 
 	protected:

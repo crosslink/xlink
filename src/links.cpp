@@ -257,11 +257,11 @@ QLINK::link *links::push_link(char *place_in_file, long offset, char *buffer, lo
 {
 	bool isnoun = true;
 	link *current = NULL;
-	if (count_word(buffer) == 1) {
+	if (this->topic_->get_ltw_task()->get_source_lang() == "en" && count_word(buffer) == 1) {
 		wordnet::instance().check(buffer);
 		isnoun = wordnet::instance().is_noun();
 	}
-	if (isnoun ) {
+	if (isnoun) {
 		if (find(buffer) == NULL) {
 			current = create_new_link();
 
