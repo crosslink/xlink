@@ -66,6 +66,7 @@ inline std::string byte_to_string(int i, int b = 10)
 }
 
 
+
 template<typename StringT>
 inline void std_tolower(StringT& s1, StringT& s2) {
 	std::transform(s1.begin(), s1.end(), s2.begin(), static_cast < int(*)(int) > (std::tolower));
