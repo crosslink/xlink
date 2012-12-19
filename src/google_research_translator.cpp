@@ -31,7 +31,7 @@ google_research_translator::~google_research_translator() {
 google_research_translator& google_research_translator::get_instance()
 {
 	static google_research_translator instance;
-	instance.init();
+//	instance.init();
 	return instance;
 }
 

@@ -185,13 +185,13 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 			}
 			else {
 				// old Google API no longer available, needed re-impremented
-				if (!google_research_translator::instance().is_initialized()) {
+				if (!google_research_translator::get_instance().is_initialized()) {
 //					database_mysql::instance().connect();
-					google_research_translator::instance().initialize(google_translator::LOAD_KEY);
+					google_research_translator::get_instance().initialize(google_translator::LOAD_KEY);
 					string lang_pair = string(source_lang) + ":" + string(target_lang);
-					google_research_translator::instance().set_lang_pair(lang_pair.c_str());
+					google_research_translator::get_instance().set_lang_pair(lang_pair.c_str());
 				}
-				query = google_research_translator::instance().translate(term); //translation::instance().translate(term, lang_pair.c_str());
+				query = google_research_translator::get_instance().translate(term); //translation::instance().translate(term, lang_pair.c_str());
 			}
 
 			vector<string> docids;
