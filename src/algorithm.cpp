@@ -181,16 +181,23 @@ void algorithm::process_topic_text()
 		string_tolower(filecopy);
 
 	current = term_list = new char *[strlen(filecopy)];		// this is the worst case by far
-	if (use_utf8_token_matching_) {
+//	if (use_utf8_token_matching_) {
 		token_address_ = new char *[strlen(filecopy)];
 		create_utf8_token_list(filecopy, term_list, segmented_, token_address_);
-	}
-	else
-		{
-		for (token = strtok(filecopy, seperators); token != NULL; token = strtok(NULL, seperators))
-			*current++ = token;
-		*current = NULL;
-		}
+//	}
+//	else
+//		{
+//		for (token = strtok(filecopy, seperators); token != NULL; token = strtok(NULL, seperators))
+//			*current++ = token;
+//		*current = NULL;
+//#ifdef DEBUG
+//		char **first;
+//		for (first = token_address_; *first != NULL; first++)
+//		{
+//			cerr << (*first) - source_ << ": " << (*first) << endl;
+//		}
+//#endif
+//		}
 	//string_to_list(filecopy, term_list);
 
 	process_terms(term_list, filecopy);

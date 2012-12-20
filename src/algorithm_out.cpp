@@ -104,6 +104,11 @@ void algorithm_out::recommend_anchors(links* lx, char **term_list, const char *s
 				{
 //				if (strcmp("過年", buffer) == 0)
 //					cerr << " I caught you" << endl;
+				string test("Certified check");
+				if (strcasecmp(test.c_str(), current_term_) == 0
+						|| strcasecmp(test.c_str(), buffer) == 0
+						|| strcasecmp(test.c_str(), index_term->term) == 0)
+					cerr << "I got you" << endl;
 
 //				if (!lx->find(buffer)) {
 					offset = assign_link_term(buffer, term_list);
@@ -130,14 +135,14 @@ long algorithm_out::assign_link_term(char *buffer, char **term_list)
 {
 	long term_len, offset, index;
 
-	if (!use_utf8_token_matching_) {
-		offset = current_term_ - source_;
-	}
-	else {
+//	if (!use_utf8_token_matching_) {
+//		offset = current_term_ - source_;
+//	}
+//	else {
 		index = current_index_;
 		offset = token_address_[index] - source_;
 //		strcpy(buffer_, index_term->term);
-	}
+//	}
 	term_len = strlen(buffer);
 	strncpy(buffer_, offset + current_topic_->get_content(), term_len);
 

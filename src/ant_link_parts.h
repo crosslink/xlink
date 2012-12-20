@@ -574,6 +574,9 @@ char **current = term_list;
 term_count = 0;
 while (*where_to != '\0')
 	{
+	if (term_count == 965)
+		fprintf(stderr, "I got you\n");
+
 	while (isspace(*where_to))
 		++where_to;
 
