@@ -111,7 +111,7 @@ namespace QLINK
 					if (use_utf8_token_matching_ && strchr(wiki_title.c_str(), ' ') != NULL)
 						find_and_replace(wiki_title, string(" "), string(""));
 
-					std::pair<std::string, std::string> title_pair = wikipedia::process_title(wiki_title, lowercase_only/*, !use_utf8_token_matching_*/);
+					std::pair<std::string, std::string> title_pair = wikipedia::process_title(wiki_title, 1/*, !use_utf8_token_matching_*/);
 					//struct wiki_entry a_entry;
 					ANT_link_posting *a_entry = new ANT_link_posting;
 					a_entry->docid = doc_id;
@@ -196,13 +196,13 @@ namespace QLINK
 	while (low < high)
 		{
 		mid = (low + high) / 2;
-		if (string_compare(name_array_[mid]->term, value, lowercase_only, use_utf8_token_matching_) < 0)
+		if (string_compare(name_array_[mid]->term, value, 1, use_utf8_token_matching_) < 0)
 			low = mid + 1;
 		else
 			high = mid;
 		}
 
-	if ((low < name_array_.size()) && (string_compare(value, name_array_[low]->term, lowercase_only, use_utf8_token_matching_) == 0))
+	if ((low < name_array_.size()) && (string_compare(value, name_array_[low]->term, 1, use_utf8_token_matching_) == 0))
 		return name_array_[low];		// match
 	else
 		{

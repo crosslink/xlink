@@ -155,8 +155,6 @@ while (fgets(buffer_, sizeof(buffer_), fp) != NULL)
 	postings = count_char (term_end, '>');
 	//term->term = strnnew(buffer_, term_end - buffer_);
 	term->term = strndup(buffer_, term_end - buffer_);
-	if (lowercase_only)
-		strlower(term->term);
 	if (!term->term) {
 		fprintf(stderr, "reading term error at %d, should be load %d terms", count, unique_terms);
 		unique_terms = count;
