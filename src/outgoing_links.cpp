@@ -37,8 +37,6 @@ outgoing_links::outgoing_links(ltw_topic *a_topic) : links(a_topic)
 
 outgoing_links::outgoing_links()
 {
-	links_to_print_ = 250;
-	beps_to_print_ = 5;
 	init();
 }
 
@@ -65,6 +63,9 @@ void outgoing_links::init_links()
 
 void outgoing_links::init() {
 	type(OUTGOING_LINK_TYPE);
+
+	links_to_print_ = 250;
+	beps_to_print_ = 5;
 
 	if (links_to_print_ <= 0 && topic_->get_ltw_task()->is_a2b_task()) {
 		links_to_print_ = 50;

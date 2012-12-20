@@ -173,7 +173,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 
 		how_many_left = beps_to_print - count;
 #ifdef WITH_ATIRE
-		if (fill_anchor_with_ir_results && how_many_left > 0) {
+		if (fill_anchor_with_ir_results && how_many_left > 0 && (how_many_left < beps_to_print)) {
 			long long result = 0;
 			string query;
 

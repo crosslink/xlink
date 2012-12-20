@@ -64,8 +64,8 @@ namespace QLINK {
 	    links *outgoings_;
 	    links *incomings_;
 
-	    long links_to_print_;
-	    long beps_to_print_;
+//	    long links_to_print_;
+//	    long beps_to_print_;
 
 	    std::string source_lang_;
 	    std::string target_lang_;
@@ -86,11 +86,11 @@ namespace QLINK {
 
 	    algorithm_out *get_algor_out() const { return algor_out_; }
 
-		void set_links_to_print(long links_to_print) { links_to_print_ = links_to_print; }
-		long links_to_print() { return links_to_print_; }
-
-		void set_beps_to_print(long beps_to_print) { beps_to_print_ = beps_to_print; }
-		long beps_to_print() { return beps_to_print_; }
+//		void set_links_to_print(long links_to_print) { links_to_print_ = links_to_print; }
+//		long links_to_print() { return links_to_print_; }
+//
+//		void set_beps_to_print(long beps_to_print) { beps_to_print_ = beps_to_print; }
+//		long beps_to_print() { return beps_to_print_; }
 
 	    std::string get_source_lang() const
 	    {

@@ -71,13 +71,16 @@ void ltw_task::init()
 
 	set_alorithm_bep(system_config_->get_value("algorithm_bep"));
 
-	string links_to_print_str = system_config_->get_value("anchors_number");
-	if (links_to_print_str.length() > 0)
-		set_links_to_print(atol(links_to_print_str.c_str()));
-
-	string beps_to_print_str = system_config_->get_value("anchor_links_number");
-	if (beps_to_print_str.length() > 0)
-		set_beps_to_print(atol(beps_to_print_str.c_str()));
+	/*TODO
+	 * no time to fix it, it can be done in the algorithm class
+	 */
+//	string links_to_print_str = system_config_->get_value("anchors_number");
+//	if (links_to_print_str.length() > 0)
+//		set_links_to_print(atol(links_to_print_str.c_str()));
+//
+//	string beps_to_print_str = system_config_->get_value("anchor_links_number");
+//	if (beps_to_print_str.length() > 0)
+//		set_beps_to_print(atol(beps_to_print_str.c_str()));
 
 	string source_lang = system_config_->get_value("source_lang");
 	set_source_lang(source_lang.length() > 0 ? source_lang : "en");
@@ -184,10 +187,10 @@ void ltw_task::perform()
 				outgoings_->set_bep_algorithm(algor_bep_);
 				outgoings_->set_algorithm(algor_out_);
 
-				if (links_to_print_ > 0)
-					outgoings_->set_links_to_print(links_to_print_);
-				if (beps_to_print_ > 0)
-					outgoings_->set_beps_to_print(beps_to_print_);
+//				if (links_to_print_ > 0)
+//					outgoings_->set_links_to_print(links_to_print_);
+//				if (beps_to_print_ > 0)
+//					outgoings_->set_beps_to_print(beps_to_print_);
 
 				algor_out_->set_links_container(outgoings_);
 				algor_out_->set_stage(algorithm::FIND_ANCHOR);
@@ -208,10 +211,10 @@ void ltw_task::perform()
 					incomings_ = NULL;
 				}
 				incomings_ = new incoming_links(&a_topic);
-				if (links_to_print_ > 0)
-					incomings_->set_links_to_print(links_to_print_);
-				if (beps_to_print_ > 0)
-					incomings_->set_beps_to_print(beps_to_print_);
+//				if (links_to_print_ > 0)
+//					incomings_->set_links_to_print(links_to_print_);
+//				if (beps_to_print_ > 0)
+//					incomings_->set_beps_to_print(beps_to_print_);
 
 				incomings_->set_bep_algorithm(algor_bep_);
 				algor_in_->set_links_container(incomings_);
