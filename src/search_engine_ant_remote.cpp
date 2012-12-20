@@ -34,7 +34,7 @@ return strnnew(start, finish - start);
 search_engine_ant_remote::search_engine_ant_remote() {
 	if (!socket.open((char *)"localhost:8088"))
 		{
-		puts("Cannot open socket");
+		fprintf(stderr, "Cannot open socket");
 		exit(-1);
 		}
 }
@@ -54,7 +54,7 @@ long search_engine_ant_remote::search(const char* query,
 
 	if (result == NULL || strstr(result, "<ATIREerror>") != NULL)
 		{
-		puts("Communications Error in search request");
+		fprintf(stderr, "Communications Error in search request");
 		return 0;
 		}
 

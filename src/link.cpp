@@ -210,7 +210,8 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 			else {
 				ret = anchor_printed;
 			}
-			for (int i = 0; i < hits; ++i) {
+			int num = hits > how_many_left ? how_many_left : hits;
+			for (int i = 0; i < num; ++i) {
 				doc_id = result_to_id(docids[i].c_str());
 				if (doc_id < 1)
 					continue;
