@@ -132,7 +132,7 @@ while (*ch != '\0')
 	{
 	if (*ch == '<')			// then remove the XML tags
 		{
-		while (*ch != '>')
+		while (*ch != '>' && *ch != '\0')
 			*ch++ = ' ';
 		*ch++ = ' ';
 		}
@@ -149,7 +149,7 @@ if (trim) {
 		from++;
 	while (*from != '\0')
 		{
-		while (isalnum(*from))
+		while (!isspace(*from))
 			*to++ = *from++;
 		if (isspace(*from))
 			*to++ = *from++;

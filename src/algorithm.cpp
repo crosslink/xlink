@@ -203,9 +203,12 @@ void algorithm::process_topic_text()
 	process_terms(term_list, filecopy);
 
 	// segmnet fault for delete term list
-	if (use_utf8_token_matching_)
-		free_utf8_token_list(term_list);
+//	if (use_utf8_token_matching_)
+	free_utf8_token_list(term_list);
 	delete [] term_list;
+	delete [] token_address_;
+	term_list = NULL;
+	token_address_ = NULL;
 //	delete [] filecopy;
 	free(filecopy);
 	//free(filecopy);

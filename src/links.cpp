@@ -280,15 +280,15 @@ QLINK::link *links::push_link(char *place_in_file, long offset, char *buffer, lo
 			if ((all_links_in_file_.size()) >= MAX_LINKS_IN_FILE)
 				exit(printf("Too many links in this file (aborting)\n"));
 		}
-#ifdef DEBUG
-		else
-			fprintf(stderr, "%s already added\n", buffer);
-#endif
+//#ifdef DEBUG
+//		else
+//			fprintf(stderr, "%s already added\n", buffer);
+//#endif
 	}
-#ifdef DEBUG
-	else
-		fprintf(stderr, "%s is not a noun word\n", buffer);
-#endif
+//#ifdef DEBUG
+//	else
+//		fprintf(stderr, "%s is not a noun word\n", buffer);
+//#endif
 
 
 	return current;

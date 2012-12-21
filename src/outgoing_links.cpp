@@ -222,14 +222,14 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 
 	while ((result < all_links_in_file_.size()) && (links_printed < links_to_print_)) {
 		current_link = reinterpret_cast<outgoing_link *>(all_links_in_file_[result]);
-		if (strlen(current_link->link_term->term) == 0)
-			{
-			result++;		// in the case of empty term
-			continue;
-			}
+//		if (strlen(current_link->link_term->term) == 0)
+//			{
+//			result++;		// in the case of empty term
+//			continue;
+//			}
 
-			if (strcmp(current_link->link_term->term, "3rd Regiment") == 0)
-				cerr << "I got you " << endl;
+//			if (strcmp(current_link->link_term->term, "3rd Regiment") == 0)
+//				cerr << "I got you " << endl;
 
 		if (link_print::is_number_or_chronological_link(current_link->link_term->term, current_link->get_source_lang())) {
 			result++;		// in the case of a 4 digit number we ignore as we're probably a year
@@ -310,6 +310,7 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 		result++;
 	} // while
 
+	cerr << "finished printing links" << endl;
 	//print_link_tag_footer();
 
 }

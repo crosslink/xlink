@@ -112,9 +112,12 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 	 * to someting with the this_term first;
 	 */
 	int term_length = strlen(term);
-	string this_term = string_clean_tag(term);
-	while (this_term.find("  ") != string::npos)
-		find_and_replace(this_term, string("  "), string(" "));
+	string this_term = string_clean_tag(term, 0);
+	trim_left(this_term, " ");
+	trim_right(this_term, " ");
+
+//	while (this_term.find("  ") != string::npos)
+	find_and_replace(this_term, string("  "), string(" "));
 
 	find_and_replace(this_term, string("&"), string("&amp;"));
 //	find_and_replace(this_term, string("&lt;"), string("<"));
@@ -204,7 +207,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 					string lang_pair = string(source_lang) + ":" + string(target_lang);
 					google_research_translator::get_instance().set_lang_pair(lang_pair.c_str());
 				}
-				query = google_research_translator::get_instance().translate(term); //translation::instance().translate(term, lang_pair.c_str());
+				query = google_research_translator::get_instance().get_translation(term); //translation::instance().translate(term, lang_pair.c_str());
 			}
 
 			vector<string> docids;
