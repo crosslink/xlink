@@ -108,7 +108,20 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 		ret = true;
 
 	string tran;
-	string this_term = term;
+	/*
+	 * to someting with the this_term first;
+	 */
+	int term_length = strlen(term);
+	string this_term = string_clean_tag(term);
+	while (this_term.find("  ") != string::npos)
+		find_and_replace(this_term, string("  "), string(" "));
+
+	find_and_replace(this_term, string("&"), string("&amp;"));
+//	find_and_replace(this_term, string("&lt;"), string("<"));
+//	find_and_replace(this_term, string("&gt;"), string(">"));
+	find_and_replace(this_term, string("\""), string("&quot;"));
+	find_and_replace(this_term, string("'"), string("&apos;"));
+
 	long this_offset = offset;
 	ANT_link_term *this_link_term = link_term;
 	int how_many_left = beps_to_print;
@@ -131,7 +144,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 //		if (strcmp(term, "\"") == 0)
 //			sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, 1, "&quot;");
 //		else
-		sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, this_term.length(), this_term.c_str());
+		sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", this_offset, term_length, this_term.c_str());
 
 		std::string anchor_tag(buf);
 		if ((fill_anchor_with_ir_results && fill_anchor_with_ir_results != 2) || (!fill_anchor_with_ir_results && this_link_term->postings.size() > 0)) {

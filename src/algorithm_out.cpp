@@ -145,7 +145,23 @@ long algorithm_out::assign_link_term(char *buffer, char **term_list)
 //	}
 
 	term_len = strlen(buffer);
-	strncpy(buffer_, offset + current_topic_->get_content(), term_len);
+	char *where_to = buffer_;
+	char *start = offset + current_topic_->get_content();
+	int count = term_len;
+	while (count > 0) {
+		if (*start == '<') {
+			while (*start != '>') {
+//				++start;
+				*where_to++ = *start++;
+			}
+//			++start;
+//			*where_to++ = *start++;
+		}
+		else
+			--count;
+		*where_to++ = *start++;
+	}
+//	strncpy(buffer_, offset + current_topic_->get_content(), term_len);
 
 	buffer_[term_len] = '\0';
 
