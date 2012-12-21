@@ -143,15 +143,24 @@ long algorithm_out::assign_link_term(char *buffer, char **term_list)
 		offset = token_address_[index] - source_;
 //		strcpy(buffer_, index_term->term);
 //	}
+
 	term_len = strlen(buffer);
 	strncpy(buffer_, offset + current_topic_->get_content(), term_len);
 
-	if (memcmp(buffer_, buffer, term_len) != 0) {
+	buffer_[term_len] = '\0';
+
+	if (ltw_task_->is_cjk_lang() && memcmp(buffer_, buffer, term_len) != 0) {
+		fprintf(stderr, "WARNING - buffer does not match: [%s], [%s]\n", buffer_, buffer);
 		term_len = current_topic_->get_term_len(offset, buffer, ltw_task_->is_cjk_lang());
 		strncpy(buffer_, offset + current_topic_->get_content(), term_len);
+		buffer_[term_len] = '\0';
 	}
 
-	buffer_[term_len] = '\0';
+#ifdef DEBUG
+		if (strlen(buffer_) == 0)
+			fprintf(stderr, "WARNING - empty anchor found: [%s], [%s]\n", current_term_, buffer);
+//		fprintf(stderr, "WARNING - empty anchor found: [%s], [%s], [%s]\n", current_term_, buffer);
+#endif
 
 //	if (offset == 3443)
 //		cerr << " I caught you" << endl;

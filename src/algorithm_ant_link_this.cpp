@@ -75,9 +75,14 @@ void algorithm_ant_link_this::init_variables()
 	topic_with_links_ = NULL;
 
 	string crosslink_table = run_config::instance().get_value("crosslink_table");
-	if (crosslink_table.length() > 0) {
-//		crosslink_ = true;
-		load_crosslink_table(crosslink_table);
+	vector<string> table_list;
+	string_to_collection(table_list, crosslink_table);
+
+	for (int i = 0; i < table_list.size(); ++i) {
+		if (table_list[i].length() > 0) {
+	//		crosslink_ = true;
+			load_crosslink_table(table_list[i]);
+		}
 	}
 
 	topic_with_links_path_ = run_config::instance().get_value("topic_with_links_path");
@@ -97,7 +102,8 @@ void algorithm_ant_link_this::load_crosslink_table(std::string& filename)
 //				if (!corpus::instance().exist(doc_id))
 //					continue;
 				unsigned long target_doc_id = atol(line.c_str() + pos + 1);
-				crosslink_table_[doc_id] = target_doc_id;
+				if (crosslink_table_.find(doc_id) == crosslink_table_.end())
+					crosslink_table_[doc_id] = target_doc_id;
 				//crosslink_table_.insert(make_pair(doc_id, target_doc_id));
 			}
 		}
@@ -496,12 +502,7 @@ void algorithm_ant_link_this::add_link(links* lx, ANT_link_term *term, char **te
 		/*
 		 * TODO buffer_ might be empty, make sure it got fixed
 		 */
-#ifdef DEBUG
-		if (strlen(buffer_) == 0)
-			fprintf(stderr, "WARNING - empty anchor found: [%s], [%s], [%s]\n", term->term, current_term_, buffer_);
-#endif
-
-		lx->push_link(current_term_, offset, term->term, term->postings[0]->docid, gamma, term);
+		lx->push_link(current_term_, offset, buffer_, term->postings[0]->docid, gamma, term);
 
 			// debug
 	//					fprintf(stderr, "found a %s anchor\n", buffer__);

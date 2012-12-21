@@ -13,6 +13,9 @@
 #include <algorithm>
 #include <cctype>
 #include <sstream>
+#include <vector>
+#include <iterator>
+#include <iostream>
 
 #include <assert.h>
 #include <string.h>
@@ -210,6 +213,14 @@ while (ch != file.end())
 	else
 		++ch;
 	}
+}
+
+template <typename StringT = std::string, typename CollectionT = std::vector<StringT> >
+inline void string_to_collection(CollectionT& tokens, StringT str, StringT seprator = std::string(":")) {
+	std::istringstream iss(str);
+	std::copy(std::istream_iterator<StringT>(iss),
+	        std:: istream_iterator<StringT>(),
+	         std::back_inserter<CollectionT>(tokens));
 }
 
 template <typename T>
