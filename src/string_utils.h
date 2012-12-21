@@ -133,10 +133,15 @@ inline void trim_non_alnum(std::string& source)
 template <typename T>
 void find_and_replace( T& source, const T& find, const T& replace )
 {
-        size_t j;
-        for (;(j = source.find( find )) != T::npos;)
+//	T::iterator it;
+
+        size_t j = 0;
+        size_t len = source.length();
+        for (; j < len && (j = source.find(find, j)) != T::npos;)
         {
-                source.replace( j, find.length(), replace );
+                source.replace(j, len, replace);
+                j += replace.length();
+                len = source.length();
         }
 }
 
