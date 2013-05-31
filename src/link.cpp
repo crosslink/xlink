@@ -164,23 +164,26 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 				else
 					id = atoi(this_link_term->postings[i]->desc);
 
+				std::string target_title;
 				if (crosslink_me) {
 					if (algor != NULL && algor->size_of_crosslink() > 0)
 						id = algor->get_crosslink(id);
 					if (id <= 0)
 						continue;
+				}
+				if (corpus::instance().exists()) {
 					string filename = corpus::instance().id2docpath(id);
 					if (!sys_file::exist(filename.c_str())) {
 						cerr << "No target file found:" << filename << endl;
 						continue;
 					}
-					std::string target_title = corpus::instance().gettitle(filename);
-					sprintf(buf, format, 0, target_lang, target_title.c_str(), id);
+					target_title.append(corpus::instance().gettitle(filename));
 				}
-				else
-				{
-					sprintf(buf, format, this_link_term->postings[i]->offset, id);
-				}
+//				else
+//				{
+//					sprintf(buf, format, this_link_term->postings[i]->offset, id);
+//				}
+				sprintf(buf, format, 0, target_lang, target_title.c_str(), id);
 				stringbuffer << buf;
 				++count;
 				if (count >= beps_to_print)

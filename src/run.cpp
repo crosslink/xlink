@@ -41,9 +41,12 @@ void run::init()
 //		home = ".";
 		home.append(sys_file::SEPARATOR);
 		corpus::instance().home(home);
+		corpus::instance().exists(true);
 	}
-	else
+	else {
 		cerr << "No CORPUS HOME is given!" << endl;
+		corpus::instance().exists(false);
+	}
 }
 
 void run::print_header()

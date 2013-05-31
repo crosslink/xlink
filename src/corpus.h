@@ -20,16 +20,18 @@ namespace QLINK {
 		typedef std::map<std::string, std::string> 		teara_map;
 
 	private:
-		const char 								*doclist_;
+		const char 							*doclist_;
 
 	protected:
-		doc_map									doc_map_;
-		teara_map								teara_map_;
-		bool									load_;
+		doc_map								doc_map_;
+		teara_map							teara_map_;
+		bool										load_;
 		std::string								home_;
 		std::string								base_;
 		std::string								teara_home_;
 		std::string								lang_;
+
+		bool										exists_;
 
 	public:
 		corpus();
@@ -59,6 +61,9 @@ namespace QLINK {
 
 		bool exist(unsigned long id);
 		bool exist(unsigned long id, std::string lang);
+
+		bool exists() { return exists_; }
+		void exists(bool has_it) { exists_ = has_it; }
 
 		static corpus& instance();
 
