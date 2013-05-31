@@ -29,7 +29,7 @@
 using namespace QLINK;
 using namespace std;
 
-outgoing_links::outgoing_links(ltw_topic *a_topic) : links(a_topic)
+outgoing_links::outgoing_links(ltw_topic *a_topic, bool need_crosslink) : links(a_topic, need_crosslink)
 {
 	init();
 }

@@ -266,43 +266,46 @@ link *orphan_link = NULL;
 
 pos = strstr(file, COLLECTION_LINK_TAG_NAME);
 int count = 0;
-while (pos != NULL)
+if (pos != NULL)
 	{
-	end = strstr(pos, COLLECTION_LINK_TAG_NAME_CLOSED);
-	pos = strstr(pos, "xlink:href=");
-	if (pos != NULL && pos < end)
-		{
-		pos = strchr(pos, '"');
-		pos++;
-		target_end = strchr(pos, '"');
+	do {
+		end = strstr(pos, COLLECTION_LINK_TAG_NAME_CLOSED);
+		pos = strstr(pos, "xlink:href=");
+		if (pos != NULL && pos < end)
+			{
+			pos = strchr(pos, '"');
+			pos++;
+			target_end = strchr(pos, '"');
 
-		while ((slash = strpbrk(pos, "\\/")) && slash < target_end)
-			pos = slash + 1;
+			while ((slash = strpbrk(pos, "\\/")) && slash < target_end)
+				pos = slash + 1;
 
-		id = atol(pos);
-		pos = strchr(pos, '>');
+			id = atol(pos);
+			pos = strchr(pos, '>');
 
-		copy = strndup(pos + 1, end - pos - 1);
-		string_clean(copy, lowercase_only);
+			copy = strndup(pos + 1, end - pos - 1);
+			string_clean(copy, lowercase_only);
 
-//		links_in_orphan_[*links_in_orphan_length]->term = copy;
-//		links_in_orphan_[*links_in_orphan_length]->gamma = 0;
-//		links_in_orphan_[*links_in_orphan_length]->target_document = id;
-		if (copy && strlen(copy) > 0 && !links_->find_orphan(copy)) {
-				orphan_link = links_->create_new_orphan_link();
-				orphan_link->term = copy;
-				orphan_link->gamma = 0;
-				orphan_link->target_document = id;
-				//(*links_in_orphan_length)++;
-				++count;
-		}
-		else
-			free(copy);
+	//		links_in_orphan_[*links_in_orphan_length]->term = copy;
+	//		links_in_orphan_[*links_in_orphan_length]->gamma = 0;
+	//		links_in_orphan_[*links_in_orphan_length]->target_document = id;
+			if (copy && strlen(copy) > 0 && !links_->find_orphan(copy)) {
+					orphan_link = links_->create_new_orphan_link();
+					orphan_link->term = copy;
+					orphan_link->gamma = 0;
+					orphan_link->target_document = id;
+					//(*links_in_orphan_length)++;
+					++count;
+			}
+			else
+				free(copy);
 
-		if (links_->orphan_links_length() >= MAX_LINKS_IN_FILE)
-			exit(printf("Too many links present in orphan a priori\n"));
-		}
-	pos = strstr(end, COLLECTION_LINK_TAG_NAME);
+			if (links_->orphan_links_length() >= MAX_LINKS_IN_FILE)
+				exit(printf("Too many links present in orphan a priori\n"));
+			}
+		} while (pos != NULL);
+		pos = strstr(end, COLLECTION_LINK_TAG_NAME);
+		links_->sort_orphan();
 	}
 
 //link *link_ptr;
@@ -313,7 +316,7 @@ while (pos != NULL)
 //}
 
 //qsort(links_in_orphan, *links_in_orphan_length, sizeof(*links_in_orphan), ANT_link::string_target_compare);
-links_->sort_orphan();
+
 free(file);
 }
 

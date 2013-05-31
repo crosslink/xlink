@@ -93,6 +93,8 @@ void ltw_task::init()
 	string target_lang = system_config_->get_value("target_lang");
 	set_target_lang(target_lang.length() > 0 ? target_lang : get_source_lang());
 
+	need_crosslink_ = source_lang != target_lang;
+
 	switch (get_algorithm_outgoing_type()) {
 	case LTW_ANT:
 		algor_out_ = new algorithm_ant_link_this(this);
@@ -183,7 +185,7 @@ void ltw_task::perform()
 					delete outgoings_;
 					outgoings_ = NULL;
 				}
-				outgoings_ = new outgoing_links(&a_topic);
+				outgoings_ = new outgoing_links(&a_topic, need_crosslink_);
 				outgoings_->set_bep_algorithm(algor_bep_);
 				outgoings_->set_algorithm(algor_out_);
 

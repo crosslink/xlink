@@ -70,6 +70,8 @@ namespace QLINK {
 	    std::string source_lang_;
 	    std::string target_lang_;
 
+	    bool need_crosslink_;
+
 	    bool is_cjk_lang_;
 		config					*system_config_;
 
@@ -117,6 +119,8 @@ namespace QLINK {
 
 		void set_system_config(config *config_ptr) {system_config_ = config_ptr; }
 		config *get_system_config() { return system_config_; }
+
+		bool need_crosslink() { return need_crosslink_; }
 
 	private:
 		ltw_algorithm get_algorithm_outgoing_type();

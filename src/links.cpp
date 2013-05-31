@@ -56,9 +56,10 @@ links::links() : topic_(NULL)
 	init();
 }
 
-links::links(ltw_topic *a_topic) : topic_(a_topic)
+links::links(ltw_topic *a_topic, bool need_crosslink) : topic_(a_topic)
 {
 	init();
+	link::crosslink_me = need_crosslink;
 }
 
 links::~links()

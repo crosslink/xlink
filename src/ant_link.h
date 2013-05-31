@@ -7,8 +7,6 @@
 #ifndef ANT_LINK_H_
 #define ANT_LINK_H_
 
-#define REMOVE_ORPHAN_LINKS 1
-
 #ifdef REMOVE_ORPHAN_LINKS
 	#define ADD_ORPHAN_LINKS 1
 	#define SUBTRACT_ORPHAN_LINKS (-1)

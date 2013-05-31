@@ -19,7 +19,7 @@ namespace QLINK {
 
 	public:
 		outgoing_links();
-		outgoing_links(ltw_topic *a_topic);
+		outgoing_links(ltw_topic *a_topic, bool need_crosslink = false);
 		virtual ~outgoing_links();
 
 		virtual void print_header();

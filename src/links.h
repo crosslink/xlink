@@ -53,7 +53,7 @@ namespace QLINK {
 
 	public:
 		links();
-		links(ltw_topic *a_topic);
+		links(ltw_topic *a_topic, bool need_crosslink = false);
 		virtual ~links();
 
 		std::vector<link *>& all_links() { return all_links_in_file_; }

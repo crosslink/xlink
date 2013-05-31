@@ -32,6 +32,7 @@ using namespace std;
 
 long link::fill_anchor_with_ir_results = 0;
 long link::translate_anchor_for_linking = 0;
+bool link::crosslink_me = false;
 
 link::link() {
 	place_in_file = NULL;
@@ -163,21 +164,23 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 				else
 					id = atoi(this_link_term->postings[i]->desc);
 
-#ifdef CROSSLINK
-				if (algor != NULL && algor->size_of_crosslink() > 0)
-					id = algor->get_crosslink(id);
-				if (id <= 0)
-					continue;
-				string filename = corpus::instance().id2docpath(id);
-				if (!sys_file::exist(filename.c_str())) {
-					cerr << "No target file found:" << filename << endl;
-					continue;
+				if (crosslink_me) {
+					if (algor != NULL && algor->size_of_crosslink() > 0)
+						id = algor->get_crosslink(id);
+					if (id <= 0)
+						continue;
+					string filename = corpus::instance().id2docpath(id);
+					if (!sys_file::exist(filename.c_str())) {
+						cerr << "No target file found:" << filename << endl;
+						continue;
+					}
+					std::string target_title = corpus::instance().gettitle(filename);
+					sprintf(buf, format, 0, target_lang, target_title.c_str(), id);
 				}
-				std::string target_title = corpus::instance().gettitle(filename);
-				sprintf(buf, format, 0, target_lang, target_title.c_str(), id);
-#else
-				sprintf(buf, format, this_link_term->postings[i]->offset, id);
-#endif
+				else
+				{
+					sprintf(buf, format, this_link_term->postings[i]->offset, id);
+				}
 				stringbuffer << buf;
 				++count;
 				if (count >= beps_to_print)
