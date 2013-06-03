@@ -126,7 +126,7 @@ ltw_sources = \
 	$(SRC_DIR)/urlcode.cpp \
 	$(SRC_DIR)/ltw.cpp
 
-noinst_PROGRAMS = ltw collection_link_finder
+noinst_PROGRAMS = ltw collection_link_finder urlencoder
 
 ltw_SOURCES = $(ltw_sources)
 ltw_LDADD = ${LTW_LIBS}
@@ -134,3 +134,8 @@ ltw_CFLAGS = $(AM_CFLAGS)
 #ltw_LDFLAGS = -static
 
 collection_link_finder_SOURCES = $(TOOLS_DIR)/collection_link_finder.cpp
+
+urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
+									 $(SRC_DIR)/urlcode.cpp
+urlencoder_LDADD =
+urlenclode_CFLAGS =							

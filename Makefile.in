@@ -50,7 +50,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-noinst_PROGRAMS = ltw$(EXEEXT) collection_link_finder$(EXEEXT)
+noinst_PROGRAMS = ltw$(EXEEXT) collection_link_finder$(EXEEXT) \
+	urlencoder$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(noinst_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
@@ -100,6 +101,9 @@ am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
 ltw_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_urlencoder_OBJECTS = urlencoder.$(OBJEXT) urlcode.$(OBJEXT)
+urlencoder_OBJECTS = $(am_urlencoder_OBJECTS)
+urlencoder_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -109,8 +113,10 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES)
-DIST_SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES)
+SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES) \
+	$(urlencoder_SOURCES)
+DIST_SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES) \
+	$(urlencoder_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -353,6 +359,11 @@ ltw_LDADD = ${LTW_LIBS}
 ltw_CFLAGS = $(AM_CFLAGS)
 #ltw_LDFLAGS = -static
 collection_link_finder_SOURCES = $(TOOLS_DIR)/collection_link_finder.cpp
+urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
+									 $(SRC_DIR)/urlcode.cpp
+
+urlencoder_LDADD = 
+urlenclode_CFLAGS = 
 all: all-am
 
 .SUFFIXES:
@@ -400,6 +411,9 @@ collection_link_finder$(EXEEXT): $(collection_link_finder_OBJECTS) $(collection_
 ltw$(EXEEXT): $(ltw_OBJECTS) $(ltw_DEPENDENCIES) $(EXTRA_ltw_DEPENDENCIES) 
 	@rm -f ltw$(EXEEXT)
 	$(CXXLINK) $(ltw_OBJECTS) $(ltw_LDADD) $(LIBS)
+urlencoder$(EXEEXT): $(urlencoder_OBJECTS) $(urlencoder_DEPENDENCIES) $(EXTRA_urlencoder_DEPENDENCIES) 
+	@rm -f urlencoder$(EXEEXT)
+	$(CXXLINK) $(urlencoder_OBJECTS) $(urlencoder_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -457,6 +471,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/topic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/translation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlcode.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlencoder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/webpage_retriever.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia_page.Po@am__quote@
@@ -1261,6 +1276,20 @@ ltw.obj: $(SRC_DIR)/ltw.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/ltw.cpp' object='ltw.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ltw.obj `if test -f '$(SRC_DIR)/ltw.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/ltw.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/ltw.cpp'; fi`
+
+urlencoder.o: $(TOOLS_DIR)/urlencoder.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT urlencoder.o -MD -MP -MF $(DEPDIR)/urlencoder.Tpo -c -o urlencoder.o `test -f '$(TOOLS_DIR)/urlencoder.cpp' || echo '$(srcdir)/'`$(TOOLS_DIR)/urlencoder.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/urlencoder.Tpo $(DEPDIR)/urlencoder.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(TOOLS_DIR)/urlencoder.cpp' object='urlencoder.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o urlencoder.o `test -f '$(TOOLS_DIR)/urlencoder.cpp' || echo '$(srcdir)/'`$(TOOLS_DIR)/urlencoder.cpp
+
+urlencoder.obj: $(TOOLS_DIR)/urlencoder.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT urlencoder.obj -MD -MP -MF $(DEPDIR)/urlencoder.Tpo -c -o urlencoder.obj `if test -f '$(TOOLS_DIR)/urlencoder.cpp'; then $(CYGPATH_W) '$(TOOLS_DIR)/urlencoder.cpp'; else $(CYGPATH_W) '$(srcdir)/$(TOOLS_DIR)/urlencoder.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/urlencoder.Tpo $(DEPDIR)/urlencoder.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(TOOLS_DIR)/urlencoder.cpp' object='urlencoder.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o urlencoder.obj `if test -f '$(TOOLS_DIR)/urlencoder.cpp'; then $(CYGPATH_W) '$(TOOLS_DIR)/urlencoder.cpp'; else $(CYGPATH_W) '$(srcdir)/$(TOOLS_DIR)/urlencoder.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

@@ -22,6 +22,11 @@ application_out::application_out()
 	out_ = &cout;
 }
 
+application_out::application_out(std::ostream	 *out)
+{
+	out_ = out;
+}
+
 application_out::~application_out()
 {
 

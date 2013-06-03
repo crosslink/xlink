@@ -15,9 +15,29 @@
 
 #include <string.h>
 
+#include <signal.h>
+
+#define DEFAULT_PORT 8888
+
 using namespace QLINK;
+using namespace std;
+
 
 enum {RECOMMEND_ANCHOR, CREATE_RUN};
+
+ltw_run *run_ptr = NULL;
+
+void clean_up() {
+	if (run_ptr != NULL)
+		delete run_ptr;
+}
+
+void catch_signal(int sig) {
+	cerr << "signal: " << sig << " received!" << endl;
+	if (run_ptr != NULL)
+		run_ptr->stop_daemon();
+	clean_up();
+}
 
 void create_run(int argc, char **argv)
 {
@@ -44,27 +64,38 @@ void create_run(int argc, char **argv)
 
 	database_mysql::instance().connect();
 
-	ltw_run *run = NULL;
+//	ltw_run *run = NULL;
 	if (config_file)
-		run = new ltw_run(config_file);
+		run_ptr = new ltw_run(config_file);
 	else
-		run = new ltw_run("ltw.conf");
+		run_ptr = new ltw_run("ltw.conf");
 
-	run->create();
-	switch (cmd) {
-		case RECOMMEND_ANCHOR:
-		{
-			application_out anchor_out;
-			run->get_task()->get_algor_out()->list_anchors(anchor_out);
-			//run->get_task()->get_algor_out()->recommend_anchors()
-			break;
-		}
-		case CREATE_RUN:
-		default:
-			aout.flush();
-			break;
+	if (run_ptr->get_config().get_value("run_mode") == "web") {
+		int port = DEFAULT_PORT;
+		run_ptr->create_daemon(port);
+//		  if (NULL == daemon) return 1;
+
+		signal(SIGABRT, &catch_signal);
+		signal(SIGTERM, &catch_signal);
+		signal(SIGINT, &catch_signal);
 	}
-	delete run;
+	else {
+		run_ptr->create();
+		switch (cmd) {
+			case RECOMMEND_ANCHOR:
+			{
+				application_out anchor_out;
+				run_ptr->get_task()->get_algor_out()->list_anchors(anchor_out);
+				//run_ptr->get_task()->get_algor_out()->recommend_anchors()
+				break;
+			}
+			case CREATE_RUN:
+			default:
+				aout.flush();
+				break;
+		}
+		clean_up();
+	}
 }
 
 int main(int argc, char **argv)

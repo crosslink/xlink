@@ -26,6 +26,7 @@ namespace QLINK
 
 	public:
 		application_out();
+		application_out(std::ostream	*out);
 		virtual ~application_out();
 
 		void use_stdout(bool b);

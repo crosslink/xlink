@@ -11,6 +11,9 @@
 #include "run.h"
 #include "ltw_task.h"
 
+struct MHD_Connection;
+struct MHD_Daemon;
+
 namespace QLINK {
 
 	/*
@@ -18,7 +21,8 @@ namespace QLINK {
 	 */
 	class ltw_run : public run {
 	private:
-		ltw_task		*task_;
+		ltw_task						*task_;
+		struct MHD_Daemon	*daemon_;
 
 	public:
 		ltw_run(char *configfile);
@@ -27,6 +31,17 @@ namespace QLINK {
 		void create();
 		void print();
 		ltw_task *get_task() { return task_; }
+
+		void create_daemon(int port);
+		void stop_daemon();
+
+		void initialise();
+
+		static int response (void *cls, struct MHD_Connection *connection,
+                const char *url,
+                const char *method, const char *version,
+                const char *upload_data,
+                size_t *upload_data_size, void **con_cls);
 
 	protected:
 		void init();

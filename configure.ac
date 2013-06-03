@@ -38,6 +38,8 @@ AC_CHECK_LIB([atire_api], [atire_api_check], [LIBS="$LIBS -latire_api"])
 #AC_CHECK_LIB([dl], [dlopen], [LIBS="$LIBS -ldl"])
 AC_CHECK_LIB([curl], [curl_easy_init], [LIBS="$LIBS -lcurl"])
 
+AC_CHECK_LIB([microhttpd], [MHD_start_daemon], [LIBS="$LIBS -lmicrohttpd"])
+
 AC_ARG_WITH([mysql-lib-path],
   [AS_HELP_STRING([--with-mysql-lib-path], [location of the MySQL libraries])],
   [MYSQL_LIBS="-L$withval -lmysqlclient"],
