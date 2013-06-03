@@ -1,0 +1,10 @@
+http://elliotth.blogspot.com.au/2009/01/accessing-get-arguments-with.html
+
+[QUOTE]
+What it doesn't mention is the alternatives to MHD_HEADER_KIND. You don't need to parse the "Referer:" header yourself, as I was about to fall back on; you just need to look at the MHD_GET_ARGUMENT_KIND values. (Or, if it's cookies you're wanting, MHD_COOKIE_KIND.)
+
+Even better, given that you probably know the name of the cookie, GET argument, or header you're looking for in any real code, there's MHD_lookup_connection_value. Here's how you'd get the value of a GET argument called "q", for example:
+
+  const char* q = MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "q");
+Don't go putting that straight into a std::string, because libmicrohttpd returns NULL for missing values.
+[/QUOTE]
