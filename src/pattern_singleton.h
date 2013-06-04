@@ -13,32 +13,33 @@ class pattern_singleton
 {
 protected:
 //	static T inst;
-	static T *inst_ptr_;
+//	static T *inst_ptr_;
 
 public:
 	pattern_singleton() {
-		inst_ptr_ = 0;
+//		inst_ptr_ = 0;
 	}
 
 	inline static T& instance() {
-		if (inst_ptr_ == 0) {
+//		if (inst_ptr_ == 0) {
 			static T inst;
-			inst_ptr_ = & inst;
-		}
-		return *inst_ptr_;
+			return inst;
+//			inst_ptr_ = & inst;
+//		}
+//		return *inst_ptr_;
 	}
 
-	T& get_instance_ptr() {
-		return *inst_ptr_;
-	}
-
-	static void set_instance_ptr(T &instance) {
-		*inst_ptr_ = instance;
-	}
-
-	static void set_instance_ptr() {
-		inst_ptr_ = &instance();
-	}
+//	T& get_instance_ptr() {
+//		return *inst_ptr_;
+//	}
+//
+//	static void set_instance_ptr(T &instance) {
+//		*inst_ptr_ = instance;
+//	}
+//
+//	static void set_instance_ptr() {
+//		inst_ptr_ = &instance();
+//	}
 };
 
 #endif /* PATTERN_SINGLETON_H_ */

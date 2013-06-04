@@ -23,7 +23,7 @@
 
 using namespace std;
 
-//QLINK::ltw_run* QLINK::ltw_run::inst_ptr_ = NULL;
+QLINK::ltw_run* QLINK::ltw_run::instance_ptr_ = NULL;
 
 QLINK::ltw_run::ltw_run()
 {
@@ -47,10 +47,15 @@ QLINK::ltw_run::~ltw_run()
 	stop_daemon();
 }
 
-void QLINK::ltw_run::load(const char *configfile)
+void QLINK::ltw_run::load_config(const char *configfile)
 {
-	run::load(configfile);
+	run::load_config(configfile);
 
+	load_config();
+}
+
+void QLINK::ltw_run::load_config()
+{
 	// set the corpus txt home
 	if (get_config().get_value("TEARA_HOME").length() > 0) {
 		corpus::instance().teara_home(get_home("TEARA_HOME"));
@@ -157,7 +162,7 @@ void QLINK::ltw_run::print_header()
 void QLINK::ltw_run::create_daemon(int port) {
 //	struct MHD_Daemon *daemon;
 
-	if (inst_ptr_ != NULL) {
+	if (instance_ptr_  != NULL) {
 		daemon_ = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY,  port, NULL, NULL,
 									 &ltw_run::response, NULL, MHD_OPTION_END);
 

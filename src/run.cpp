@@ -20,7 +20,7 @@ run::run(char *configfile) : config_file_(configfile)/*: run_conf_(configfile)*/
 {
 	run_conf_ = static_cast<run_config *>(&run_config::instance());
 
-	load();
+	load_config();
 }
 
 run::~run()
@@ -28,10 +28,14 @@ run::~run()
 
 }
 
-void run::load()
+void run::load_config(const char *config_file)
 {
+	config_file_ = config_file;
+	load_config();
+}
 
-
+void run::load_config()
+{
 	affiliation = get_config().get_value("affiliation");
 	run_name = get_config().get_value("name");
 	task = get_config().get_value("task");
@@ -68,12 +72,6 @@ void run::print_footer()
 {
 	//puts(footer.c_str());
 	aout << footer;
-}
-
-void run::load(const char* config_file) {
-	config_file_ = config_file;
-
-	load();
 }
 
 void run::set_config_file(const char* config_file) {

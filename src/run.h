@@ -33,7 +33,6 @@ namespace QLINK {
 		system_info		system_information;
 
 	private:
-		void load();
 
 	protected:
 		virtual void print_header();
@@ -48,7 +47,8 @@ namespace QLINK {
 		virtual void create() = 0;
 		virtual void print() = 0;
 
-		void load(const char *config_file);
+		virtual void load_config(const char *config_file);
+		virtual void load_config();
 
 		void set_config_file(const char *config_file);
 		const run_config& get_config() const { return *run_conf_; }

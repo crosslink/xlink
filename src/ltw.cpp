@@ -36,7 +36,7 @@ void catch_signal(int sig) {
 	cerr << "signal: " << sig << " received!" << endl;
 	if (run_ptr != NULL)
 		run_ptr->stop_daemon();
-	clean_up();
+//	clean_up();
 }
 
 void create_run(int argc, char **argv)
@@ -68,11 +68,11 @@ void create_run(int argc, char **argv)
 	if (config_file == NULL)
 		config_file = "ltw.conf";
 
-	static ltw_run ltw_run_instance(config_file);
+	ltw_run ltw_run_instance(config_file);
 
 	run_ptr = &ltw_run_instance;
 
-	ltw_run::set_instance_ptr(ltw_run_instance);
+//	ltw_run::set_instance_ptr(ltw_run_instance);
 
 	if (run_ptr->get_config().get_value("run_mode") == "web") {
 		int port = DEFAULT_PORT;
@@ -100,7 +100,7 @@ void create_run(int argc, char **argv)
 				break;
 		}
 	}
-	clean_up();
+//	clean_up();
 }
 
 int main(int argc, char **argv)

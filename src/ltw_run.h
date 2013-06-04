@@ -26,6 +26,8 @@ namespace QLINK {
 		ltw_task						*task_;
 		struct MHD_Daemon	*daemon_;
 
+		static ltw_run				*instance_ptr_;
+
 	public:
 		ltw_run();
 		ltw_run(char *configfile);
@@ -49,8 +51,10 @@ namespace QLINK {
                 const char *upload_data,
                 size_t *upload_data_size, void **con_cls);
 
+		void load_config(const char *config_file);
+		void load_config();
+
 	protected:
-		void load(const char *configfile);
 		std::string get_home(const char *name);
 
 		void print_header();
