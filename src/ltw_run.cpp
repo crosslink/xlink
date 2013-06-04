@@ -23,6 +23,14 @@
 
 using namespace std;
 
+//QLINK::ltw_run* QLINK::ltw_run::inst_ptr_ = NULL;
+
+QLINK::ltw_run::ltw_run()
+{
+	task_ = NULL;
+//	init();
+}
+
 QLINK::ltw_run::ltw_run(char *configfile) : run(configfile)
 {
 	task_ = NULL;
@@ -39,8 +47,10 @@ QLINK::ltw_run::~ltw_run()
 	stop_daemon();
 }
 
-void QLINK::ltw_run::init()
+void QLINK::ltw_run::load(const char *configfile)
 {
+	run::load(configfile);
+
 	// set the corpus txt home
 	if (get_config().get_value("TEARA_HOME").length() > 0) {
 		corpus::instance().teara_home(get_home("TEARA_HOME"));
@@ -147,16 +157,20 @@ void QLINK::ltw_run::print_header()
 void QLINK::ltw_run::create_daemon(int port) {
 //	struct MHD_Daemon *daemon;
 
-	daemon_ = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY,  port, NULL, NULL,
-	                             &ltw_run::response, NULL, MHD_OPTION_END);
+	if (inst_ptr_ != NULL) {
+		daemon_ = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY,  port, NULL, NULL,
+									 &ltw_run::response, NULL, MHD_OPTION_END);
 
-	if (daemon_ == NULL)
-		cerr << "Failed to create xlink daemon!";
-	else {
-		cerr << "Xlink daemon created";
-		while (1)
-			usleep(1000000);
+		if (daemon_ == NULL)
+			cerr << "Failed to create xlink daemon!" << endl;
+		else {
+			cerr << "Xlink daemon created" << endl;
+			while (1)
+				usleep(1000000);
+		}
 	}
+	else
+		cerr << "LTW Run wasn't created properly" << endl;
 }
 
 void QLINK::ltw_run::stop_daemon() {
@@ -168,13 +182,30 @@ void QLINK::ltw_run::stop_daemon() {
 }
 
 void QLINK::ltw_run::initialise() {
-	if (task_ == NULL)
-		init();
+//	if (task_ == NULL)
+//		load();
+}
+
+int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,
+		const char* key, const char* value) {
+	  fprintf (stderr, "%s: %s\n", key, value);
+	  return MHD_YES;
 }
 
 int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 		const char* url, const char* method, const char* version,
 		const char* upload_data, size_t* upload_data_size, void** con_cls) {
+
+	// get the arguments passed from the GET, POST methods
+	// MHD_GET_ARGUMENT_KIND
+	// MHD_HEADER_KIND
+//	  MHD_get_connection_values (connection, MHD_GET_ARGUMENT_KIND, parse_request_arguments,
+//	                             NULL);
+	// or if we know what we are looking for
+
+
+	 const char* page_url = MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+
 	time_t t = time(0);   // get time now
 	struct tm * now = localtime( & t );
 	std::stringstream datetime;
@@ -186,7 +217,11 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 
 	stringstream page_buf;
 //	page_buf << "Content-Type: text/html" << endl;
-	page_buf  << "<html><body>" << datetime.str() << "</body></html>";
+	page_buf  << "<html><body>";
+	page_buf << datetime.str() <<endl;
+	page_buf << "<br";
+	page_buf << "page url: " << page_url << endl;
+	page_buf << "</body></html>";
 
 	struct MHD_Response *response;
 	int ret;

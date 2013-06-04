@@ -17,23 +17,26 @@ protected:
 
 public:
 	pattern_singleton() {
-//		set_instance();
+		inst_ptr_ = 0;
 	}
 
 	inline static T& instance() {
-		static T inst;
-		return inst;
+		if (inst_ptr_ == 0) {
+			static T inst;
+			inst_ptr_ = & inst;
+		}
+		return *inst_ptr_;
 	}
 
 	T& get_instance_ptr() {
 		return *inst_ptr_;
 	}
 
-	void set_instance_ptr(T& instance) {
-		inst_ptr_ = &instance;
+	static void set_instance_ptr(T &instance) {
+		*inst_ptr_ = instance;
 	}
 
-	void set_instance_ptr() {
+	static void set_instance_ptr() {
 		inst_ptr_ = &instance();
 	}
 };

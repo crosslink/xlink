@@ -27,15 +27,20 @@
 	class webpage_retriever : public pattern_singleton<webpage_retriever>
 	{
 	private:
-		  CURL *curl_handle;
-		  struct curl_slist *headers;
-		  struct MemoryStruct chunk;
+		static const char 			*ERROR_PAGE;
+
+		  CURL 								*curl_handle;
+		  struct curl_slist 				*headers;
+		  struct MemoryStruct 		chunk;
+		  int									response_code;
 
 	public:
 		webpage_retriever();
 		virtual ~webpage_retriever();
 
 		char *retrieve(const char *url, int *response_code);
+		char *retrieve(const char *url);
+
 		void add_header(const char *header);
 
 		int get_response_code();

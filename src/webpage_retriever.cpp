@@ -7,6 +7,8 @@
 
 #include "webpage_retriever.h"
 
+const char *webpage_retriever::ERROR_PAGE = "<html><title>Error</title><body>Internal Error while retrieving %s with code %d.<br>Below is the response (if any) from the server. <br>==============================================================<br>%s</body></html>\n";
+
 //namespace QLINK {
 	static void *myrealloc(void *ptr, size_t size);
 
@@ -84,7 +86,7 @@ void webpage_retriever::free_chunk()
 		  chunk.size = 0;
 	}
 
-	char *webpage_retriever::retrieve(const char *url, int *response_code)
+	char *webpage_retriever::retrieve(const char *url, int *this_response_code)
 	{
 		free_chunk();
 
@@ -93,7 +95,10 @@ void webpage_retriever::free_chunk()
 
 	  /* get it! */
 	  curl_easy_perform(curl_handle);
-	  curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, response_code);
+	  curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &response_code);
+
+	  if (this_response_code)
+		  *this_response_code = response_code;
 	  /*
 	   * Now, our chunk.memory points to a memory block that is chunk.size
 	   * bytes big and contains the remote file.
@@ -105,6 +110,21 @@ void webpage_retriever::free_chunk()
 	   * you're done with it, you should free() it as a nice application.
 	   */
 	  return chunk.memory;
+	}
+
+	char *webpage_retriever::retrieve(const char *url)
+	{
+		retrieve(url, NULL);
+
+		if (response_code != 200) {
+			long size = strlen(url) + 4 /*4 digits for the response code*/ + strlen(ERROR_PAGE) + ((chunk.size > 0) ? chunk.size : 0) - 6 /*%s %d %s*/;
+			char *buf = (char *) myrealloc(NULL, size);
+			sprintf(buf, ERROR_PAGE, url, response_code,  ((chunk.size > 0) ? chunk.memory : ""));
+			free_chunk();
+			chunk.memory = buf;
+			chunk.size = size;
+		}
+		  return chunk.memory;
 	}
 
 	void webpage_retriever::add_header(const char *header) {

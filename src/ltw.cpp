@@ -65,19 +65,24 @@ void create_run(int argc, char **argv)
 	database_mysql::instance().connect();
 
 //	ltw_run *run = NULL;
-	if (config_file)
-		run_ptr = new ltw_run(config_file);
-	else
-		run_ptr = new ltw_run("ltw.conf");
+	if (config_file == NULL)
+		config_file = "ltw.conf";
+
+	static ltw_run ltw_run_instance(config_file);
+
+	run_ptr = &ltw_run_instance;
+
+	ltw_run::set_instance_ptr(ltw_run_instance);
 
 	if (run_ptr->get_config().get_value("run_mode") == "web") {
 		int port = DEFAULT_PORT;
-		run_ptr->create_daemon(port);
 //		  if (NULL == daemon) return 1;
 
 		signal(SIGABRT, &catch_signal);
 		signal(SIGTERM, &catch_signal);
 		signal(SIGINT, &catch_signal);
+
+		run_ptr->create_daemon(port);
 	}
 	else {
 		run_ptr->create();
@@ -94,8 +99,8 @@ void create_run(int argc, char **argv)
 				aout.flush();
 				break;
 		}
-		clean_up();
 	}
+	clean_up();
 }
 
 int main(int argc, char **argv)

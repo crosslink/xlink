@@ -19,7 +19,8 @@ namespace QLINK {
 	 */
 	class run {
 	private:
-		run_config		*run_conf_;
+		run_config	*run_conf_;
+		const char	*config_file_;
 
 	public:
 		std::string		affiliation;
@@ -32,7 +33,7 @@ namespace QLINK {
 		system_info		system_information;
 
 	private:
-		void init();
+		void load();
 
 	protected:
 		virtual void print_header();
@@ -40,12 +41,16 @@ namespace QLINK {
 		//virtual void print() = 0;
 
 	public:
+		run();
 		run(char *configfile);
 		virtual ~run();
 
 		virtual void create() = 0;
 		virtual void print() = 0;
 
+		void load(const char *config_file);
+
+		void set_config_file(const char *config_file);
 		const run_config& get_config() const { return *run_conf_; }
 		run_config& get_config() { return *run_conf_; }
 	};
