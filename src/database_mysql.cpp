@@ -16,9 +16,7 @@ using namespace std;
 
 const char *database_mysql::DEFAULT_CORPUS_TABLE = "wiki_corpus";
 
-database_mysql::database_mysql() {
-
-
+database_mysql::database_mysql() : connection(NULL) {
 	init();
 //	connect();
 }

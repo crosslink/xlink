@@ -12,6 +12,7 @@
 #include "application_out.h"
 #include "google_research_translator.h"
 #include "webpage_retriever.h"
+#include "urlcode.h"
 
 #include <string>
 #include <ctime>
@@ -171,7 +172,7 @@ void QLINK::ltw_run::create_daemon(int port) {
 
 	if (instance_ptr_  != NULL) {
 		daemon_ = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY,  port, NULL, NULL,
-									 &ltw_run::response, NULL, MHD_OPTION_END);
+									 &ltw_run::response_request, NULL, MHD_OPTION_END);
 
 		if (daemon_ == NULL)
 			cerr << "Failed to create xlink daemon!" << endl;
@@ -204,7 +205,7 @@ int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,
 	  return MHD_YES;
 }
 
-int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
+int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connection,
 		const char* url, const char* method, const char* version,
 		const char* upload_data, size_t* upload_data_size, void** con_cls) {
 
@@ -216,19 +217,21 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 	// or if we know what we are looking for
 
 
-	 const char *page_url = MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+	 char *page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
 
 	 webpage_retriever page_fetcher;
 	 char *external_page = NULL;
 	 char *result = NULL;
 
 	 if (page_url) {
-		 external_page = page_fetcher.retrieve(page_url);
-		 if (external_page != NULL)
-			 result = strdup(external_page);
+		 char *decoded_url = url_decode(page_url);
+		 external_page = page_fetcher.retrieve(decoded_url);
+//		 if (external_page != NULL)
+//			 result = strdup(external_page);
+//		 free(decoded_url);
 	 }
 
-	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
+//	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
 		time_t t = ::time(0);   // get time now
 		struct tm * now = localtime( & t );
 		std::stringstream datetime;
@@ -246,19 +249,22 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 		page_buf << "page url: " << page_url << endl;
 		page_buf << "</body></html>";
 
-		result = strdup(page_buf.str().c_str());
-	 }
+		if (external_page != NULL)
+			page_buf << external_page;
 
-	struct MHD_Response *response;
-	int ret;
+		result = strdup(page_buf.str().c_str());
+//	 }
+
+//	struct MHD_Response *response =  MHD_create_response_from_buffer (strlen(result),
+//            (void*) result,  MHD_RESPMEM_PERSISTENT);
 
 //	response = MHD_create_response_from_buffer (strlen(result),
 //	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
-	response = MHD_create_response_from_data (strlen(result),
-	                                            (void*) (result),  MHD_NO, MHD_YES);
+	struct MHD_Response *response  = MHD_create_response_from_data (strlen(result),
+	                                            result,  MHD_NO, MHD_YES);
 
 	MHD_add_response_header (response, "Content-Type", "text/html");
-	ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
+	int ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
 	MHD_destroy_response (response);
 	free(result);
 	return ret;

@@ -47,7 +47,7 @@ namespace QLINK {
 		static int parse_request_arguments(void *cls, enum MHD_ValueKind kind, const char *key,
 	               const char *value);
 
-		static int response (void *cls, struct MHD_Connection *connection,
+		static int response_request (void *cls, struct MHD_Connection *connection,
                 const char *url,
                 const char *method, const char *version,
                 const char *upload_data,

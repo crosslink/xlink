@@ -8,7 +8,7 @@
 #ifndef URLCODE_H_
 #define URLCODE_H_
 
-char *url_encode(char *str);
-char *url_decode(char *str);
+char *url_encode(const char *str);
+char *url_decode(const char *str);
 
 #endif /* URLCODE_H_ */

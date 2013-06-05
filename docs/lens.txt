@@ -1,2 +1,6 @@
 http://www.lens.org/textserver/fulltext.html?patent=US_A1_2013095301&docdDbKey=US_A1_2013095301&query=ipad&language=en&stemming=true
 http://www.lens.org/textserver/fulltext.html?patent=US_A1_2010223579&docdDbKey=US_A1_2010223579&query=iphone&language=en&stemming=true
+
+http%3a%2f%2fwww.lens.org%2ftextserver%2ffulltext.html%3fpatent%3dUS_A1_2013095301%26docdDbKey%3dUS_A1_2013095301%26query%3dipad%26language%3den%26stemming%3dtrue
+http%3a%2f%2fwww.lens.org%2ftextserver%2ffulltext.html%3fpatent%3dUS_A1_2010223579%26docdDbKey%3dUS_A1_2010223579%26query%3diphone%26language%3den%26stemming%3dtrue
+
