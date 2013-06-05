@@ -242,7 +242,7 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 	//	page_buf << "Content-Type: text/html" << endl;
 		page_buf  << "<html><body>";
 		page_buf << datetime.str() <<endl;
-		page_buf << "<br";
+		page_buf << "<br>";
 		page_buf << "page url: " << page_url << endl;
 		page_buf << "</body></html>";
 
@@ -252,10 +252,10 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 	struct MHD_Response *response;
 	int ret;
 
-	response = MHD_create_response_from_buffer (strlen(result),
-	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
-//	response = MHD_create_response_from_data (strlen(result),
-//	                                            (void*) (result),  MHD_NO, MHD_YES);
+//	response = MHD_create_response_from_buffer (strlen(result),
+//	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
+	response = MHD_create_response_from_data (strlen(result),
+	                                            (void*) (result),  MHD_NO, MHD_YES);
 
 	MHD_add_response_header (response, "Content-Type", "text/html");
 	ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
