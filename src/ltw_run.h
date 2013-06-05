@@ -37,6 +37,8 @@ namespace QLINK {
 		void print();
 		ltw_task *get_task() { return task_; }
 
+		static void setup_instance(ltw_run *instance_ptr) { instance_ptr_ = instance_ptr; };
+
 		void create_daemon(int port);
 		void stop_daemon();
 
@@ -61,7 +63,7 @@ namespace QLINK {
 		void print_links(long orphan_docid, char *orphan_name, long links_to_print, long max_targets_per_anchor, long mode);
 
 	private:
-
+		void init();
 	};
 
 }

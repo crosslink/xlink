@@ -11,6 +11,7 @@
 #include "sys_file.h"
 #include "application_out.h"
 #include "google_research_translator.h"
+#include "webpage_retriever.h"
 
 #include <string>
 #include <ctime>
@@ -47,6 +48,10 @@ QLINK::ltw_run::~ltw_run()
 	stop_daemon();
 }
 
+void QLINK::ltw_run::init() {
+
+}
+
 void QLINK::ltw_run::load_config(const char *configfile)
 {
 	run::load_config(configfile);
@@ -57,6 +62,8 @@ void QLINK::ltw_run::load_config(const char *configfile)
 void QLINK::ltw_run::load_config()
 {
 	// set the corpus txt home
+	run::load_config();
+
 	if (get_config().get_value("TEARA_HOME").length() > 0) {
 		corpus::instance().teara_home(get_home("TEARA_HOME"));
 		corpus::instance().load_teara_map();
@@ -209,37 +216,50 @@ int QLINK::ltw_run::response(void* cls, struct MHD_Connection* connection,
 	// or if we know what we are looking for
 
 
-	 const char* page_url = MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+	 const char *page_url = MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
 
-	time_t t = time(0);   // get time now
-	struct tm * now = localtime( & t );
-	std::stringstream datetime;
-	datetime << (now->tm_year + 1900) << '-'
-	         << (now->tm_mon + 1) << '-'
-	         <<  now->tm_mday
-	         << " "
-	         << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
+	 webpage_retriever page_fetcher;
+	 char *external_page = NULL;
+	 char *result = NULL;
 
-	stringstream page_buf;
-//	page_buf << "Content-Type: text/html" << endl;
-	page_buf  << "<html><body>";
-	page_buf << datetime.str() <<endl;
-	page_buf << "<br";
-	page_buf << "page url: " << page_url << endl;
-	page_buf << "</body></html>";
+	 if (page_url) {
+		 external_page = page_fetcher.retrieve(page_url);
+		 if (external_page != NULL)
+			 result = strdup(external_page);
+	 }
+
+	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
+		time_t t = ::time(0);   // get time now
+		struct tm * now = localtime( & t );
+		std::stringstream datetime;
+		datetime << (now->tm_year + 1900) << '-'
+				 << (now->tm_mon + 1) << '-'
+				 <<  now->tm_mday
+				 << " "
+				 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
+
+		stringstream page_buf;
+	//	page_buf << "Content-Type: text/html" << endl;
+		page_buf  << "<html><body>";
+		page_buf << datetime.str() <<endl;
+		page_buf << "<br";
+		page_buf << "page url: " << page_url << endl;
+		page_buf << "</body></html>";
+
+		result = strdup(page_buf.str().c_str());
+	 }
 
 	struct MHD_Response *response;
 	int ret;
 
-	string page = page_buf.str();
-
-//	response = MHD_create_response_from_buffer (page.length(),
-//	                                            (void*) (page.c_str()),  MHD_RESPMEM_PERSISTENT);
-	response = MHD_create_response_from_data (page.length(),
-	                                            (void*) (page.c_str()),  MHD_NO, MHD_YES);
+	response = MHD_create_response_from_buffer (strlen(result),
+	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
+//	response = MHD_create_response_from_data (strlen(result),
+//	                                            (void*) (result),  MHD_NO, MHD_YES);
 
 	MHD_add_response_header (response, "Content-Type", "text/html");
 	ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
 	MHD_destroy_response (response);
-	 return ret;
+	free(result);
+	return ret;
 }

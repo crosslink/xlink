@@ -36,6 +36,7 @@ void catch_signal(int sig) {
 	cerr << "signal: " << sig << " received!" << endl;
 	if (run_ptr != NULL)
 		run_ptr->stop_daemon();
+	exit(0);
 //	clean_up();
 }
 
@@ -69,6 +70,7 @@ void create_run(int argc, char **argv)
 		config_file = "ltw.conf";
 
 	ltw_run ltw_run_instance(config_file);
+	ltw_run::setup_instance(&ltw_run_instance);
 
 	run_ptr = &ltw_run_instance;
 

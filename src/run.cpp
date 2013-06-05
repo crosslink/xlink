@@ -19,7 +19,7 @@ run::run() {
 run::run(char *configfile) : config_file_(configfile)/*: run_conf_(configfile)*/
 {
 	run_conf_ = static_cast<run_config *>(&run_config::instance());
-
+	set_config_file(configfile);
 	load_config();
 }
 
@@ -30,7 +30,7 @@ run::~run()
 
 void run::load_config(const char *config_file)
 {
-	config_file_ = config_file;
+	set_config_file(config_file);
 	load_config();
 }
 
