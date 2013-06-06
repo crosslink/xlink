@@ -236,14 +236,13 @@ void links::print()
 void links::print_header()
 {
 	//puts("	<link>\n");
-	aout << "	<link>\n";
-
+	aout_ ->printbuf("	<link>\n");
 }
 
 void links::print_footer()
 {
 	//puts("	</link>\n");
-	aout << "	</link>\n";
+	aout_ ->printbuf("	</link>\n");
 }
 
 void links::sort_orphan()

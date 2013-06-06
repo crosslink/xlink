@@ -61,7 +61,7 @@ void link::print()
 {
 	print_header();
 	//printf("%d", target_document);
-	aout << target_document;
+	(*aout_) << target_document;
 	print_footer();
 }
 
@@ -76,7 +76,7 @@ bool link::print_target(long anchor, algorithm *algor)
 		print_header();
 		//printf("%d", link_term->postings[anchor]->docid);
 		if (link_term->postings.size() > 0)
-			aout << link_term->postings[anchor]->docid;
+			(*aout_) << link_term->postings[anchor]->docid;
 		else
 			;
 		print_footer();
@@ -260,7 +260,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 	}
 
 	if (ret)
-		aout << stringbuffer.str();
+		(*aout_) << stringbuffer.str();
 	return ret;
 }
 
@@ -269,12 +269,12 @@ void link::print_bep(long beps_to_print)
 	char buf[255];
 	if (!link_term) {
 		sprintf(buf, "\t\t\t<bep offset=\"%d\">\n", 0);
-		aout << buf;
+		(*aout_) << buf;
 		sprintf(buf, "\t\t\t\t<fromanchor offset=\"%d\" length=\"%d\" file=\"%d\">%s</fromanchor>\n",
 				offset, strlen(term), target_document, term);
-		aout << buf;
+		(*aout_) << buf;
 //		puts("\t\t\t</bep>\n");
-		aout << "\t\t\t</bep>\n";
+		(*aout_) << "\t\t\t</bep>\n";
 	}
 	else {
 		int count = 0;
@@ -283,12 +283,12 @@ void link::print_bep(long beps_to_print)
 				continue;
 
 			sprintf(buf, "\t\t\t<bep offset=\"%d\">\n", link_term->postings[i]->offset);
-			aout << buf;
+			(*aout_) << buf;
 			sprintf(buf, "\t\t\t\t<fromanchor offset=\"%d\" length=\"%d\" file=\"%d\">%s</fromanchor>\n",
 					offset, strlen(term), target_document, term);
-			aout << buf;
+			(*aout_) << buf;
 			//puts("\t\t\t</bep>\n");
-			aout << "\t\t\t</bep>\n";
+			(*aout_) << "\t\t\t</bep>\n";
 			++count;
 			if (count >= beps_to_print)
 				break;

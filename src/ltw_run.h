@@ -10,11 +10,13 @@
 
 #include "run.h"
 #include "ltw_task.h"
+#include "request.h"
 
 //struct MHD_Connection;
 //struct MHD_Daemon;
 
 #include <microhttpd.h>
+#include <map>
 
 namespace QLINK {
 
@@ -22,11 +24,15 @@ namespace QLINK {
 	 * Link-the-Wiki run
 	 */
 	class ltw_run : public run, public pattern_singleton<ltw_run> {
+	public:
+		typedef std::map<std::string, request> request_type;
 	private:
-		ltw_task						*task_;
-		struct MHD_Daemon	*daemon_;
+		ltw_task											*task_;
+		struct MHD_Daemon						*daemon_;
 
-		static ltw_run				*instance_ptr_;
+		static ltw_run									*instance_ptr_;
+
+		request_type										requests_;
 
 	public:
 		ltw_run();
@@ -43,7 +49,7 @@ namespace QLINK {
 		void stop_daemon();
 
 		void global_initialise();
-		void request_initialise();
+		void request_initialise(const char *url);
 
 		void setup_output(ostream *out);
 
@@ -59,14 +65,18 @@ namespace QLINK {
 		void load_config(const char *config_file);
 		void load_config();
 
-	protected:
-		std::string get_home(const char *name);
+		const std::map<std::string, request>& get_requests() const {
+			return requests_;
+		}
 
-		void print_header();
-		void print_links(long orphan_docid, char *orphan_name, long links_to_print, long max_targets_per_anchor, long mode);
+		protected:
+			std::string get_home(const char *name);
 
-	private:
-		void init();
+			void print_header();
+			void print_links(long orphan_docid, char *orphan_name, long links_to_print, long max_targets_per_anchor, long mode);
+
+		private:
+			void init();
 	};
 
 }

@@ -155,7 +155,9 @@ void ltw_task::set_alorithm_bep(string name)
 		algor_bep_ = new algorithm_bep(name);
 }
 
-void ltw_task::perform()
+
+
+void ltw_task::perform(application_out& aout)
 {
 	int count = 0;
 	long param = topic_param_start;
@@ -178,7 +180,7 @@ void ltw_task::perform()
 			ltw_topic a_topic(name);
 			a_topic.xml_to_text();
 			a_topic.set_ltw_task(this);
-			a_topic.print_header();
+			a_topic.print_header(aout);
 
 			if (algor_out_) {
 				if (outgoings_) {
@@ -186,6 +188,7 @@ void ltw_task::perform()
 					outgoings_ = NULL;
 				}
 				outgoings_ = new outgoing_links(&a_topic, need_crosslink_);
+				outgoings_->set_application_out(aout);
 				outgoings_->set_bep_algorithm(algor_bep_);
 				outgoings_->set_algorithm(algor_out_);
 
@@ -227,7 +230,7 @@ void ltw_task::perform()
 				// output
 				incomings_->print();
 			}
-			a_topic.print_footer();
+			a_topic.print_footer(aout);
 
 			//delete [] file;
 		}

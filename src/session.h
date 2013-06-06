@@ -8,9 +8,18 @@
 #ifndef SESSION_H_
 #define SESSION_H_
 
+#include <string>
+#include <map>
+
+#include "request.h"
+
 namespace QLINK {
 
 class session {
+private:
+	std::string 										session_id_;
+	std::map<std::string, request>			request_;
+
 public:
 	session();
 	virtual ~session();

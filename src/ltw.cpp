@@ -100,7 +100,7 @@ void create_run(int argc, char **argv)
 			}
 			case CREATE_RUN:
 			default:
-				aout.flush();
+//				aout.flush();
 				break;
 		}
 	}

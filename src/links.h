@@ -9,9 +9,8 @@
 #define LINKS_H_
 
 #include "link.h"
-//#include "ltw_topic.h"
-//#include <stdlib.h>
-//#include <algorithm>
+#include "application_out.h"
+
 #include <vector>
 
 #define MAX_LINKS_IN_FILE (1024 * 1024)
@@ -50,6 +49,8 @@ namespace QLINK {
 		//maker_t						*link_maker_;
 		algorithm_bep 				*bep_algor_;
 		algorithm					*algorithm_;
+
+		application_out			*aout_;
 
 	public:
 		links();
@@ -103,6 +104,8 @@ namespace QLINK {
 		int size() { return all_links_in_file_.size(); }
 
 		void set_topic(ltw_topic *topic) { this->topic_ = topic; }
+
+		void set_application_out(application_out& out) { aout_ = &out; }
 		//long find_bep(link *lnk);
 
 	protected:

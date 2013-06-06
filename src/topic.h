@@ -11,6 +11,7 @@
 #include "ir_task.h"
 
 namespace QLINK {
+	class application_out;
 
 	class topic
 	{
@@ -36,8 +37,8 @@ namespace QLINK {
 		void task(ir_task *task) { task_ = task; }
 		ir_task *task() { return task_; }
 
-		virtual void print_header();
-		virtual void print_footer();
+		virtual void print_header(application_out& aout);
+		virtual void print_footer(application_out& aout);
 	};
 
 }

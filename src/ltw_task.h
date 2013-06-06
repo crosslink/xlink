@@ -44,7 +44,7 @@ namespace QLINK {
 							  LTW_TEARA_BASE = 6,
 							  LTW_PAGE_NAME = 7,
 							  LTW_ANT_CROSSLINK = 8,
-							  LTW_ANT_AND_PAGE2 = 9,
+							  LTW_ANT_AND_PAGE2 = 9
 							};
 	    //NUMBER_OF_LTW_ALGORITHMS
 	    typedef std::map<std::string,ltw_algorithm> ltw_algorithm_map;
@@ -79,7 +79,7 @@ namespace QLINK {
 	    ltw_task(config& config_ref, std::string & name, std::string & out_algor_name, std::string & in_algor_name);
 	    virtual ~ltw_task();
 	    virtual void init();
-	    virtual void perform();
+	    virtual void perform(application_out& out);
 	    virtual void print_links();
 	    bool is_f2f_task();
 	    bool is_a2b_task();

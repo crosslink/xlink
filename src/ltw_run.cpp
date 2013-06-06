@@ -85,7 +85,7 @@ void QLINK::ltw_run::load_config()
 	}
 
 	if (get_config().get_value("load_on_startup") == "true")
-		this->initialise();
+		this->global_initialise();
 
 //	if ((pos = taskname.find("F2F")) != string::npos)
 //		task_ = new task_f2f(taskname, out_algor_name, in_algor_name);
@@ -109,7 +109,7 @@ void QLINK::ltw_run::create()
 	print_header();
 
 	if (task_) {
-		task_->perform();
+		task_->perform(*aout_);
 	}
 
 	print_footer();
@@ -130,7 +130,7 @@ void QLINK::ltw_run::print_header()
 {
 	char *local_buf = new char[1024 * 1024]; // = {""};
 	sprintf(local_buf, header.c_str(), affiliation.c_str(), run_id.c_str(), task.c_str(), task_->get_target_lang().c_str(), task_->get_source_lang().c_str());
-	aout << local_buf;
+	aout_->printbuf(local_buf);
 	delete [] local_buf;
 }
 
@@ -210,7 +210,7 @@ void QLINK::ltw_run::global_initialise() {
 	}
 }
 
-void QLINK::ltw_run::request_initialise() {
+void QLINK::ltw_run::request_initialise(const char *url) {
 
 }
 
@@ -227,7 +227,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 	/*
 	 *  load necessary tables into memory and do some preparation work
 	 */
-	instance_ptr_ ->initialise();
+	instance_ptr_ ->global_initialise();
 
 	// get the arguments passed from the GET, POST methods
 	// MHD_GET_ARGUMENT_KIND
@@ -236,21 +236,13 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 //	                             NULL);
 	// or if we know what we are looking for
 
-	 char *page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+	 const char *page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
 
 	 cerr << "Attempt to answer the connection" << endl;
 
 	 webpage_retriever page_fetcher;
-	 char *external_page = NULL;
+	 const char *external_page = NULL;
 	 char *result = NULL;
-
-	 if (page_url) {
-		 char *decoded_url = url_decode(page_url);
-		 external_page = page_fetcher.retrieve(decoded_url);
-//		 if (external_page != NULL)
-//			 result = strdup(external_page);
-//		 free(decoded_url);
-	 }
 
 //	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
 		time_t t = ::time(0);   // get time now
@@ -270,6 +262,29 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		page_buf << "page url: " << page_url << endl;
 		page_buf << "</body></html>";
 
+		 if (page_url) {
+			 const request_type& requests = instance_ptr_->get_requests();
+			 request_type::const_iterator it = requests.find(page_url) ;
+			 request_type::const_iterator end = requests.end();
+			 if (it != end) {
+				 const request& rsq = requests.find(page_url)->second;
+				 external_page = rsq.get_page().c_str();
+			 }
+			 else
+			 {
+				 char *decoded_url = url_decode(page_url);
+				 instance_ptr_->request_initialise(page_url);
+				 external_page = page_fetcher.retrieve(decoded_url);
+
+				 request rsq;
+				 rsq.set_page(external_page);
+				 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
+//				 requests.insert(rsq_p);
+				 requests [page_url] = rsq;
+			 }
+	//			 result = strdup(external_page);
+	//		 free(decoded_url);
+		 }
 		if (external_page != NULL)
 			page_buf << external_page;
 

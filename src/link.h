@@ -11,6 +11,7 @@
 #include <string>
 
 #include "ant_link.h"
+#include "application_out.h"
 
 namespace QLINK {
 	class algorithm;
@@ -31,6 +32,7 @@ namespace QLINK {
 
 	private:
 		bool							to_clean_;
+		application_out			*aout_;
 
 	public:
 		link();

@@ -1,5 +1,5 @@
 #AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
-AM_CPPFLAGS = -std=c++0x  -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
+AM_CPPFLAGS = -std=c++0x -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
 
 LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @MYSQL_LIBS@
 #LTW_LIBS ==-lgcj
@@ -65,6 +65,8 @@ ltw_headers = \
 	$(SRC_DIR)/application_out.h \
 	$(SRC_DIR)/link_print.h \
 	$(SRC_DIR)/urlcode.h \
+	$(SRC_DIR)/session.h \
+	$(SRC_DIR)/request.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -124,6 +126,8 @@ ltw_sources = \
 	$(SRC_DIR)/application_out.cpp \
 	$(SRC_DIR)/link_print.cpp \
 	$(SRC_DIR)/urlcode.cpp \
+	$(SRC_DIR)/session.cpp \
+	$(SRC_DIR)/request.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 noinst_PROGRAMS = ltw collection_link_finder urlencoder

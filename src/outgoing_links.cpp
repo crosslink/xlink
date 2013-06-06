@@ -78,24 +78,24 @@ void outgoing_links::init() {
 void outgoing_links::print_header()
 {
 	//puts("	<outgoing>");
-	aout << "	\t<outgoing>\n";
+	(*aout_) << "	\t<outgoing>\n";
 }
 
 void outgoing_links::print_footer()
 {
 //	puts("	</outgoing>\n");
-	aout << "	\t</outgoing>\n";
+	(*aout_) << "	\t</outgoing>\n";
 }
 
 void outgoing_links::print_link_tag_header()
 {
 	//printf("		<linkto>");
-	aout << "		<linkto>";
+	(*aout_) << "		<linkto>";
 }
 
 void outgoing_links::print_link_tag_footer()
 {
-	aout << "</linkto>\n";
+	(*aout_) << "</linkto>\n";
 	//printf("</linkto>\n");
 }
 
@@ -171,7 +171,7 @@ void outgoing_links::print_links(long orphan_docid, const char *orphan_name, lon
 						if (links_already_printed.size() > 1)
 						#endif
 							//printf(", ");
-							aout << ", ";
+							(*aout_) << ", ";
 						current_link->print_target(current_anchor, algorithm_);
 						anchors_printed++;
 //						fprintf(stderr, "%s -> %d (gamma = %f)\n", current_link->link_term->term, docid, current_link->gamma);
@@ -262,7 +262,7 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 			if (stop == -1 || (stop > -1 && (postings.size() - 1) > 0)) {
 				int count = 0;
 				sprintf(buf, "\t\t\t<anchor offset=\"%d\" length=\"%d\" name=\"%s\">\n", current_link->offset, strlen(current_link->term), current_link->term);
-				aout << buf;
+				(*aout_) << buf;
 				unsigned id = 0;
 				string target_title;
 				if (postings.size() > 0)
@@ -282,7 +282,7 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 #else
 						sprintf(buf, link_print::target_format.c_str(), postings[i]->offset, id);
 #endif
-						aout << buf;
+						(*aout_) << buf;
 						++count;
 						if (count >= beps_to_print_)
 							break;
@@ -300,11 +300,11 @@ void outgoing_links::print_anchors(long orphan_docid, const char *orphan_name)
 #else
 					sprintf(buf, link_print::target_format.c_str(), 0, current_link->target_document);
 #endif
-					aout << buf;
+					(*aout_) << buf;
 				}
 
 				//puts("\t\t\t</anchor>\n");
-				aout << "\t\t\t</anchor>\n";
+				(*aout_) << "\t\t\t</anchor>\n";
 			}
 		}
 		result++;

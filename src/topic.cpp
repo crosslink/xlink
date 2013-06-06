@@ -59,7 +59,7 @@ void topic::set_content(char *file)
 
 }
 
-void topic::print_header()
+void topic::print_header(application_out& aout)
 {
 	char buf[255];
 	if (id_ > 0)
@@ -71,7 +71,7 @@ void topic::print_header()
 	aout << buf;
 }
 
-void topic::print_footer()
+void topic::print_footer(application_out& aout)
 {
 	//puts("	</topic>");
 	aout << "\t</topic>\n";

@@ -28,8 +28,8 @@ private:
 
     MYSQL *connection;
 
-    int number_of_doc = 0 ;
-    bool connected = false;
+    int number_of_doc;
+    bool connected;
 
     std::string corpus_table;
 
