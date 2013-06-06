@@ -46,6 +46,10 @@ QLINK::ltw_run::~ltw_run()
 		task_ = NULL;
 	}
 
+	if (aout_) {
+		delete aout_;
+		aout_ = NULL;
+	}
 	stop_daemon();
 }
 
@@ -58,6 +62,10 @@ void QLINK::ltw_run::load_config(const char *configfile)
 	run::load_config(configfile);
 
 	load_config();
+}
+
+void QLINK::ltw_run::setup_output(ostream* out) {
+	aout_ = new application_out(out);
 }
 
 void QLINK::ltw_run::load_config()
@@ -76,10 +84,8 @@ void QLINK::ltw_run::load_config()
 		corpus_txt::instance().load_teara_map();
 	}
 
-	string taskname = get_config().get_value("task");
-	string out_algor_name = get_config().get_algorithm_outgoing_name();
-	string in_algor_name = get_config().get_algorithm_incoming_name();
-	string::size_type pos = string::npos;
+	if (get_config().get_value("load_on_startup") == "true")
+		this->initialise();
 
 //	if ((pos = taskname.find("F2F")) != string::npos)
 //		task_ = new task_f2f(taskname, out_algor_name, in_algor_name);
@@ -87,45 +93,6 @@ void QLINK::ltw_run::load_config()
 //		task_ = new task_a2b(taskname, out_algor_name, in_algor_name);
 //	else
 //		throw std::runtime_error("No recognizable task given.");
-	task_ = new ltw_task(get_config(), taskname, out_algor_name, in_algor_name);
-
-	string source_lang = task_->get_source_lang();
-	string target_lang = task_->get_target_lang();
-
-//	string target_lang = get_config().get_value("target_lang");
-	corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
-	assert(corpus::instance().lang().length() <= 4);
-
-	string lang_pair = string(source_lang) + ":" + string(target_lang);
-	google_research_translator::instance().set_lang_pair(lang_pair.c_str());
-
-	string s_code;
-	string t_code;
-
-	if (source_lang == "zh")
-	  s_code="C";
-	else if (source_lang == "en")
-	  s_code="E";
-	else if (source_lang == "ja")
-	  s_code="J";
-	else if (source_lang == "ko")
-	  s_code="K";
-	else
-		s_code = toupper(source_lang[0]);
-
-
-	if (target_lang == "zh")
-	  t_code="C";
-	else if (target_lang == "en")
-	  t_code="E";
-	else if (target_lang == "ja")
-	  t_code="J";
-	else if (target_lang == "ko")
-	  t_code="K";
-	else
-		t_code = toupper(target_lang[0]);
-
-	run_id = affiliation + "_" + s_code + "2" + t_code + "_" + task + "_" + id + "_" + run_name;
 }
 
 std::string QLINK::ltw_run::get_home(const char *name)
@@ -178,8 +145,9 @@ void QLINK::ltw_run::create_daemon(int port) {
 			cerr << "Failed to create xlink daemon!" << endl;
 		else {
 			cerr << "Xlink daemon created" << endl;
-			while (1)
-				usleep(1000000);
+			 (void) getc (stdin);
+//			while (1)
+//				usleep(1000000);
 		}
 	}
 	else
@@ -194,9 +162,56 @@ void QLINK::ltw_run::stop_daemon() {
 	}
 }
 
-void QLINK::ltw_run::initialise() {
-//	if (task_ == NULL)
-//		load();
+void QLINK::ltw_run::global_initialise() {
+	if (task_ == NULL) {
+		string taskname = get_config().get_value("task");
+		string out_algor_name = get_config().get_algorithm_outgoing_name();
+		string in_algor_name = get_config().get_algorithm_incoming_name();
+		string::size_type pos = string::npos;
+		task_ = new ltw_task(get_config(), taskname, out_algor_name, in_algor_name);
+
+		string source_lang = task_->get_source_lang();
+		string target_lang = task_->get_target_lang();
+
+	//	string target_lang = get_config().get_value("target_lang");
+		corpus::instance().lang(target_lang.length() > 0 ? target_lang : "en");
+		assert(corpus::instance().lang().length() <= 4);
+
+		string lang_pair = string(source_lang) + ":" + string(target_lang);
+		google_research_translator::instance().set_lang_pair(lang_pair.c_str());
+
+		string s_code;
+		string t_code;
+
+		if (source_lang == "zh")
+		  s_code="C";
+		else if (source_lang == "en")
+		  s_code="E";
+		else if (source_lang == "ja")
+		  s_code="J";
+		else if (source_lang == "ko")
+		  s_code="K";
+		else
+			s_code = toupper(source_lang[0]);
+
+
+		if (target_lang == "zh")
+		  t_code="C";
+		else if (target_lang == "en")
+		  t_code="E";
+		else if (target_lang == "ja")
+		  t_code="J";
+		else if (target_lang == "ko")
+		  t_code="K";
+		else
+			t_code = toupper(target_lang[0]);
+
+		run_id = affiliation + "_" + s_code + "2" + t_code + "_" + task + "_" + id + "_" + run_name;
+	}
+}
+
+void QLINK::ltw_run::request_initialise() {
+
 }
 
 int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,
@@ -209,6 +224,11 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		const char* url, const char* method, const char* version,
 		const char* upload_data, size_t* upload_data_size, void** con_cls) {
 
+	/*
+	 *  load necessary tables into memory and do some preparation work
+	 */
+	instance_ptr_ ->initialise();
+
 	// get the arguments passed from the GET, POST methods
 	// MHD_GET_ARGUMENT_KIND
 	// MHD_HEADER_KIND
@@ -216,8 +236,9 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 //	                             NULL);
 	// or if we know what we are looking for
 
-
 	 char *page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+
+	 cerr << "Attempt to answer the connection" << endl;
 
 	 webpage_retriever page_fetcher;
 	 char *external_page = NULL;
@@ -262,6 +283,8 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 //	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
 	struct MHD_Response *response  = MHD_create_response_from_data (strlen(result),
 	                                            result,  MHD_NO, MHD_YES);
+
+    if (response == NULL) return MHD_NO;
 
 	MHD_add_response_header (response, "Content-Type", "text/html");
 	int ret = MHD_queue_response (connection, MHD_HTTP_OK, response);

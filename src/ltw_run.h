@@ -42,7 +42,10 @@ namespace QLINK {
 		void create_daemon(int port);
 		void stop_daemon();
 
-		void initialise();
+		void global_initialise();
+		void request_initialise();
+
+		void setup_output(ostream *out);
 
 		static int parse_request_arguments(void *cls, enum MHD_ValueKind kind, const char *key,
 	               const char *value);

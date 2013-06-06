@@ -10,6 +10,8 @@
 
 #include "system_info.h"
 #include "run_config.h"
+#include "application_out.h"
+
 #include <string>
 
 namespace QLINK {
@@ -19,18 +21,21 @@ namespace QLINK {
 	 */
 	class run {
 	private:
-		run_config	*run_conf_;
-		const char	*config_file_;
+		run_config				*run_conf_;
+		const char				*config_file_;
+
+	protected:
+		application_out			*aout_;
 
 	public:
-		std::string		affiliation;
-		std::string		id;
-		std::string		run_id;
-		std::string		run_name;
-		std::string		task;
-		std::string		header;
-		std::string		footer;
-		system_info		system_information;
+		std::string					affiliation;
+		std::string					id;
+		std::string					run_id;
+		std::string					run_name;
+		std::string					task;
+		std::string					header;
+		std::string					footer;
+		system_info				system_information;
 
 	private:
 

@@ -8,7 +8,6 @@
 #include "run.h"
 #include "corpus.h"
 #include "sys_file.h"
-#include "application_out.h"
 
 using namespace QLINK;
 
@@ -61,7 +60,8 @@ void run::load_config()
 void run::print_header()
 {
 	//printf(header.c_str());
-	aout << header;
+//	(*aout_) << header;
+	aout_->printbuf(header.c_str());
 }
 
 /*
@@ -71,7 +71,8 @@ void run::print_header()
 void run::print_footer()
 {
 	//puts(footer.c_str());
-	aout << footer;
+//	(*aout_) << footer;
+	aout_->printbuf(footer.c_str());
 }
 
 void run::set_config_file(const char* config_file) {

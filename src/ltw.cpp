@@ -84,9 +84,11 @@ void create_run(int argc, char **argv)
 		signal(SIGTERM, &catch_signal);
 		signal(SIGINT, &catch_signal);
 
+		run_ptr->setup_output(new ostringstream);
 		run_ptr->create_daemon(port);
 	}
 	else {
+		run_ptr->setup_output(&cout);
 		run_ptr->create();
 		switch (cmd) {
 			case RECOMMEND_ANCHOR:

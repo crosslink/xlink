@@ -15,14 +15,14 @@
 namespace QLINK
 {
 
-	class application_out: public pattern_singleton<application_out>
+	class application_out /*: public pattern_singleton<application_out>*/
 	{
 	public:
 
 	private:
 		std::stringstream	 	buf_;
-		std::ostream			*out_;
-		bool					use_stdout_;
+		std::ostream				*out_;
+		bool							use_stdout_;
 
 	public:
 		application_out();
@@ -42,8 +42,6 @@ namespace QLINK
 			return *this;
 		}
 	};
-
-	extern application_out	aout;
 }
 
 #endif /* APPLICATION_OUT_H_ */
