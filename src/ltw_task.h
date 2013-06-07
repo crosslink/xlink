@@ -122,6 +122,8 @@ namespace QLINK {
 
 		bool need_crosslink() { return need_crosslink_; }
 
+		void wikify(const char *topic, application_out& aout);
+
 	private:
 		ltw_algorithm get_algorithm_outgoing_type();
 		ltw_algorithm get_algorithm_incoming_type();

@@ -47,6 +47,8 @@ public:
 	void set_wikified(bool wikified) {
 		wikified_ = wikified;
 	}
+
+	void apply_links(const std::string& links_xml);
 };
 
 } /* namespace QLINK */

@@ -99,7 +99,7 @@ void xml2txt_client::end_request()
 	send_buffer(XML2TXT_REQUEST_END);
 }
 
-void xml2txt_client::send_request(char *xml)
+void xml2txt_client::send_request(const char *xml)
 {
 	char size_buf[100];
 	int size = strlen(xml);

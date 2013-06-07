@@ -34,6 +34,8 @@ namespace QLINK
 		void reset();
 		void flush();
 
+		std::string to_string() { return buf_.str(); }
+
 //		template <typename T>
 //		application_out& operator << (T const &content);
 		template <typename T>

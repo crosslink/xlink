@@ -222,9 +222,9 @@ inline static long result_to_id(const char *source)
 	 GET_DOC_NAME()
 	 --------------
  */
-inline char *get_doc_name(char *file, char *to)
+inline char *get_doc_name(const char *file, char *to)
 {
-	char *pos, *start, *end;
+	const char *pos, *start, *end;
 	long len = 0;
 
 	pos = strstr(file, ARTICLE_NAME_SIGNITURE_OPEN);

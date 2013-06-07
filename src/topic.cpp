@@ -7,7 +7,6 @@
 
 #include "topic.h"
 #include "ant_link_parts.h"
-#include "sys_file.h"
 #include "application_out.h"
 
 //#include <libgen.h>
@@ -19,21 +18,20 @@
 
 using namespace QLINK;
 
-topic::topic(const char *filename)
+topic::topic(const char *topic_text)
 {
 	id_ = -1;
 	strcpy(name_, "");
 	strcpy(filename_, "");
 
-	set_filename(filename);
-	content_ = sys_file::read_entire_file(filename);
-	set_content(content_);
+//	set_filename(filename);
+	set_content(topic_text);
 }
 
 topic::~topic()
 {
-	if (content_)
-		delete [] content_;
+//	if (content_)
+//		delete [] content_;
 }
 
 void topic::set_filename(const char *filename)
@@ -41,12 +39,12 @@ void topic::set_filename(const char *filename)
 	strcpy(filename_, filename);
 }
 
-void topic::set_content(char *file)
+void topic::set_content(const char *file)
 {
 	content_ = file;
 
 	id_ = get_doc_id(file);
-	get_doc_name(file, name_);
+	get_doc_name((char *)file, name_);
 	if (strlen(name_) <= 0) {
 		char filename[1024];
 		char *end = NULL;

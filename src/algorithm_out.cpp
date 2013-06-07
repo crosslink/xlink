@@ -146,7 +146,7 @@ long algorithm_out::assign_link_term(char *buffer, char **term_list)
 
 	term_len = strlen(buffer);
 	char *where_to = buffer_;
-	char *start = offset + current_topic_->get_content();
+	const char *start = offset + current_topic_->get_content();
 	int count = term_len;
 	while (count > 0) {
 		if (*start == '<') {

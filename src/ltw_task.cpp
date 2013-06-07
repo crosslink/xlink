@@ -177,62 +177,10 @@ void ltw_task::perform(application_out& aout)
 			count++;
 			//cerr << "Processing #" << count << ": " << name << endl;
 			//char *file = disk.read_entire_file(name);
-			ltw_topic a_topic(name);
-			a_topic.xml_to_text();
-			a_topic.set_ltw_task(this);
-			a_topic.print_header(aout);
+			const char *content = sys_file::read_entire_file(name);
+			wikify(content, aout);
 
-			if (algor_out_) {
-				if (outgoings_) {
-					delete outgoings_;
-					outgoings_ = NULL;
-				}
-				outgoings_ = new outgoing_links(&a_topic, need_crosslink_);
-				outgoings_->set_application_out(aout);
-				outgoings_->set_bep_algorithm(algor_bep_);
-				outgoings_->set_algorithm(algor_out_);
-
-//				if (links_to_print_ > 0)
-//					outgoings_->set_links_to_print(links_to_print_);
-//				if (beps_to_print_ > 0)
-//					outgoings_->set_beps_to_print(beps_to_print_);
-
-				algor_out_->set_links_container(outgoings_);
-				algor_out_->set_stage(algorithm::FIND_ANCHOR);
-
-				algor_out_->process_topic(&a_topic);
-			//if (algor_out_name_ != "LTW_ANT")
-				//if (is_a2b_task())
-
-					outgoings_->find_anchor();
-
-				// output
-				algor_out_->set_stage(algorithm::PRINT_LINK);
-				outgoings_->print();
-			}
-			if (algor_in_) {
-				if (incomings_) {
-					delete incomings_;
-					incomings_ = NULL;
-				}
-				incomings_ = new incoming_links(&a_topic);
-//				if (links_to_print_ > 0)
-//					incomings_->set_links_to_print(links_to_print_);
-//				if (beps_to_print_ > 0)
-//					incomings_->set_beps_to_print(beps_to_print_);
-
-				incomings_->set_bep_algorithm(algor_bep_);
-				algor_in_->set_links_container(incomings_);
-				algor_in_->process_topic(&a_topic);
-				//if (is_a2b_task())
-					incomings_->find_anchor();
-
-				// output
-				incomings_->print();
-			}
-			a_topic.print_footer(aout);
-
-			//delete [] file;
+			delete [] content;
 		}
 	}
 //	outgoings_->create();
@@ -245,4 +193,61 @@ void ltw_task::print_links()
 //		outgoings_->print();
 //
 //	incomings_->print();
+}
+
+void QLINK::ltw_task::wikify(const char * topic_text, application_out& aout) {
+	ltw_topic a_topic(topic_text);
+	a_topic.xml_to_text();
+	a_topic.set_ltw_task(this);
+	a_topic.print_header(aout);
+
+	if (algor_out_) {
+		if (outgoings_) {
+			delete outgoings_;
+			outgoings_ = NULL;
+		}
+		outgoings_ = new outgoing_links(&a_topic, need_crosslink_);
+		outgoings_->set_application_out(aout);
+		outgoings_->set_bep_algorithm(algor_bep_);
+		outgoings_->set_algorithm(algor_out_);
+
+//				if (links_to_print_ > 0)
+//					outgoings_->set_links_to_print(links_to_print_);
+//				if (beps_to_print_ > 0)
+//					outgoings_->set_beps_to_print(beps_to_print_);
+
+		algor_out_->set_links_container(outgoings_);
+		algor_out_->set_stage(algorithm::FIND_ANCHOR);
+
+		algor_out_->process_topic(&a_topic);
+	//if (algor_out_name_ != "LTW_ANT")
+		//if (is_a2b_task())
+
+			outgoings_->find_anchor();
+
+		// output
+		algor_out_->set_stage(algorithm::PRINT_LINK);
+		outgoings_->print();
+	}
+	if (algor_in_) {
+		if (incomings_) {
+			delete incomings_;
+			incomings_ = NULL;
+		}
+		incomings_ = new incoming_links(&a_topic);
+//				if (links_to_print_ > 0)
+//					incomings_->set_links_to_print(links_to_print_);
+//				if (beps_to_print_ > 0)
+//					incomings_->set_beps_to_print(beps_to_print_);
+
+		incomings_->set_bep_algorithm(algor_bep_);
+		algor_in_->set_links_container(incomings_);
+		algor_in_->process_topic(&a_topic);
+		//if (is_a2b_task())
+			incomings_->find_anchor();
+
+		// output
+		incomings_->print();
+	}
+	a_topic.print_footer(aout);
 }

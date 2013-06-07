@@ -23,11 +23,11 @@ namespace QLINK {
 		virtual ~xml2txt();
 
 		static xml2txt& instance();
-		char *convert(char *xml);
+		char *convert(const char *xml);
 
 		char *clean_tags(const char *xml, long lowercase = 0);
 
-		char *gettext(const char *xmlfile, const char *txtfile, char *xml);
+		char *gettext(const char *xmlfile, const char *txtfile, const char *xml);
 		char *gettext(long docid, char *xml = 0);
 
 		char *gettearatext(const char *name, char *xml = 0);

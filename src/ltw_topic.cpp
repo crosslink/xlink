@@ -16,7 +16,7 @@
 
 using namespace QLINK;
 
-ltw_topic::ltw_topic(const char *file) : topic(file)
+ltw_topic::ltw_topic(const char *file) : topic(file), ltw_task_(NULL)
 {
 	text_of_xml_ = NULL;
 }
@@ -28,7 +28,7 @@ ltw_topic::~ltw_topic()
 		//free(text_of_xml_);
 }
 
-char *ltw_topic::get_text()
+const char *ltw_topic::get_text()
 {
 	if (!text_of_xml_)
 		xml_to_text();
@@ -43,8 +43,8 @@ void ltw_topic::xml_to_text()
 		text_of_xml_ = xml2txt::instance().gettext(filename_, NULL, content_);
 		//text_of_xml_ = xml2txt::instance().gettext(id_, content_);
 	}
-	else
-		text_of_xml_ = xml2txt::instance().gettearatext(name_, content_);
+//	else
+//		text_of_xml_ = xml2txt::instance().gettearatext(name_, content_);
 
 	if (!text_of_xml_) {
 		//text_of_xml_ = new char[strlen(content_) + 1];
@@ -63,7 +63,8 @@ void ltw_topic::xml_to_text()
 
 long QLINK::ltw_topic::get_term_len(long  offset, char *term, bool is_cjk_lang)
 {
-	char *start, *end, *where_to = term;
+	const char *start, *end;
+	char *where_to = term;
 	long term_len = 0, char_len;
 	long target_term_len = strlen(term);
 
@@ -125,5 +126,3 @@ long QLINK::ltw_topic::get_term_len(long  offset, char *term, bool is_cjk_lang)
 	term_len =  end - start;
 	return term_len;
 }
-
-

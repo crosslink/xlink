@@ -210,8 +210,34 @@ void QLINK::ltw_run::global_initialise() {
 	}
 }
 
-void QLINK::ltw_run::request_initialise(const char *url) {
+const char *QLINK::ltw_run::check_request(const char *page_url) {
+	 webpage_retriever page_fetcher;
+	 char *decoded_url = url_decode(page_url);
+	 const char *external_page = NULL;
 
+	 request_type& requests = instance_ptr_->get_requests();
+	 request_type::const_iterator it = requests.find(page_url) ;
+	 request_type::const_iterator end = requests.end();
+	 if (it != end) {
+		 request& rsq = requests.find(page_url)->second;
+		 external_page = rsq.get_page().c_str();
+
+		 task_->wikify(external_page, *aout_);
+
+		 string links_xml = aout_->to_string();
+		 rsq.apply_links(links_xml);
+	 }
+	 else
+	 {
+		 external_page = page_fetcher.retrieve(decoded_url);
+		 request rsq;
+		 rsq.set_page(external_page);
+		 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
+	//				 requests.insert(rsq_p);
+		 requests_.insert(std::pair<string, request>(page_url, rsq));
+//				 requests [page_url] = rsq;
+	 }
+	 return external_page;
 }
 
 int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,
@@ -240,7 +266,6 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 
 	 cerr << "Attempt to answer the connection" << endl;
 
-	 webpage_retriever page_fetcher;
 	 const char *external_page = NULL;
 	 char *result = NULL;
 
@@ -263,26 +288,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		page_buf << "</body></html>";
 
 		 if (page_url) {
-			 const request_type& requests = instance_ptr_->get_requests();
-			 request_type::const_iterator it = requests.find(page_url) ;
-			 request_type::const_iterator end = requests.end();
-			 if (it != end) {
-				 const request& rsq = requests.find(page_url)->second;
-				 external_page = rsq.get_page().c_str();
-			 }
-			 else
-			 {
-				 char *decoded_url = url_decode(page_url);
-				 instance_ptr_->request_initialise(page_url);
-				 external_page = page_fetcher.retrieve(decoded_url);
-
-				 request rsq;
-				 rsq.set_page(external_page);
-				 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
-//				 requests.insert(rsq_p);
-				 requests.insert(std::pair<string, request>(page_url, rsq));
-//				 requests [page_url] = rsq;
-			 }
+			 external_page = instance_ptr_->check_request(page_url);
 	//			 result = strdup(external_page);
 	//		 free(decoded_url);
 		 }

@@ -52,7 +52,7 @@ public:
 	bool connect_server();
 	void start_request();
 	void end_request();
-	void send_request(char *xml);
+	void send_request(const char *xml);
 	void recv_text();
 	void close_connect() { close_socket(); }
 

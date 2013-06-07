@@ -50,7 +50,7 @@ namespace QLINK {
 		void stop_daemon();
 
 		void global_initialise();
-		void request_initialise(const char *url);
+		const char * check_request(const char *url);
 
 		void setup_output(ostream *out);
 
@@ -66,7 +66,7 @@ namespace QLINK {
 		void load_config(const char *config_file);
 		void load_config();
 
-		const std::map<std::string, request>& get_requests() const {
+		std::map<std::string, request>& get_requests() {
 			return requests_;
 		}
 

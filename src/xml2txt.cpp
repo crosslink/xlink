@@ -40,7 +40,7 @@ xml2txt::~xml2txt()
 	}
 }
 
-char *xml2txt::convert(char *xml)
+char *xml2txt::convert(const char *xml)
 {
 	client_.send_request(xml);
 	client_.recv_text();
@@ -62,9 +62,10 @@ char *xml2txt::gettearatext(const char *name, char *xml)
 	return gettext(corpus::instance().name2tearapath(name).c_str(), corpus_txt::instance().name2tearapath(name).c_str(), xml);
 }
 
-char *xml2txt::gettext(const char *xmlfile, const char *txtfile, char *xml)
+char *xml2txt::gettext(const char *xmlfile, const char *txtfile,  const char *xml)
 {
-	char *content = xml, *text = NULL;
+	const char *content = xml;
+	char *text = NULL;
 
 	if (txtfile != NULL && sys_file::exist(txtfile))
 		text = sys_file::read_entire_file(txtfile);

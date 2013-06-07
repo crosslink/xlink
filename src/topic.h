@@ -16,21 +16,21 @@ namespace QLINK {
 	class topic
 	{
 	protected:
-		char		filename_[1024];
-		char 		*content_;
-		long		id_;
-		//char		id_name_[1024];
-		char		name_[1024];
+		char					filename_[1024];
+		const char 		*content_;
+		long					id_;
+		//char				id_name_[1024];
+		char					name_[1024];
 
-		ir_task		*task_;
+		ir_task				*task_;
 
 	public:
 		topic(const char *filename);
 		virtual ~topic();
 
 		void set_filename(const char *filename);
-		void set_content(char *file);
-		char *get_content() { return content_; }
+		void set_content(const char *file);
+		const char *get_content() const { return content_; }
 		long get_id() { return id_; }
 		const char *get_name() const { return name_; }
 

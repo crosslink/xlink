@@ -7,6 +7,9 @@
 
 #include "request.h"
 
+#include <stpl/stpl_stream.h>
+#include <stpl/xml/stpl_xml.h>
+
 namespace QLINK {
 
 request::request() : wikified_(false), last_request_time_(time(0)) {
@@ -20,6 +23,10 @@ request::request(const request& rsq) {
 }
 
 request::~request() {
+
+}
+
+void request::apply_links(const std::string& links_xml) {
 
 }
 

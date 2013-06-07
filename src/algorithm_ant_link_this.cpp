@@ -421,11 +421,11 @@ void algorithm_ant_link_this::process_topic_text()
 
 void algorithm_ant_link_this::process_topic(ltw_topic *a_topic)
 {
-	char *xml = a_topic->get_content();
+	const char *xml = a_topic->get_content();
 	orphan_docid_ = get_doc_id(xml);
 	get_doc_name(xml, orphan_name_);
 
-    char *links_file = xml;
+    const char *links_file = xml;
     string filepath;
 
 	if (topic_with_links_path_.length() > 0) {
