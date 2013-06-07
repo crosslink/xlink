@@ -280,7 +280,8 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 				 rsq.set_page(external_page);
 				 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
 //				 requests.insert(rsq_p);
-				 requests [page_url] = rsq;
+				 requests.insert(std::pair<string, request>(page_url, rsq));
+//				 requests [page_url] = rsq;
 			 }
 	//			 result = strdup(external_page);
 	//		 free(decoded_url);

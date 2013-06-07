@@ -26,6 +26,7 @@ namespace QLINK {
 	class ltw_run : public run, public pattern_singleton<ltw_run> {
 	public:
 		typedef std::map<std::string, request> request_type;
+
 	private:
 		ltw_task											*task_;
 		struct MHD_Daemon						*daemon_;
