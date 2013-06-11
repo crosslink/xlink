@@ -43,6 +43,9 @@ namespace QLINK
 			buf_ << content;
 			return *this;
 		}
+
+	private:
+		void init();
 	};
 }
 

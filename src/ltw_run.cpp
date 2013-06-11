@@ -33,10 +33,10 @@ QLINK::ltw_run::ltw_run()
 //	init();
 }
 
-QLINK::ltw_run::ltw_run(char *configfile) : run(configfile)
+QLINK::ltw_run::ltw_run(char *configfile)
 {
 	task_ = NULL;
-//	init();
+	load_config(configfile);
 }
 
 QLINK::ltw_run::~ltw_run()
@@ -218,14 +218,9 @@ const char *QLINK::ltw_run::check_request(const char *page_url) {
 	 request_type& requests = instance_ptr_->get_requests();
 	 request_type::const_iterator it = requests.find(page_url) ;
 	 request_type::const_iterator end = requests.end();
+	 request* rsq_ptr;
 	 if (it != end) {
-		 request& rsq = requests.find(page_url)->second;
-		 external_page = rsq.get_page().c_str();
-
-		 task_->wikify(external_page, *aout_);
-
-		 string links_xml = aout_->to_string();
-		 rsq.apply_links(links_xml);
+		 rsq_ptr = &(requests.find(page_url)->second);
 	 }
 	 else
 	 {
@@ -235,9 +230,15 @@ const char *QLINK::ltw_run::check_request(const char *page_url) {
 		 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
 	//				 requests.insert(rsq_p);
 		 requests_.insert(std::pair<string, request>(page_url, rsq));
+
+		 task_->wikify(external_page, *aout_);
+
+		 string links_xml = aout_->to_string();
+		 rsq.apply_links(links_xml);
+		 rsq_ptr = &rsq;
 //				 requests [page_url] = rsq;
 	 }
-	 return external_page;
+	 return rsq_ptr->get_page().c_str();
 }
 
 int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,

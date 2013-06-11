@@ -90,9 +90,6 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 	int count = 0;
 	bool anchor_printed = false;
 
-	if (strcmp(term, "Money order") == 0)
-		cerr << "I got you " << endl;
-
 	bool ret = false;
 	if (!fill_anchor_with_ir_results && algor != NULL && algor->size_of_crosslink() > 0) {
 		if (link_term->postings.size() > 0)
@@ -259,8 +256,10 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 		ret = false;
 	}
 
-	if (ret)
-		(*aout_) << stringbuffer.str();
+	if (ret) {
+//		(*aout_) << stringbuffer.str(); // segmentation fault
+		aout_->printbuf(stringbuffer.str().c_str());
+	}
 	return ret;
 }
 

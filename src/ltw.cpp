@@ -34,8 +34,10 @@ void clean_up() {
 
 void catch_signal(int sig) {
 	cerr << "signal: " << sig << " received!" << endl;
-	if (run_ptr != NULL)
+	if (run_ptr != NULL) {
+		cerr << "Terminating daemon " << endl;
 		run_ptr->stop_daemon();
+	}
 	exit(0);
 //	clean_up();
 }

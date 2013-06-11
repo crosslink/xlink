@@ -20,11 +20,13 @@ namespace QLINK
 application_out::application_out()
 {
 	out_ = &cout;
+	init();
 }
 
 application_out::application_out(std::ostream	 *out)
 {
 	out_ = out;
+	init();
 }
 
 application_out::~application_out()
@@ -33,6 +35,10 @@ application_out::~application_out()
 		if (out_ != &cout && out_ != &cerr)
 			delete out_;
 	}
+}
+
+void application_out::init() {
+	buf_ << "";
 }
 
 //void application_out::operator << (const char *content)
@@ -66,4 +72,5 @@ void application_out::flush()
 {
 	*out_ << buf_.str();
 }
+
 }
