@@ -258,7 +258,8 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 
 	if (ret) {
 //		(*aout_) << stringbuffer.str(); // segmentation fault
-		aout_->printbuf(stringbuffer.str().c_str());
+		const char *result_buf = stringbuffer.str().c_str();
+		aout_->printbuf(result_buf);
 	}
 	return ret;
 }

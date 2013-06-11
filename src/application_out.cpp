@@ -65,7 +65,8 @@ void application_out::reset()
 
 void application_out::printbuf(const char *content)
 {
-	buf_ << content;
+//	buf_ << content;
+	buf_.write(content, strlen(content));
 }
 
 void application_out::flush()
