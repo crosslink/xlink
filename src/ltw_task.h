@@ -49,6 +49,7 @@ namespace QLINK {
 	    //NUMBER_OF_LTW_ALGORITHMS
 	    typedef std::map<std::string,ltw_algorithm> ltw_algorithm_map;
 	    typedef std::map<std::string,ltw_task_type> ltw_task_type_map;
+
 	public:
 	    static ltw_algorithm_map alorithm_names;
 	    static ltw_task_type_map task_names;

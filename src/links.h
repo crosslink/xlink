@@ -105,8 +105,7 @@ namespace QLINK {
 
 		void set_topic(ltw_topic *topic) { this->topic_ = topic; }
 
-		void set_application_out(application_out& out) { aout_ = &out; }
-		//long find_bep(link *lnk);
+		void set_application_out(application_out& out);
 
 	protected:
 		virtual void print_links(long orphan_docid, const char *orphan_name, long links_to_print = 250, long max_targets_per_anchor = 1, long mode = 1);

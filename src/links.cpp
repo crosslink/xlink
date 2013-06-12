@@ -119,9 +119,16 @@ void links::init()
 //	links_in_orphan__length = 0;
 //}
 
+void links::set_application_out(application_out& out)
+{
+	aout_ = &out;
+}
+
 QLINK::link *links::create_new_link()
 {
 	link *new_link = link_maker();
+	new_link->set_application_out(aout_);
+
 	all_links_in_file_.push_back(new_link);
 	return new_link;
 }

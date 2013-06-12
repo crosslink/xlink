@@ -58,6 +58,8 @@ namespace QLINK {
 
 		bool operator==(const link& rhs);
 		bool operator==(const char *term);
+
+		void set_application_out(application_out *out) {aout_ = out; }
 	};
 
 	class link_string_target_compare {

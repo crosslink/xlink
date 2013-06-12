@@ -30,7 +30,6 @@ QLINK::ltw_run* QLINK::ltw_run::instance_ptr_ = NULL;
 QLINK::ltw_run::ltw_run()
 {
 	task_ = NULL;
-//	init();
 }
 
 QLINK::ltw_run::ltw_run(char *configfile)
