@@ -64,7 +64,7 @@ namespace stpl {
 
 			protected:
 				virtual bool is_start(IteratorT& it) {
-					skip_whitespace(it);
+					this->skip_whitespace(it);
 					this->begin(it);
 					return true;
 				}
@@ -687,7 +687,7 @@ namespace stpl {
 						//IteratorT end = this->end();
 
 						// if it is the end of character stream
-						if (eow(it)) {
+						if (this->eow(it)) {
 							//TODO error message here for xml
 							// but could be valid for html
 							body_.end(it);
@@ -775,7 +775,7 @@ namespace stpl {
 				}
 
 				virtual IteratorT skip_not_valid_char(IteratorT& it) {
-					skip_whitespace(it);
+					this->skip_whitespace(it);
 
 					//if (!start_k_)
 					//	start_k_ = new ElemTagT(next, next);
@@ -789,7 +789,7 @@ namespace stpl {
 
 						bool ret = false;
 						while (!this->eow(it) && last_tag_ptr_->length() <= 0 )
-							if (!(ret = skip_comment_unknown_node(last_tag_ptr_, it))) {
+							if (!(ret = this->skip_comment_unknown_node(last_tag_ptr_, it))) {
 								cleanup_last_tag();
 								break;
 							}
@@ -815,7 +815,7 @@ namespace stpl {
 							//node_ptr->detected(true);
 							if ((ret = node_ptr->resume_match(new_begin, end))) {
 								begin = node_ptr->end();
-								add(reinterpret_cast<basic_entity* >(node_ptr));
+								this->add(reinterpret_cast<basic_entity* >(node_ptr));
 							}
 
 							delete keyword_ptr;
@@ -835,7 +835,7 @@ namespace stpl {
 							//keyword_ptr>detected(true);
 							if ((ret = keyword_ptr->resume_match(new_begin, end))) {
 								begin = keyword_ptr->end();
-								add(reinterpret_cast<basic_entity* >(keyword_ptr));
+								this->add(reinterpret_cast<basic_entity* >(keyword_ptr));
 							}
 						}
 					} else {

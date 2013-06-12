@@ -48,12 +48,15 @@ namespace stpl {
 		public:
 			Document() : StringEntity</*StringT, IteratorT, */EntityT>::StringEntity() { 
 			}
+
 			Document(IteratorT it) : 
 				StringEntity</*StringT, IteratorT, */EntityT>::StringEntity(it) {
 			}
+
 			Document(IteratorT begin, IteratorT end) :
 				StringEntity</*StringT, IteratorT, */EntityT>::StringEntity(begin, end) {
 			}
+
 			Document(StringT content) :
 				StringEntity</*StringT, IteratorT, */EntityT>::StringEntity(content) {
 			}
@@ -63,7 +66,6 @@ namespace stpl {
 			int count() {
 				return this->size();
 			}
-		
 	};
 }
 

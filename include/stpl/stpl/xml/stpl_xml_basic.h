@@ -128,7 +128,7 @@ namespace stpl {
 					else {
 						IteratorT next = it;						
 						if (*next == '/') {							
-							skip_whitespace(++next);							
+							this->skip_whitespace(++next);
 						}
 						if (BasicXmlEntity<StringT, IteratorT>::is_end_symbol(next) ) {
 							it = next;
@@ -202,7 +202,7 @@ namespace stpl {
 				
 				virtual bool is_start(IteratorT& it) {						
 					bool ret = false;
-					if (is_start_symbol(it)) { 		
+					if (this->is_start_symbol(it)) {
 						// decide what kind of node is
 						this->type_ = UNKNOWN;
 						IteratorT next = it;
@@ -215,14 +215,14 @@ namespace stpl {
 									} else if (*(next) == '[' ) {
 										IteratorT begin = next;
 										std::string keyword("[CDATA[");
-										skip_n_chars(next, keyword.length());
+										this->skip_n_chars(next, keyword.length());
 											
 										if (std::string(begin, next) == keyword)
 											this->type_ = CDATA;
 									} else {
 										IteratorT begin = next;
 										std::string keyword("DOCTYPE");
-										skip_n_chars(next, keyword.length());
+										this->skip_n_chars(next, keyword.length());
 											
 										if (std::string(begin, next) == keyword)
 											this->type_ = DTD;										
@@ -252,7 +252,7 @@ namespace stpl {
 				}
 				
 				virtual bool is_end(IteratorT& it) {
-					if (eow(it))
+					if (this->eow(it))
 						return true;		
 						
 					if (this->type_ == DTD) {
@@ -262,7 +262,7 @@ namespace stpl {
 							contain_intsubset_ = false;
 					}
 					
-					if (!contain_intsubset_ && is_end_symbol(it)) {
+					if (!contain_intsubset_ && this->is_end_symbol(it)) {
 						IteratorT pre_char = it;
 						--pre_char;		
 								
@@ -274,7 +274,7 @@ namespace stpl {
 							if (*pre_char == ']' && *(--pre_char) == ']')
 								ret = true;							
 						} else if (this->type_ == DTD) {	
-							skip_whitespace_backward(pre_char);							
+							this->skip_whitespace_backward(pre_char);
 							//if (*pre_char == ']')
 								ret = true;							
 						} else if (this->type() == LABEL) {
@@ -306,7 +306,7 @@ namespace stpl {
 				}	
 						
 				virtual IteratorT skip_not_valid_char(IteratorT& it) {
-					return skip_whitespace(it);
+					return this->skip_whitespace(it);
 				}			
 				
 				virtual void add_start(StringT& text) {

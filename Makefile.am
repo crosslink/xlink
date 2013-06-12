@@ -1,5 +1,6 @@
-#AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl
-AM_CPPFLAGS = -std=c++0x -pedantic -I $(srcdir)/include/ -I $(srcdir)/include/stpl -DCROSSLINK
+#AM_CPPFLAGS = -std=c++0x  -pedantic -DREMOVE_ORPHAN_LINKS -I $(srcdir)/include/stpl -I $(srcdir)/include/stpl
+
+AM_CPPFLAGS = -std=c++0x -pedantic -I $(srcdir)/include/ -DCROSSLINK
 
 LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @MYSQL_LIBS@
 #LTW_LIBS ==-lgcj

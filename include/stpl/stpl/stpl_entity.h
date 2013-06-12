@@ -134,7 +134,7 @@ namespace stpl {
 				return next;
 			}
 
-			StringT to_string() {
+			virtual StringT to_string() {
 				if (begin_ == end_)
 					return StringT("");
 				return StringT(begin_, end_);
@@ -397,13 +397,16 @@ namespace stpl {
 		public:
 			StringEntity() : StringBound<StringT, IteratorT>::StringBound()
 				, Entity<EntityT>::Entity() {}
+
 			StringEntity(IteratorT it) :
 				StringBound<StringT, IteratorT>::StringBound(it)
 				, Entity<EntityT>::Entity()  {
 			}
+
 			StringEntity(IteratorT begin, IteratorT end) :
 				StringBound<StringT, IteratorT>::StringBound(begin, end)
 					, Entity<EntityT>::Entity() {}
+
 			StringEntity(StringT content) :
 				StringBound<StringT, IteratorT>::StringBound(content)
 				, Entity<EntityT>::Entity()  {

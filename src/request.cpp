@@ -23,8 +23,12 @@
 
 #include "request.h"
 
+#include <string>
 #include <stpl/stpl_stream.h>
 #include <stpl/xml/stpl_xml.h>
+
+using namespace std;
+using namespace stpl;
 
 namespace QLINK {
 
@@ -43,6 +47,9 @@ request::~request() {
 }
 
 void request::apply_links(const std::string& links_xml) {
+	XML::XParser<string, string::const_iterator> parser(links_xml.begin(), links_xml.end());
+	parser.parse();
+
 
 }
 

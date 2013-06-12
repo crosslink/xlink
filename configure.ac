@@ -21,7 +21,11 @@ AC_ARG_WITH(stpl,
             CXXFLAGS="$CXXFLAGS -I$withval"
           else
             AC_MSG_ERROR([Cannot stat directory $withval])
-          fi ] )
+          fi ], 
+          [
+            CFLAGS="$CFLAGS -I $(srcdir)/include/stpl"
+            CXXFLAGS="$CXXFLAGS -I $(srcdir)/include/stpl"
+          ] )
           
 AC_ARG_WITH(atire,
             AC_HELP_STRING([--with-atire]

@@ -41,10 +41,6 @@ namespace stpl {
 								>
 				>
 		class XDocument :  public Document<EntityT> {
-			private:
-				//typedef	typename EntityT::string_type StringT;
-				//typedef typename EntityT::iterator	IteratorT;
-
 			public:
 				typedef EntityT										entity_type;
 				typedef StringT										string_type;
@@ -52,6 +48,12 @@ namespace stpl {
 				typedef typename RootElemT::tree_type				tree_type;
 				typedef RootElemT 									element_type;
 				typedef typename Document<EntityT>::entity_iterator entity_iterator;
+
+			private:
+				//typedef	typename EntityT::string_type StringT;
+				//typedef typename EntityT::iterator	IteratorT;
+
+				RootElemT* 	root_;
 
 			public:
 				XDocument() : Document<EntityT>::Document() { init(); }
@@ -90,15 +92,13 @@ namespace stpl {
 					}
 				}
 
+				virtual StringT to_string() { return 0; }
+
 			private:
 				void init() {
 					//debug
 					// this->ref().append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 				}
-
-			private:
-				RootElemT* 	root_;
-
 		};
 
 		typedef XDocument<>	XmlDocument;
@@ -163,7 +163,7 @@ namespace stpl {
 
 		template<
 					typename StringT = std::string,
-					typename IteratorT = typename StringT::iterator,
+					typename IteratorT = typename StringT::const_iterator,
 					typename DocumentT = XDocument<StringT, IteratorT>,
 					typename GrammarT = BasicXmlGrammar<DocumentT>,
 		 			typename EntityT = typename DocumentT::entity_type,
@@ -227,7 +227,6 @@ namespace stpl {
 				}
 
 				element_type* root() { return this->doc().root(); }
-
 		};
 
 	}
