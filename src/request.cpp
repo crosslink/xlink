@@ -47,10 +47,21 @@ request::~request() {
 }
 
 void request::apply_links(const std::string& links_xml) {
-	XML::XParser<string, string::const_iterator> parser(links_xml.begin(), links_xml.end());
+	typedef XML::XParser<string, string::const_iterator> xml_parser;
+	typedef 	xml_parser::document_type::entity_type	  node_type;
+	xml_parser parser(links_xml.begin(), links_xml.end());
 	parser.parse();
 
+	xml_parser::document_type &doc = parser.doc();
 
+	xml_parser::document_type::entity_iterator	it;
+
+	for (it = doc.iter_begin(); it != doc.iter_end(); ++it) {
+		node_type *node = static_cast<node_type*>((*it));
+
+		if (node->is_element())
+			node->print();
+	}
 }
 
 } /* namespace QLINK */

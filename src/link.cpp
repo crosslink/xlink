@@ -58,6 +58,7 @@ link::link() {
 	gamma = 0.0;
 	offset = 0;
 	target_document = -1;
+	aout_ = NULL;
 }
 
 link::~link() {
@@ -265,7 +266,8 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 
 		//puts("\t\t\t</anchor>\n");
 		if (anchor_printed)
-			stringbuffer << "\t\t\t</anchor>\n";
+			stringbuffer << "\t\t\t</anchor>" << endl;
+			stringbuffer <<"\n";
 	}
 	if (how_many_left == beps_to_print) {
 		cerr << "No link outputed: there must be something funny happened for anchor \"" << term << "\" even with " << this_link_term->postings.size() << " links."<< endl;
