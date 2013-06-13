@@ -26,6 +26,7 @@
 
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 #include <stpl/stpl_stream.h>
 #include <stpl/xml/stpl_xml.h>
@@ -85,11 +86,11 @@ void request::apply_links(const std::string& links_xml) {
 				vector<anchor> anchor_array;
 
 				while (anchor_it != outgoing_links->iter_end()) {
-					element_type *anchor = static_cast<element_type *>((*anchor_it));
-					element_type *link = anchor->find_child("tofile");
+					element_type *anchor_elem = static_cast<element_type *>((*anchor_it));
+					element_type *link = anchor_elem->find_child("tofile");
 					if (link != NULL) {
-						string name = anchor->get_attribute("name");
-						long	offset = atol(anchor->get_attribute("offset").c_str());
+						string name = anchor_elem->get_attribute("name");
+						long	offset = atol(anchor_elem->get_attribute("offset").c_str());
 						string target = link->text();
 
 						if (offset > 0) {
@@ -99,8 +100,22 @@ void request::apply_links(const std::string& links_xml) {
 					}
 					++anchor_it;
 				}
-
-				for (int i = 0; )
+				std::sort(anchor_array.begin(), anchor_array.end());
+				for (int i = 0; i < anchor_array.size(); ++i) {
+					anchor &ancr = anchor_array[i];
+					const string &name = ancr.get_name();
+					const string &target = ancr.get_target();
+					stringstream ss;
+					ss << "<a href=\"en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
+//					string::size_type where = page_.find(ancr.get_name());
+					const string::size_type where = ancr.get_offset();
+//					if (where != string::npos) {
+						page_.replace(where, where + name.length(), ss.str());
+//					}
+//					else {
+//						cerr << "Couldn't find " << name << " in the article." << endl;
+//					}
+				}
 			}
 //			node->print();
 		}

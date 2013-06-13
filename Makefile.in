@@ -99,7 +99,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	google_research_translator.$(OBJEXT) \
 	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
 	link_print.$(OBJEXT) urlcode.$(OBJEXT) session.$(OBJEXT) \
-	request.$(OBJEXT) ltw.$(OBJEXT)
+	request.$(OBJEXT) anchor.$(OBJEXT) ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -297,6 +297,7 @@ ltw_headers = \
 	$(SRC_DIR)/urlcode.h \
 	$(SRC_DIR)/session.h \
 	$(SRC_DIR)/request.h \
+	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -316,7 +317,7 @@ ltw_sources = \
 	$(SRC_DIR)/run_config.cpp \
 	$(SRC_DIR)/algorithm_config.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this.cpp \
-	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp \
+	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp\
 	$(SRC_DIR)/algorithm_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp \
@@ -357,6 +358,7 @@ ltw_sources = \
 	$(SRC_DIR)/urlcode.cpp \
 	$(SRC_DIR)/session.cpp \
 	$(SRC_DIR)/request.cpp \
+	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 ltw_SOURCES = $(ltw_sources)
@@ -439,6 +441,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_ltw_tang.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_out.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithm_page_name.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/anchor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ant_link_posting.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ant_link_term.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/application_out.Po@am__quote@
@@ -1297,6 +1300,20 @@ request.obj: $(SRC_DIR)/request.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/request.cpp' object='request.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o request.obj `if test -f '$(SRC_DIR)/request.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/request.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/request.cpp'; fi`
+
+anchor.o: $(SRC_DIR)/anchor.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT anchor.o -MD -MP -MF $(DEPDIR)/anchor.Tpo -c -o anchor.o `test -f '$(SRC_DIR)/anchor.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/anchor.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/anchor.Tpo $(DEPDIR)/anchor.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/anchor.cpp' object='anchor.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o anchor.o `test -f '$(SRC_DIR)/anchor.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/anchor.cpp
+
+anchor.obj: $(SRC_DIR)/anchor.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT anchor.obj -MD -MP -MF $(DEPDIR)/anchor.Tpo -c -o anchor.obj `if test -f '$(SRC_DIR)/anchor.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/anchor.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/anchor.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/anchor.Tpo $(DEPDIR)/anchor.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/anchor.cpp' object='anchor.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o anchor.obj `if test -f '$(SRC_DIR)/anchor.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/anchor.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/anchor.cpp'; fi`
 
 ltw.o: $(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ltw.o -MD -MP -MF $(DEPDIR)/ltw.Tpo -c -o ltw.o `test -f '$(SRC_DIR)/ltw.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/ltw.cpp

@@ -28,13 +28,14 @@
 #include <vector>
 
 namespace QLINK {
+typedef 	std::string target_type;
 
 class anchor {
 private:
 	long				offset_;
 	std::string		name_;
 
-	std::vector<std::string> targets_;
+	std::vector<target_type> targets_;
 
 public:
 	anchor();
@@ -59,9 +60,11 @@ public:
 
 	bool operator<(const anchor &rhs_anchor) const { return this->get_offset() > rhs_anchor.get_offset(); }
 
-	std::vector<std::string>& get_targets() const {
+	std::vector<std::string>& get_targets() {
 		return targets_;
 	}
+
+	const target_type &get_target(int index = 0) const { return targets_[0]; }
 
 	void add_target(const std::string &target) {
 		targets_.push_back(target);

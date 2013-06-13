@@ -68,6 +68,7 @@ ltw_headers = \
 	$(SRC_DIR)/urlcode.h \
 	$(SRC_DIR)/session.h \
 	$(SRC_DIR)/request.h \
+	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -88,7 +89,7 @@ ltw_sources = \
 	$(SRC_DIR)/run_config.cpp \
 	$(SRC_DIR)/algorithm_config.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this.cpp \
-	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp \
+	$(SRC_DIR)/algorithm_ant_crosslink_this.cpp\
 	$(SRC_DIR)/algorithm_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name.cpp \
 	$(SRC_DIR)/algorithm_ant_link_this_and_page_name2.cpp \
@@ -129,6 +130,7 @@ ltw_sources = \
 	$(SRC_DIR)/urlcode.cpp \
 	$(SRC_DIR)/session.cpp \
 	$(SRC_DIR)/request.cpp \
+	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 noinst_PROGRAMS = ltw collection_link_finder urlencoder
