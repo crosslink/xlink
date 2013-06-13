@@ -198,7 +198,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 //					sprintf(buf, format, this_link_term->postings[i]->offset, id);
 //				}
 				sprintf(buf, format, 0, target_lang, target_title.c_str(), id);
-				stringbuffer << buf;
+				stringbuffer << buf << endl;
 				++count;
 				if (count >= beps_to_print)
 					break;
@@ -265,9 +265,10 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 #endif
 
 		//puts("\t\t\t</anchor>\n");
-		if (anchor_printed)
-			stringbuffer << "\t\t\t</anchor>" << endl;
+		if (anchor_printed) {
+			stringbuffer << "\t\t\t</anchor> " << endl;
 			stringbuffer <<"\n";
+		}
 	}
 	if (how_many_left == beps_to_print) {
 		cerr << "No link outputed: there must be something funny happened for anchor \"" << term << "\" even with " << this_link_term->postings.size() << " links."<< endl;
@@ -275,9 +276,9 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 	}
 
 	if (ret) {
-//		(*aout_) << stringbuffer.str(); // segmentation fault
-		const char *result_buf = stringbuffer.str().c_str();
-		aout_->printbuf(result_buf);
+		(*aout_) << stringbuffer.str();
+//		const char *result_buf = stringbuffer.str().c_str();
+//		aout_->printbuf(result_buf);
 	}
 	return ret;
 }

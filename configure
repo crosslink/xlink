@@ -627,10 +627,10 @@ am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
 MYSQL_CFLAGS
+MYSQL_LIBS
 EGREP
 GREP
 CXXCPP
-MYSQL_LIBS
 LN_S
 am__fastdepCXX_FALSE
 am__fastdepCXX_TRUE
@@ -3587,17 +3587,6 @@ if test "x$ac_cv_lib_microhttpd_MHD_start_daemon" = xyes; then :
 fi
 
 
-
-# Check whether --with-mysql-lib-path was given.
-if test "${with_mysql_lib_path+set}" = set; then :
-  withval=$with_mysql_lib_path; MYSQL_LIBS="-L$withval -lmysqlclient"
-else
-  MYSQL_LIBS='-lmysqlclient'
-fi
-
-
-
-# Checks for header files.
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3991,6 +3980,29 @@ fi
 done
 
 
+ac_fn_cxx_check_header_mongrel "$LINENO" "stpl/xml/stpl_xml.h" "ac_cv_header_stpl_xml_stpl_xml_h" "$ac_includes_default"
+if test "x$ac_cv_header_stpl_xml_stpl_xml_h" = xyes; then :
+
+else
+  as_fn_error $? "Couldn't find STPL library. Please try checking out the source from \
+					http://svn.code.sf.net/p/stpl/code/trunk/ \
+					svn co http://svn.code.sf.net/p/stpl/code/trunk stpl \
+					then configure --with-stpl=/a/path/to/stpl " "$LINENO" 5
+fi
+
+
+
+
+# Check whether --with-mysql-lib-path was given.
+if test "${with_mysql_lib_path+set}" = set; then :
+  withval=$with_mysql_lib_path; MYSQL_LIBS="-L$withval -lmysqlclient"
+else
+  MYSQL_LIBS='-lmysqlclient'
+fi
+
+
+
+# Checks for header files.
 for ac_header in netdb.h netinet/in.h stddef.h stdlib.h string.h sys/socket.h unistd.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`

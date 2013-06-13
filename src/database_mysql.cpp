@@ -50,7 +50,7 @@ int database_mysql::connect() {
 			//connection->connect("DB NAME", "DB HOST probably localhost", "DB USER", "DB PASS");
 		if (mysql_real_connect(connection, server.c_str(), user.c_str(), password.c_str(), database.c_str(), 0, NULL, 0) == NULL) {
 			printf("Error %u: %s\n", mysql_errno(connection), mysql_error(connection));
-			 exit(1);
+//			 exit(1);
 		}
 		else {
 			cerr << "Database (" << server << ": " << database << ") connected" << endl;

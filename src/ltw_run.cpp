@@ -235,17 +235,18 @@ const char *QLINK::ltw_run::check_request(const char *page_url) {
 	 request_type::const_iterator end = requests.end();
 	 request* rsq_ptr;
 	 if (it != end) {
-		 rsq_ptr = &(requests.find(page_url)->second);
+		 rsq_ptr = const_cast<request *>(&(it->second));
 	 }
 	 else
 	 {
 		 external_page = page_fetcher.retrieve(decoded_url);
-		 request rsq;
-		 rsq.set_page(external_page);
+		 request rsq(page_url, external_page);
+//		 rsq.set_page(external_page);
 		 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
 	//				 requests.insert(rsq_p);
 		 requests_.insert(std::pair<string, request>(page_url, rsq));
 
+		 aout_->reset();
 		 task_->wikify(external_page, *aout_);
 
 		 string links_xml = aout_->to_string();

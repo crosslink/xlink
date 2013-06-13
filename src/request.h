@@ -34,9 +34,11 @@ private:
 	std::string		page_;
 	time_t			last_request_time_;
 	bool				wikified_;
+	std::string		url_;
 
 public:
 	request();
+	request(const char *url, const char *page);
 	request(const request& rsq);
 	virtual ~request();
 
@@ -65,6 +67,14 @@ public:
 	}
 
 	void apply_links(const std::string& links_xml);
+
+	const std::string& get_url() const {
+		return url_;
+	}
+
+	void set_url(const std::string& url) {
+		url_ = url;
+	}
 };
 
 } /* namespace QLINK */

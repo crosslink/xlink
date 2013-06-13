@@ -44,6 +44,13 @@ AC_CHECK_LIB([curl], [curl_easy_init], [LIBS="$LIBS -lcurl"])
 
 AC_CHECK_LIB([microhttpd], [MHD_start_daemon], [LIBS="$LIBS -lmicrohttpd"])
 
+AC_CHECK_HEADER(stpl/xml/stpl_xml.h, [], 
+		[AC_MSG_ERROR(
+				[Couldn't find STPL library. Please try checking out the source from \
+					http://svn.code.sf.net/p/stpl/code/trunk/ \
+					svn co http://svn.code.sf.net/p/stpl/code/trunk stpl \
+					then configure --with-stpl=/a/path/to/stpl] )], [])
+
 AC_ARG_WITH([mysql-lib-path],
   [AS_HELP_STRING([--with-mysql-lib-path], [location of the MySQL libraries])],
   [MYSQL_LIBS="-L$withval -lmysqlclient"],
