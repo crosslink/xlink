@@ -58,7 +58,7 @@ public:
 		offset_ = offset;
 	}
 
-	bool operator<(const anchor &rhs_anchor) const { return this->get_offset() > rhs_anchor.get_offset(); }
+	bool operator<(const anchor &rhs_anchor) const { return this->get_offset() < rhs_anchor.get_offset(); }
 
 	std::vector<std::string>& get_targets() {
 		return targets_;

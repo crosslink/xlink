@@ -32,6 +32,7 @@ namespace QLINK {
 class request {
 private:
 	std::string		page_;
+	std::string		wikified_page_;
 	time_t			last_request_time_;
 	bool				wikified_;
 	std::string		url_;
@@ -74,6 +75,14 @@ public:
 
 	void set_url(const std::string& url) {
 		url_ = url;
+	}
+
+	const std::string& get_wikified_page() const {
+		return wikified_page_;
+	}
+
+	void set_wikified_page(const std::string& wikified_page) {
+		wikified_page_ = wikified_page;
 	}
 };
 

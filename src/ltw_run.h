@@ -41,7 +41,7 @@ namespace QLINK {
 	 */
 	class ltw_run : public run, public pattern_singleton<ltw_run> {
 	public:
-		typedef std::map<std::string, request> request_type;
+		typedef std::map<std::string, request *> request_type;
 
 	private:
 		ltw_task											*task_;
@@ -82,7 +82,7 @@ namespace QLINK {
 		void load_config(const char *config_file);
 		void load_config();
 
-		std::map<std::string, request>& get_requests() {
+		request_type& get_requests() {
 			return requests_;
 		}
 

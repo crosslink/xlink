@@ -65,6 +65,12 @@ QLINK::ltw_run::~ltw_run()
 		delete aout_;
 		aout_ = NULL;
 	}
+
+	request_type::const_iterator it  = requests_.begin();
+	while (it != requests_.end()) {
+		delete it->second;
+		++it;
+	}
 	stop_daemon();
 }
 
@@ -235,26 +241,31 @@ const char *QLINK::ltw_run::check_request(const char *page_url) {
 	 request_type::const_iterator end = requests.end();
 	 request* rsq_ptr;
 	 if (it != end) {
-		 rsq_ptr = const_cast<request *>(&(it->second));
+		 rsq_ptr = const_cast<request *>(it->second);
 	 }
 	 else
 	 {
 		 external_page = page_fetcher.retrieve(decoded_url);
-		 request rsq(page_url, external_page);
+		 rsq_ptr = new request(page_url, external_page);
 //		 rsq.set_page(external_page);
-		 pair<string, request> rsq_p = make_pair(string(page_url), rsq);
-	//				 requests.insert(rsq_p);
-		 requests_.insert(std::pair<string, request>(page_url, rsq));
+//		 pair<string, *request> rsq_p = make_pair(string(page_url), rsq);
+//		 requests.insert(rsq_p);
+		 requests_.insert(std::pair<string, request *>(page_url, rsq_ptr));
 
 		 aout_->reset();
 		 task_->wikify(external_page, *aout_);
 
 		 string links_xml = aout_->to_string();
-		 rsq.apply_links(links_xml);
-		 rsq_ptr = &rsq;
+		 rsq_ptr->apply_links(links_xml);
+
 //				 requests [page_url] = rsq;
 	 }
-	 return rsq_ptr->get_page().c_str();
+
+	 const string &wikified_page = rsq_ptr->get_wikified_page();
+//	 cerr << "Wikified page:" << endl;
+//	 cerr << wikified_page << endl;
+
+	 return wikified_page.c_str();
 }
 
 int QLINK::ltw_run::parse_request_arguments(void* cls, enum MHD_ValueKind kind,

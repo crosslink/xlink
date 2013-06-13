@@ -96,26 +96,41 @@ void request::apply_links(const std::string& links_xml) {
 						if (offset > 0) {
 							anchor ancr(name, offset);
 							ancr.add_target(target);
+							anchor_array.push_back(ancr);
 						}
 					}
 					++anchor_it;
 				}
 				std::sort(anchor_array.begin(), anchor_array.end());
+				stringstream wikified_page_ss("");
+				string::size_type last_offset = 0;
+				long last_anchor_len = 0;
 				for (int i = 0; i < anchor_array.size(); ++i) {
 					anchor &ancr = anchor_array[i];
 					const string &name = ancr.get_name();
 					const string &target = ancr.get_target();
+					const string::size_type where  = ancr.get_offset();
+
 					stringstream ss;
-					ss << "<a href=\"en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
+					ss << "<a href=\"http://en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
 //					string::size_type where = page_.find(ancr.get_name());
-					const string::size_type where = ancr.get_offset();
 //					if (where != string::npos) {
-						page_.replace(where, where + name.length(), ss.str());
+//						page_.replace(where, where + name.length(), ss.str());
+					string part = page_.substr(last_offset, where - last_offset);
+#ifdef DEBUG
+					cerr << part;
+#endif
+
+					wikified_page_ss << part << ss.str();
+					last_offset = where + name.length();
 //					}
 //					else {
 //						cerr << "Couldn't find " << name << " in the article." << endl;
 //					}
 				}
+				wikified_page_ss << page_.substr(last_offset);
+				wikified_page_ = wikified_page_ss.str();
+				cerr << "finished wikify page" << endl;
 			}
 //			node->print();
 		}
