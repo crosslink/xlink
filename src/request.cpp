@@ -117,12 +117,14 @@ void request::apply_links(const std::string& links_xml) {
 //					if (where != string::npos) {
 //						page_.replace(where, where + name.length(), ss.str());
 					string part = page_.substr(last_offset, where - last_offset);
+					last_offset = where + name.length();
 #ifdef DEBUG
+					cerr << "anchor: " << name << " offset: " << where << endl;
+					cerr << "last offset: " << last_offset << endl;
 					cerr << part;
 #endif
 
 					wikified_page_ss << part << ss.str();
-					last_offset = where + name.length();
 //					}
 //					else {
 //						cerr << "Couldn't find " << name << " in the article." << endl;
@@ -130,7 +132,7 @@ void request::apply_links(const std::string& links_xml) {
 				}
 				wikified_page_ss << page_.substr(last_offset);
 				wikified_page_ = wikified_page_ss.str();
-				cerr << "finished wikify page" << endl;
+				cerr << endl << "finished wikify page" << endl;
 			}
 //			node->print();
 		}
