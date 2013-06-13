@@ -18,7 +18,7 @@
  * topic.h
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef TOPIC_H_

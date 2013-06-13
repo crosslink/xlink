@@ -18,7 +18,7 @@
  * xml2txt_client.h
  *
  *  Created on: Sep 14, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef XML2TXT_CLIENT_H_

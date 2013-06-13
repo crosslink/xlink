@@ -18,7 +18,7 @@
  * algorithm_ltw_incoming_search_tn.cpp
  *
  *  Created on: Aug 17, 2009
- *      Author: monfee
+ *
  */
 
 #include "algorithm_ltw_incoming_search_tn.h"

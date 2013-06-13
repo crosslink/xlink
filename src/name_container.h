@@ -18,7 +18,7 @@
  * name_container.h
  *
  *  Created on: Sep 30, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef NAME_CONTAINER_H_

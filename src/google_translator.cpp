@@ -18,7 +18,7 @@
  * google_translator.cpp
  *
  *  Created on: Jan 6, 2010
- *      Author: monfee
+ *
  */
 
 #include "google_translator.h"

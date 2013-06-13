@@ -18,7 +18,7 @@
  * config.cpp
  *
  *  Created on: Aug 4, 2009
- *      Author: monfee
+ *
  */
 
 #include "config.h"

@@ -18,7 +18,7 @@
  * urlcode.h
  *
  *  Created on: Apr 17, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef URLCODE_H_

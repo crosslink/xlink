@@ -18,7 +18,7 @@
  * xml2txt_client.cpp
  *
  *  Created on: Sep 14, 2009
- *      Author: monfee
+ *
  */
 
 #include "xml2txt_client.h"

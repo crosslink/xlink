@@ -18,7 +18,7 @@
  * algorithm_ltara_base.cpp
  *
  *  Created on: Oct 17, 2009
- *      Author: monfee
+ *
  */
 
 #include "algorithm_ltara_base.h"

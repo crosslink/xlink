@@ -18,7 +18,7 @@
  * wikipedia.cpp
  *
  *  Created on: Oct 7, 2009
- *      Author: monfee
+ *
  */
 
 #include "wikipedia.h"

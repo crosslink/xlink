@@ -18,7 +18,7 @@
  * ltw_task.cpp
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #include "ltw_task.h"

@@ -18,7 +18,7 @@
  * wikipedia_page.cpp
  *
  *  Created on: Mar 22, 2011
- *      Author: monfee
+ *
  */
 
 #include "wikipedia_page.h"

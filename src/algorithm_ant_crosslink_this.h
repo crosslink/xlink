@@ -18,7 +18,7 @@
  * algorithm_ant_crosslink_this.h
  *
  *  Created on: Apr 30, 2011
- *      Author: monfee
+ *
  */
 
 #ifndef ALOGRITHM_ANT_CROSSLINK_THIS_H_

@@ -18,7 +18,7 @@
  * algorithm_config.h
  *
  *  Created on: Aug 4, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_CONFIG_H_

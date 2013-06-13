@@ -18,7 +18,7 @@
  * algorithm_bep.cpp
  *
  *  Created on: Sep 16, 2009
- *      Author: monfee
+ *
  */
 
 #include "algorithm_bep.h"

@@ -18,7 +18,7 @@
  * algorithm_page_name.cpp
  *
  *  Created on: Jan 26, 2010
- *      Author: monfee
+ *
  */
 
 #include "algorithm_page_name.h"

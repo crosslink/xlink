@@ -18,7 +18,7 @@
  * algorithm_bep.h
  *
  *  Created on: Sep 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_BEP_H_

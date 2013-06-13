@@ -18,7 +18,7 @@
  * incoming_links.h
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef INCOMING_LINKS_H_

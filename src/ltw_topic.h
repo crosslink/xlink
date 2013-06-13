@@ -18,7 +18,7 @@
  * ltw_topic.h
  *
  *  Created on: Sep 9, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef LTW_TOPIC_H_

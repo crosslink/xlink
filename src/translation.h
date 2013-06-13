@@ -18,7 +18,7 @@
  * translation.h
  *
  *  Created on: Apr 18, 2011
- *      Author: monfee
+ *
  */
 
 #ifndef TRANSLATION_H_

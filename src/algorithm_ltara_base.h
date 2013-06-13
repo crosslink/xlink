@@ -18,7 +18,7 @@
  * algorithm_ltara_base.h
  *
  *  Created on: Oct 17, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_LTARA_BASE_H_

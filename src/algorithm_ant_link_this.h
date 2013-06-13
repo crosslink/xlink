@@ -18,7 +18,7 @@
  * algorithm_ant_link_this.h
  *
  *  Created on: Aug 11, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_ANT_LINK_THIS_H_

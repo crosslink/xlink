@@ -18,7 +18,7 @@
  * ltw.cpp
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #include <iostream>

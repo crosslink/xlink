@@ -18,7 +18,7 @@
  * translation.cpp
  *
  *  Created on: Apr 18, 2011
- *      Author: monfee
+ *
  */
 
 #include "translation.h"

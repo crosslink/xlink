@@ -18,7 +18,7 @@
  * application_out.h
  *
  *  Created on: Sep 16, 2010
- *      Author: monfee
+ *
  */
 
 #ifndef APPLICATION_OUT_H_

@@ -18,7 +18,7 @@
  * string_utils.h
  *
  *  Created on: Oct 7, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef STRING_UTILS_H_

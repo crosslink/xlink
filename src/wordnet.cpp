@@ -18,7 +18,7 @@
  * wordnet.cpp
  *
  *  Created on: Dec 17, 2012
- *      Author: monfee
+ *
  */
 
 #include "wordnet.h"

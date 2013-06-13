@@ -18,7 +18,7 @@
  * googler_esearch_translator.h
  *
  *  Created on: Apr 17, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef GOOGLER_ESEARCH_TRANSLATOR_H_

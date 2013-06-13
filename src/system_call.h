@@ -18,7 +18,7 @@
  * system_call.h
  *
  *  Created on: Sep 22, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef SYSTEM_CALL_H_

@@ -18,7 +18,7 @@
  * ant_link.cpp
  *
  *  Created on: Aug 11, 2009
- *      Author: monfee
+ *
  */
 
 #include "ant_link.h"

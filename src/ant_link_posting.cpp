@@ -18,7 +18,7 @@
  * ant_link_posting.cpp
  *
  *  Created on: Oct 14, 2009
- *      Author: monfee
+ *
  */
 
 #include "ant_link_posting.h"

@@ -18,7 +18,7 @@
  * template_comparor.h
  *
  *  Created on: Oct 13, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef TEMPLATE_COMPAROR_H_

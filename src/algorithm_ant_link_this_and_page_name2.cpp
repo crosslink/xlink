@@ -18,7 +18,7 @@
  * algorithm_ant_link_this_and_page_name2.cpp
  *
  *  Created on: Dec 18, 2012
- *      Author: monfee
+ *
  */
 
 #include "algorithm_ant_link_this_and_page_name2.h"

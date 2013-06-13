@@ -18,7 +18,7 @@
  * config.h
  *
  *  Created on: Aug 4, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef CONFIG_H_

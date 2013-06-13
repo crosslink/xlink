@@ -18,7 +18,7 @@
  * incoming_link.cpp
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #include "incoming_link.h"

@@ -18,7 +18,7 @@
  * corpus.h
  *
  *  Created on: Sep 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef CORPUS_H_

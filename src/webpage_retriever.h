@@ -18,7 +18,7 @@
  * webpage_retriever.h
  *
  *  Created on: Dec 31, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef WEBPAGE_RETRIEVER_H_

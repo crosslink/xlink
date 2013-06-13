@@ -18,7 +18,7 @@
  * corpus_txt.cpp
  *
  *  Created on: Sep 21, 2009
- *      Author: monfee
+ *
  */
 
 #include "corpus_txt.h"

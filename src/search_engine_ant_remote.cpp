@@ -18,7 +18,7 @@
  * search_engine_ant_remote.cpp
  *
  *  Created on: Oct 25, 2012
- *      Author: monfee
+ *
  */
 
 #include "search_engine_ant_remote.h"

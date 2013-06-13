@@ -18,7 +18,7 @@
  * algorithm_ant_link_this_and_page_name2.h
  *
  *  Created on: Dec 18, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_ANT_LINK_THIS_AND_PAGE_NAME2_H_

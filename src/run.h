@@ -18,7 +18,7 @@
  * run.h
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef RUN_H_

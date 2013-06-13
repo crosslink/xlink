@@ -18,7 +18,7 @@
  * algorithm_page_name.h
  *
  *  Created on: Jan 26, 2010
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_PAGE_NAME_H_

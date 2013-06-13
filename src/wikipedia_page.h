@@ -18,7 +18,7 @@
  * wikipedia_page.h
  *
  *  Created on: Mar 22, 2011
- *      Author: monfee
+ *
  */
 
 #ifndef WIKIPEDIA_PAGE_H_

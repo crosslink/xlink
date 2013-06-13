@@ -18,7 +18,7 @@
  * xml2txt.h
  *
  *  Created on: Sep 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef XML2TXT_H_

@@ -18,7 +18,7 @@
  * system_info.h
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef SYSTEM_INFO_H_

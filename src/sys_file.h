@@ -18,7 +18,7 @@
  * sys_file.h
  *
  *  Created on: Aug 11, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef SYS_FILE_H_

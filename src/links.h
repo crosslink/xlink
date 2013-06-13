@@ -18,7 +18,7 @@
  * links.h
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef LINKS_H_

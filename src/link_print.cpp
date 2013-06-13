@@ -18,7 +18,7 @@
  * link_print.cpp
  *
  *  Created on: Oct 28, 2010
- *      Author: monfee
+ *
  */
 
 #include "link_print.h"

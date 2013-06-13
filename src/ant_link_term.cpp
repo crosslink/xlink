@@ -18,7 +18,7 @@
  * ant_link_term.cpp
  *
  *  Created on: Sep 22, 2009
- *      Author: monfee
+ *
  */
 
 #include "ant_link_term.h"

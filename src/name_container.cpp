@@ -18,7 +18,7 @@
  * name_container.cpp
  *
  *  Created on: Sep 30, 2009
- *      Author: monfee
+ *
  */
 
 #include "name_container.h"

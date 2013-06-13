@@ -3442,11 +3442,6 @@ if test "${with_stpl+set}" = set; then :
           else
             as_fn_error $? "Cannot stat directory $withval" "$LINENO" 5
           fi
-else
-
-            CFLAGS="$CFLAGS -I $(srcdir)/include/stpl"
-            CXXFLAGS="$CXXFLAGS -I $(srcdir)/include/stpl"
-
 fi
 
 

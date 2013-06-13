@@ -14,22 +14,25 @@
  * @author				Eric Tang
  *
  *******************************************************************************/
- /*
- * search_engine.cpp
+/*
+ * anchor.cpp
  *
- *  Created on: Sep 30, 2009
+ *  Created on: 13/06/2013
  *
  */
 
-#include "search_engine.h"
+#include "anchor.h"
 
-search_engine::search_engine()
-{
-	hits_ = 0;
-	docids_ = 0;
-}
+namespace QLINK {
 
-search_engine::~search_engine()
-{
+anchor::anchor() {
 
 }
+
+anchor::anchor(std::string &name, long offset) : name_(name), offset_(offset) {
+}
+
+anchor::~anchor() {
+}
+
+} /* namespace QLINK */

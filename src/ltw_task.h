@@ -18,7 +18,7 @@
  * task.h
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef __LTW_TASK_H__

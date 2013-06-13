@@ -18,7 +18,7 @@
  * outgoing_link.h
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef OUTGOING_LINK_H_

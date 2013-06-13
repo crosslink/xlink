@@ -18,7 +18,7 @@
  * search_engine_ant_remote.h
  *
  *  Created on: Oct 25, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef SEARCH_ENGINE_ANT_REMOTE_H_

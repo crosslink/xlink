@@ -18,7 +18,7 @@
  * ir_task.h
  *
  *  Created on: Aug 18, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef IR_TASK_H_

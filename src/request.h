@@ -18,7 +18,7 @@
  * request.h
  *
  *  Created on: 06/06/2013
- *      Author: monfee
+ *
  */
 
 #ifndef REQUEST_H_

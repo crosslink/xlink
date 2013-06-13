@@ -18,7 +18,7 @@
  * google_translator.h
  *
  *  Created on: Jan 6, 2010
- *      Author: monfee
+ *
  */
 
 #ifndef GOOGLE_TRANSLATOR_H_

@@ -18,7 +18,7 @@
  * databasemysql.cpp
  *
  *  Created on: Apr 20, 2012
- *      Author: monfee
+ *
  */
 
 #include "database_mysql.h"

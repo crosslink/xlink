@@ -18,7 +18,7 @@
  * search_engine_ant.cpp
  *
  *  Created on: Sep 30, 2009
- *      Author: monfee
+ *
  */
 
 #include "search_engine_ant.h"

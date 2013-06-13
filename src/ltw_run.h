@@ -18,7 +18,7 @@
  * ltw_run.h
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef LTW_RUN_H_

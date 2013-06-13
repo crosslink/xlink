@@ -18,7 +18,7 @@
  * algorithm_out.h
  *
  *  Created on: Sep 6, 2010
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_OUT_H_

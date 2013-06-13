@@ -18,7 +18,7 @@
  * wikipedia.h
  *
  *  Created on: Oct 7, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef WIKIPEDIA_H_

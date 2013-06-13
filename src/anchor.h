@@ -14,32 +14,59 @@
  * @author				Eric Tang
  *
  *******************************************************************************/
- /*
- * session.h
+/*
+ * anchor.h
  *
- *  Created on: 06/06/2013
+ *  Created on: 13/06/2013
  *
  */
 
-#ifndef SESSION_H_
-#define SESSION_H_
+#ifndef ANCHOR_H_
+#define ANCHOR_H_
 
 #include <string>
-#include <map>
-
-#include "request.h"
+#include <vector>
 
 namespace QLINK {
 
-class session {
+class anchor {
 private:
-	std::string 										session_id_;
-	std::map<std::string, request>			request_;
+	long				offset_;
+	std::string		name_;
+
+	std::vector<std::string> targets_;
 
 public:
-	session();
-	virtual ~session();
+	anchor();
+	anchor(std::string &name, long offset);
+	virtual ~anchor();
+
+	const std::string& get_name() const {
+		return name_;
+	}
+
+	void set_name(const std::string& name) {
+		name_ = name;
+	}
+
+	long get_offset() const {
+		return offset_;
+	}
+
+	void set_offset(long offset) {
+		offset_ = offset;
+	}
+
+	bool operator<(const anchor &rhs_anchor) const { return this->get_offset() > rhs_anchor.get_offset(); }
+
+	std::vector<std::string>& get_targets() const {
+		return targets_;
+	}
+
+	void add_target(const std::string &target) {
+		targets_.push_back(target);
+	}
 };
 
 } /* namespace QLINK */
-#endif /* SESSION_H_ */
+#endif /* ANCHOR_H_ */

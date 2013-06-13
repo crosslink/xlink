@@ -18,7 +18,7 @@
  * system_call.cpp
  *
  *  Created on: Sep 22, 2009
- *      Author: monfee
+ *
  */
 
 #include "system_call.h"

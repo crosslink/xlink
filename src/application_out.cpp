@@ -18,7 +18,7 @@
  * application_out.cpp
  *
  *  Created on: Sep 16, 2010
- *      Author: monfee
+ *
  */
 
 #include "application_out.h"

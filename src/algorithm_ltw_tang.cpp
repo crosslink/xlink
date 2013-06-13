@@ -18,7 +18,7 @@
  * algorithm_ltw_tang.cpp
  *
  *  Created on: Aug 13, 2009
- *      Author: monfee
+ *
  */
 
 #include "algorithm_ltw_tang.h"

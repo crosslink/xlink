@@ -18,7 +18,7 @@
  * template_algo.h
  *
  *  Created on: Oct 13, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef TEMPLATE_ALGO_H_

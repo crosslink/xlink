@@ -18,7 +18,7 @@
  * algorithm_ltw_tang.h
  *
  *  Created on: Aug 13, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ALGORITHM_LTW_TANG_H_

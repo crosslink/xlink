@@ -18,7 +18,7 @@
  * ant_link_posting.h
  *
  *  Created on: Sep 22, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef ANT_LINK_POSTING_H_

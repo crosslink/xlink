@@ -18,7 +18,7 @@
  * cmdline_options.cpp
  *
  *  Created on: Aug 11, 2009
- *      Author: monfee
+ *
  */
 
 #include "cmdline_options.h"

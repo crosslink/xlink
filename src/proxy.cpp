@@ -18,7 +18,7 @@
  * proxy.cpp
  *
  *  Created on: Oct 5, 2009
- *      Author: monfee
+ *
  */
 
 #include "ltw_task.h"

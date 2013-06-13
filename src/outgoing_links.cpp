@@ -18,7 +18,7 @@
  * outgoing_links.cpp
  *
  *  Created on: Aug 16, 2009
- *      Author: monfee
+ *
  */
 
 #include "outgoing_links.h"

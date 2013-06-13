@@ -18,7 +18,7 @@
  * session.cpp
  *
  *  Created on: 06/06/2013
- *      Author: monfee
+ *
  */
 
 #include "session.h"

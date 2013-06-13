@@ -18,7 +18,7 @@
  * google_research_translator.cpp
  *
  *  Created on: Apr 17, 2012
- *      Author: monfee
+ *
  */
 
 #include "google_research_translator.h"

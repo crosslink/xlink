@@ -18,7 +18,7 @@
  * webpage_retriever.cpp
  *
  *  Created on: Dec 31, 2009
- *      Author: monfee
+ *
  */
 
 #include "webpage_retriever.h"

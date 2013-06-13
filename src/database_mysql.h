@@ -18,7 +18,7 @@
  * databasemysql.h
  *
  *  Created on: Apr 20, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef DATABASEMYSQL_H_

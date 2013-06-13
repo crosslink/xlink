@@ -18,7 +18,7 @@
  * ltw_topic.cpp
  *
  *  Created on: Sep 9, 2009
- *      Author: monfee
+ *
  */
 
 #include "ltw_topic.h"

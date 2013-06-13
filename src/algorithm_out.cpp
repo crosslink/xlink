@@ -18,7 +18,7 @@
  * algorithm_out.cpp
  *
  *  Created on: Sep 6, 2010
- *      Author: monfee
+ *
  */
 
 #include "algorithm_out.h"

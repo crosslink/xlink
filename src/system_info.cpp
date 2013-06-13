@@ -18,7 +18,7 @@
  * system_info.cpp
  *
  *  Created on: Aug 3, 2009
- *      Author: monfee
+ *
  */
 
 #include "system_info.h"

@@ -18,15 +18,19 @@
  * request.cpp
  *
  *  Created on: 06/06/2013
- *      Author: monfee
+ *
  */
 
 #include "request.h"
+#include "anchor.h"
 
 #include <string>
 #include <sstream>
+
 #include <stpl/stpl_stream.h>
 #include <stpl/xml/stpl_xml.h>
+
+#include <stdlib.h>
 
 using namespace std;
 using namespace stpl;
@@ -78,22 +82,25 @@ void request::apply_links(const std::string& links_xml) {
 				cerr << "Total " << outgoing_links->size() << " anchors need to be processed!" << endl;
 
 				entity_iterator anchor_it = outgoing_links->iter_begin();
+				vector<anchor> anchor_array;
+
 				while (anchor_it != outgoing_links->iter_end()) {
 					element_type *anchor = static_cast<element_type *>((*anchor_it));
 					element_type *link = anchor->find_child("tofile");
 					if (link != NULL) {
 						string name = anchor->get_attribute("name");
+						long	offset = atol(anchor->get_attribute("offset").c_str());
 						string target = link->text();
 
-						stringstream ss;
-						ss << "<a href=\"en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
-						string::size_type where = page_.find(name);
-						if (where != string::npos) {
-							page_.replace(where, where + name.length(), ss.str());
+						if (offset > 0) {
+							anchor ancr(name, offset);
+							ancr.add_target(target);
 						}
 					}
 					++anchor_it;
 				}
+
+				for (int i = 0; )
 			}
 //			node->print();
 		}

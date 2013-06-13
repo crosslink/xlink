@@ -18,7 +18,7 @@
  * search_engine.h
  *
  *  Created on: Sep 30, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef SEARCH_ENGINE_H_

@@ -18,7 +18,7 @@
  * sys_files.cpp
  *
  *  Created on: Sep 30, 2009
- *      Author: monfee
+ *
  */
 
 #include "sys_files.h"

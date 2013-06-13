@@ -18,7 +18,7 @@
  * wordnet.h
  *
  *  Created on: Dec 17, 2012
- *      Author: monfee
+ *
  */
 
 #ifndef WORDNET_H_

@@ -18,7 +18,7 @@
  * xml2txt.cpp
  *
  *  Created on: Sep 16, 2009
- *      Author: monfee
+ *
  */
 
 #include "xml2txt.h"

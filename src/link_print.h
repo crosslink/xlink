@@ -18,7 +18,7 @@
  * link_print.h
  *
  *  Created on: Oct 27, 2010
- *      Author: monfee
+ *
  */
 
 #ifndef LINK_PRINT_H_

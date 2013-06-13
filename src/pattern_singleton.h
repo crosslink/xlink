@@ -18,7 +18,7 @@
  * pattern_singleton.h
  *
  *  Created on: Oct 8, 2009
- *      Author: monfee
+ *
  */
 
 #ifndef PATTERN_SINGLETON_H_
