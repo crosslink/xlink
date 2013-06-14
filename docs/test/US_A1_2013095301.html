@@ -1,0 +1,434 @@
+
+
+
+
+
+
+
+
+    
+        <html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="css/patent_xsl.css" rel="stylesheet" type="text/css">
+<script language="JScript">
+<!--
+				function loadNewDoc(node){
+				try {
+				var myloc, root, myNewLoc, myPI, stylePI, newStylePI, r, re, styleNode;
+				var myNewDoc = new ActiveXObject("Msxml2.DOMDocument");
+				myNewDoc.loadXML("<figures></figures>");
+				root = myNewDoc.documentElement; // <figure/>
+				myloc = new String(window.location);
+				myNewLoc = myloc.substr(8); 
+				// save new file to same directory		
+				var fileName = "";
+				var href= myNewLoc;
+				var s = href.split("/");
+				for (var i=0;i<(s.length);i++) 
+					{ 
+					fileName=s[i]; 
+					}
+				var locLen = myNewLoc.length;
+				var fileLen = fileName.length;
+				var path = myNewLoc.substr(0,(locLen-fileLen));
+				// now write to a file that can be opened in new browser
+				var fso = new ActiveXObject("Scripting.FileSystemObject");
+				if (fso.FileExists(decodeURI(path)+"images.xml"))
+				;
+				else
+				{
+						var myImages = document.XMLDocument.getElementsByTagName("drawings/figure");
+						for (var i=0;i<myImages.length;i++)
+						{
+						myNewDoc.documentElement.appendChild(myImages(i));
+						}
+				for (var i=0;i<document.XMLDocument.documentElement.parentNode.childNodes.length;i++)
+						{
+						if (document.XMLDocument.documentElement.parentNode.childNodes(i).nodeName == "xml-stylesheet")
+							{
+							stylePI = document.XMLDocument.documentElement.parentNode.childNodes(i).text;
+							// test whether pap.xsl or pap_full.xsl is used;
+							if (stylePI.indexOf("full") == -1)
+							re = /pap2004/g;
+							else
+							re = /grant_full/g;
+							r = stylePI.replace(re,"figures_detail2004");
+							newStylePI = myNewDoc.createProcessingInstruction("xml-stylesheet",r);
+							}
+					}	
+				styleNode = myNewDoc.insertBefore(newStylePI,root);
+				var a = fso.CreateTextFile(decodeURI(path) + "images.xml", true);
+				a.Write(myNewDoc.xml);
+				a.Close();
+				   }
+				var newWin = window.open(decodeURI(path) + "images.xml");
+				}
+				catch(e) {
+					window.alert ("An error has occurred. "+"\n"+
+					" myNewLoc: "+myNewLoc +"\n"+
+					" myloc: "+myloc +"\n"+
+					" path: "+path +"\n"+
+					" filename: "+filename +"\n"+
+					e.toString());	
+					}
+				}	
+			--></script>
+</head>
+<body>
+<div id="contents">
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="32%">
+<col width="60%">
+</colgroup>
+<tr>
+<td align="left" class="inid_text">&nbsp;</td><td align="left" class="table_data">&nbsp;</td><td align="right" class="bar">*US20130095301A1*</td>
+</tr>
+<tr>
+<td align="left" class="inid_text">&nbsp;</td><td align="left" class="table_data">&nbsp;</td><td align="right" class="table_data">US20130095301A1
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td align="left" class="inid_text">(19)</td><td align="left" class="headinfo_large"><b>United States</b></td><td align="left" class="table_data">&nbsp;</td>
+</tr>
+</table>
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="47%">
+<col width="5%">
+<col width="10%">
+<col width="30%">
+</colgroup>
+<tr>
+<td class="inid_text">(12)</td><td class="headinfo_large"><b>Patent Application Publication</b></td><td valign="top" align="left" class="table_data">(10)</td><td align="left" class="table_data"><b>Pub. No.: </b></td><td align="right" class="headinfo_large"><b>US</b>&nbsp;<b>2013/0095301</b>&nbsp;<b>A1</b></td>
+</tr>
+<tr>
+<td class="inid_text">&nbsp;</td><td class="headinfo_reg"><b>Picha</b></td><td valign="top" align="left" class="table_data">(43)</td><td align="left" class="table_data"><b>Pub. Date:</b></td><td align="right" class="headinfo_reg">Apr. &nbsp;18, 2013</td>
+</tr>
+<tr>
+<td colspan="5">
+<hr>
+</td>
+</tr>
+</table>
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="12%">
+<col width="65%">
+<col width="15%">
+</colgroup>
+<tr>
+<td class="inid_text">(54)</td><td style="text-transform: uppercase" colspan="2" class="table_data"><font size="+1"><b>Thumbtraps</b></font></td><td class="table_data">&nbsp;</td>
+</tr>
+<tr>
+<td class="inid_text">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td>
+</tr>
+<tr>
+<td class="inid_text">(76)</td><td class="table_data">Inventor: </td><td class="table_data"><b>John William&nbsp;Picha</b>, &nbsp;Frankfort, IL (US)</td><td class="table_data">&nbsp;</td>
+</tr>
+<tr>
+<td class="inid_text">(21)</td><td class="table_data">Appl. No.: </td><td class="table_data"><b>13/273,981</b></td><td class="table_data">&nbsp;</td>
+</tr>
+<tr>
+<td class="inid_text">(22)</td><td class="table_data">Filed: </td><td class="table_data"><b>Oct. &nbsp;14, 2011</b></td><td class="table_data">&nbsp;</td>
+</tr>
+</table>
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="80%">
+<col width="15%">
+</colgroup>
+<tr>
+<td class="inid_text">&nbsp;</td><td align="center" class="table_data"><b>Publication Classification</b></td><td class="table_data">&nbsp;</td>
+</tr>
+</table>
+<table rules="none" border="0" width="95%">
+<tr>
+<td class="inid_text">(51)</td><td class="nowrap_text"><b>Int. Cl.</b></td><td class="separator">&nbsp;</td><td align="right" class="nowrap_text">B32B 003/00 (20060101)</td>
+</tr>
+</table>
+<table rules="none" border="0" width="95%">
+<tr>
+<td class="inid_text">(52)</td><td class="nowrap_text"><b>U.S. Cl.</b></td><td class="separator">&nbsp;</td><td align="right" class="nowrap_text"><b>428/189</b></td>
+</tr>
+</table>
+<br>
+<table rules="none" border="0" cellspacing="1%" width="95%">
+<colgroup>
+<col width="3%">
+<col width="12%">
+<col width="5%">
+<col width="10%">
+<col width="5%">
+<col width="29%">
+<col width="20%">
+<col width="16%">
+</colgroup>
+<tr>
+<td class="inid_text">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td><td class="table_data">&nbsp;</td>
+</tr>
+</table>
+<br>
+<div>
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="92%">
+</colgroup>
+<tr>
+<td class="inid_text">(57)</td><td class="table_data">
+<h3>Abstract</h3>
+</td>
+</tr>
+</table>
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">A Thumbtrap is an ipad accessory, that enhances individual and multi-player game play. It is a non-permanent, reusable vinyl cling that sticks to the smooth glass screen of the ipad without use of adhesives. When placed over an onscreen game control button, a Thumbtrap acts like a small fence that prevents the thumb drift that inevitably occurs during intense game play, and guides the thumb into specified zones over an onscreen button for better button contact accuracy. Thumbtraps can be used with several existing ipad games.</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="table_data">
+<table rules="none" border="0" width="95%">
+<tr>
+<td align="center" class="table_data"><b>&nbsp;<a href="#claim">Claim(s)</a>, &nbsp;Drawing Sheet(s), and Figure(s)
+
+</b></td>
+</tr>
+<tr>
+<td class="table_data">&nbsp;</td>
+</tr>
+<tr>
+<td class="table_data">&nbsp;</td>
+</tr>
+</table>
+</div>
+<div class="break_before">
+<br>
+<a name="DRAWINGS"></a>
+<br>
+</div>
+
+
+<h2 align="center">CROSS-REFERENCE TO RELATED APPLICATIONS</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0001]&nbsp;Not Applicable</div>
+</td>
+</tr>
+</table>
+</div>
+
+<h2 align="center">STATEMENT REGARDING FEDERALLY SPONSORED RESEARCH OR DEVELOPMENT</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0002]&nbsp;Not Applicable</div>
+</td>
+</tr>
+</table>
+</div>
+
+<h2 align="center">TECHNICAL HELD OF THE INVENTION</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0003]&nbsp;The present invention relates generally to handheld mobile electronic devices. More specifically the present invention relates to ipad accessories.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<h2 align="center">BACKGROUND OF THE INVENTION</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0004]&nbsp;While developing a game for the ipad it became clear to me that a player's thumbs have a tendency to drift off of buttons during intense game play, due to the smooth glass surface of the ipad. I set out to devise a method of restricting a players thumb to specified areas of the ipad's screen.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0005]&nbsp;I began experimenting with different vinyl materials that would stick to the smooth glass surface without the need for adhesive. I also played many hours computer games on the ipad and experimented with a wide range of cut pieces and parts before settling on the six main Thumbtrap shapes, which are specified in FIGURE A.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<h2 align="center">SUMMARY OF THE INVENTION</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0006]&nbsp;Thumbtraps are pieces of transparent, vinyl cut into octagon rings. By means of static, Thumptraps clings to the glass screen of an ipad. The center holes in Thumbtraps are cut into 6 unique shapes which, when clung to an ipad's flat, glass screen, create a barrier around a player's thumbs which prevents them from drifting off onscreen buttons during game play. Thumbtraps work with several existing ipad games, especially first person shooter (fps) games.</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+
+
+<h2 align="center">BRIEF DESCRIPTION OF THE SEVERAL VIEWS OF THE DRAWING</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0007]&nbsp;ThumbTraps_Fig_A.pdf is an isometric projection depicting a set of Thumbtraps as they look while in their Vinyl Sheet or Cutting Template. The FIGURE also shows an individual Thumbtrap once removed and ready for use.</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+
+
+<h2 align="center">DETAILED DESCRIPTION OF THE INVENTION</h2>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0008]&nbsp;A Thumbtrap is a 0.020 mil piece of transparent, vinyl cut into 1.73&Prime;&times;1.73&Prime; octagon ring. By means of static, a Thumptrap clings to the glass screen of an ipad. The center holes in Thumbtraps are cut into 6 unique shapes. When clung to an ipad's flat screen, Thumbtraps create a 0.020 mil fence around a player's thumbs which prevents the digits from drifting off onscreen buttons during game-play. Thumbtraps work with several existing ipad games, especially first person shooter (fps) games.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0009]&nbsp;The Thumbtrap's purpose is to help ipad game players keep their thumbs over onscreen buttons. It helps players more easily operate game controls, play better, and achieve higher game scores.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0010]&nbsp;Thumbtraps come in sets of 9 with 6 unique shapes; Jaws-Trap, Blocade-Trap, X-trap, Snap-Trap, Octo-Trap, and Chest-Burst-Trap. (See FIGURE A)</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0011]&nbsp;Typically, draggable touchscreen control-button for an ipad game registers finger movement in 8 directions akin to a compass; N, NE, E, SE, S, SW, W, NW. The Thumbtrap's unique shapes provide tracks for a user's thumb to slide into one of the 8 specified zones over onscreen controls.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0012]&nbsp;As a players thumb travels over the onscreen control during game-play, it will make contact with the Thumbtrap border, which indicates the onscreen button's boundary. Then as a player's thumb slides along the inner edge of the Thumbtrap it will travel over the details of the shape's teeth, and gates and be guided into a specified zone marking one of the 8 compass directions by touch.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0013]&nbsp;The Thumbtrap provides better button press accuracy for the ipad game player. Through touch alone, a player will know their position on the screen above the button. As a result the player will be better oriented to the game environment.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0014]&nbsp;For storage, unused Thumptraps are placed on a Thumbtrap Deck which is simply a flat 5&Prime;&times;7&Prime; piece of acetate.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0015]&nbsp;Thumbtraps can be die-cut, or hand-cut from 5&Prime;&times;7&Prime; vinyl sheets using our Thumbtrap Set Cutting Template as a guide. For die-cutting, the die is pressed into the 0.020 mil sheet of Verilon clear, flexible vinyl film. For hand-cutting, 5&Prime;&times;7&Prime; sheets of vinyl are placed over the Thumbtrap Set Cutting Template, then cut through using an x-acto knife, or utility knife.</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="para_text">
+<table rules="none" width="95%" border="0">
+<tr>
+<td valign="top">
+<div class="para_text">[0016]&nbsp;Once cut, the loose pieces are popped out of the vinyl sheet and positioned on the ipad screen to assist in game-play, or a Thumbtrap Deck for storage.</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+<div class="para_text">
+<table rules="none" border="0" width="95%">
+<colgroup>
+<col width="3%">
+<col width="62%">
+<col width="30%">
+</colgroup>
+<tr>
+<td class="inid_text">(57)<a name="claim"></a></td><td class="table_data">
+<h3>Claim</h3>
+</td>
+</tr>
+<tr>
+<td class="para_text" valign="top" colspan="3"><a name="CLM-00001"></a>
+<div class="claim_text">
+<b>1</b>. A touch feedback apparatus for an ipad screen comprising: a sheet of removable vinyl shapes which cling to an ipad's screen to restrict and guide a users thumb into specified zones on the screen surface.</div>
+</td>
+</tr>
+</table>
+</div>
+<table rules="none" align="center" border="0" width="40%">
+<tr>
+<td align="center" width="20%">*</td><td align="center" width="20%">*</td><td align="center" width="20%">*</td><td align="center" width="20%">*</td><td align="center" width="20%">*</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
+
+    
+    
+

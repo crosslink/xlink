@@ -108,10 +108,10 @@ ltw_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_urlencoder_OBJECTS = urlencoder.$(OBJEXT) urlcode.$(OBJEXT)
 urlencoder_OBJECTS = $(am_urlencoder_OBJECTS)
 urlencoder_DEPENDENCIES =
-am_wikify_OBJECTS = wikify.$(OBJEXT) anchor.$(OBJEXT) \
-	wikification.$(OBJEXT)
+am_wikify_OBJECTS = sys_file.$(OBJEXT) anchor.$(OBJEXT) \
+	wikification.$(OBJEXT) wikify.$(OBJEXT)
 wikify_OBJECTS = $(am_wikify_OBJECTS)
-wikify_LDADD = $(LDADD)
+wikify_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -378,11 +378,12 @@ urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
 
 urlencoder_LDADD = 
 urlencoder_CFLAGS = 
-wikify_SOURCES = $(TOOLS_DIR)/wikify.cpp \
+wikify_SOURCES = $(SRC_DIR)/sys_file.cpp \
 									 $(SRC_DIR)/anchor.cpp \
 									 $(SRC_DIR)/wikification.cpp \
-wikify_LDADD =
+									  $(TOOLS_DIR)/wikify.cpp
 
+wikify_LDADD = 
 wikify_CFLAGS = 
 all: all-am
 

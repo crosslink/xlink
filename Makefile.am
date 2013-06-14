@@ -149,8 +149,10 @@ urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
 urlencoder_LDADD =
 urlencoder_CFLAGS =			
 
-wikify_SOURCES = $(TOOLS_DIR)/wikify.cpp \
+wikify_SOURCES = $(SRC_DIR)/sys_file.cpp \
 									 $(SRC_DIR)/anchor.cpp \
 									 $(SRC_DIR)/wikification.cpp \
+									  $(TOOLS_DIR)/wikify.cpp
+									 
 wikify_LDADD =
 wikify_CFLAGS =								
