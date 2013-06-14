@@ -75,7 +75,12 @@ std::string wikification::linkify(const char* links_xml,
 						string target = link->text();
 
 						if (offset > 0) {
-							anchor ancr(name, offset);
+							/*
+							 * TODO
+							 * the  anchor offset is one byte offset from the real offset
+							 * and I don't why, this is just a temporary fix
+							 */
+							anchor ancr(name, ++offset);
 							ancr.add_target(target);
 							anchor_array.push_back(ancr);
 						}
@@ -108,8 +113,6 @@ std::string wikification::linkify(const char* links_xml,
 					if (where <= last_offset)
 						continue;
 
-					stringstream ss;
-					ss << "<a href=\"http://en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
 //					string::size_type where = page.find(ancr.get_name());
 //					if (where != string::npos) {
 //						page.replace(where, where + name.length(), ss.str());
@@ -117,7 +120,13 @@ std::string wikification::linkify(const char* links_xml,
 					part = new char[part_len + 1];
 					memcpy(part, page + last_offset, part_len);
 					part[part_len] = '\0';
+
+					string anchor_name = string(page + where, name.length());
 					last_offset = where + name.length();
+
+					stringstream ss;
+					ss << "<a href=\"http://en.wikipedia.org/w/api.php?curid=" << target << "\">" << anchor_name << "</a>";
+
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
 //					cerr << "anchor: " << name << " offset: " << where << endl;

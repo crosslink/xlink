@@ -40,36 +40,36 @@ namespace QLINK {
 
 	protected:
 		run_mode 				mode_;
-		int						topic_param_start_;
+		int							topic_param_start_;
 
-		links					*links_;
+		links							*links_;
 
 		algorithm_config		*config_;
 		const char 				*text_;
 		const char 				*xml_;
-		long 					lowercase_only;					// are we in lowercase or mixed-case matching mode?
-		long					stopword_no_;
-		char					*source_;
-		char		 			*current_term_;
-		char 					buffer_[1024 * 1024];
+		long 						lowercase_only;					// are we in lowercase or mixed-case matching mode?
+		long							stopword_no_;
+		char							*source_;
+		char		 					*current_term_;
+		char 						buffer_[1024 * 1024];
 
-		long 					orphan_docid_;
+		long 						orphan_docid_;
 
-		ltw_task				*ltw_task_;
+		ltw_task					*ltw_task_;
 
-		bool 					use_utf8_token_matching_; // which means that matching without spaces, all the spaces in string will be removed
+		bool 						use_utf8_token_matching_; // which means that matching without spaces, all the spaces in string will be removed
 
-		char					**token_address_;
-		long					current_index_;
+		char							**token_address_;
+		long							current_index_;
 
-		long					translate_anchor_for_linking_;
+		long							translate_anchor_for_linking_;
 
-		char 					*runname;
+		char 						*runname;
 
-		long					segmented_;
-		long					stage_;
+		long							segmented_;
+		long							stage_;
 
-		ltw_topic 				*current_topic_;
+		ltw_topic 					*current_topic_;
 
 	public:
 		algorithm(ltw_task *task);

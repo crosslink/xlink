@@ -40,15 +40,8 @@ using namespace QLINK;
 
 algorithm::algorithm(ltw_task *task) : ltw_task_(task)/*, crosslink_(false)*/
 {
-//	set_links_container(links_list);
-
 	init();
 }
-
-//algorithm::algorithm()
-//{
-//	init();
-//}
 
 algorithm::~algorithm()
 {
