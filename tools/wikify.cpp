@@ -15,7 +15,7 @@ using namespace std;
 using namespace QLINK;
 
 static void usage(const char *program) {
-	cerr << program << ": anchors_file page" << endl;
+	cerr << program << ": /anchors/xml/file /page/to/wikify" << endl;
 	exit(-1);
 }
 
@@ -25,6 +25,8 @@ int main(int argc, char **argv)
 		usage(argv[0]);
 	const char *xml_file = sys_file::read_entire_file(argv[1]);
 	const char *page = sys_file::read_entire_file(argv[2]);
+
+//	cerr << page << endl;
 
 	string wikified_page = QLINK::wikification::linkify(xml_file, page);
 

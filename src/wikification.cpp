@@ -37,6 +37,7 @@ std::string wikification::linkify(const char* links_xml,
 	char *part = NULL;
 	long article_len = strlen(links_xml);
 	long part_len = 0;
+	stringstream wikified_page_ss("");
 
 	typedef XML::XParser<string, const char*> 					xml_parser;
 	typedef xml_parser::document_type::entity_type	  			node_type;
@@ -51,7 +52,7 @@ std::string wikification::linkify(const char* links_xml,
 
 	for (it = doc.iter_begin(); it != doc.iter_end(); ++it) {
 		node_type *node = static_cast<node_type*>((*it));
-		node->print();
+//		node->print();
 
 		if (node->is_element()) {
 			element_type *elem = static_cast<element_type *>(node);
@@ -82,7 +83,20 @@ std::string wikification::linkify(const char* links_xml,
 					++anchor_it;
 				}
 				std::sort(anchor_array.begin(), anchor_array.end());
-				stringstream wikified_page_ss("");
+#ifdef DEBUG
+				for (int i = 0; i <anchor_array.size(); ++i) {
+					anchor &ancr = anchor_array[i];
+					const string &name = ancr.get_name();
+					const string &target = ancr.get_target();
+					const string::size_type where  = ancr.get_offset();
+					cerr << "anchor: " << name << " offset: " << where << endl;
+				}
+//					cerr << "anchor: " << name << " offset: " << where << endl;
+//					cerr << "last offset: " << last_offset << endl;
+//					if (last_offset == 604)
+//						cerr << endl;
+#endif
+
 				string::size_type last_offset = 0;
 				long last_anchor_len = 0;
 				for (int i = 0; i < anchor_array.size(); ++i) {
@@ -91,6 +105,9 @@ std::string wikification::linkify(const char* links_xml,
 					const string &target = ancr.get_target();
 					const string::size_type where  = ancr.get_offset();
 
+					if (where <= last_offset)
+						continue;
+
 					stringstream ss;
 					ss << "<a href=\"http://en.wikipedia.org/w/api.php?curid=" << target << "\">" << name << "</a>";
 //					string::size_type where = page.find(ancr.get_name());
@@ -98,17 +115,19 @@ std::string wikification::linkify(const char* links_xml,
 //						page.replace(where, where + name.length(), ss.str());
 					part_len = where - last_offset;
 					part = new char[part_len + 1];
-					memcpy(part, links_xml + last_offset, part_len);
+					memcpy(part, page + last_offset, part_len);
+					part[part_len] = '\0';
 					last_offset = where + name.length();
+					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
-					cerr << "anchor: " << name << " offset: " << where << endl;
-					cerr << "last offset: " << last_offset << endl;
-					if (last_offset == 604)
-						cerr << endl;
+//					cerr << "anchor: " << name << " offset: " << where << endl;
+//					cerr << "last offset: " << last_offset << endl;
+//					if (last_offset == 604)
+//						cerr << endl;
 					cerr << part;
 #endif
 					delete [] part;
-					wikified_page_ss << part << ss.str();
+					ss.str("");
 //					}
 //					else {
 //						cerr << "Couldn't find " << name << " in the article." << endl;
@@ -116,14 +135,13 @@ std::string wikification::linkify(const char* links_xml,
 				}
 				part_len = article_len - last_offset;
 				part = new char[part_len + 1];
-				memcpy(part, links_xml + last_offset, part_len);
+				memcpy(part, page + last_offset, part_len);
 				wikified_page_ss << part;
 				delete [] part;
-				return wikified_page_ss.str();
 			}
 		}
 	}
-	return page;
+	return wikified_page_ss.str();
 }
 
 } /* namespace QLINK */

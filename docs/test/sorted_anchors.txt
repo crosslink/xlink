@@ -1,0 +1,156 @@
+anchor: root, offset: 427
+anchor: save, offset: 554
+anchor: file, offset: 563
+anchor: same, offset: 571
+anchor: directory, offset: 576
+anchor: var, offset: 592
+anchor: var s, offset: 639
+anchor: s, offset: 643
+anchor: United States, offset: 3105
+anchor: patent, offset: 3411
+anchor: application, offset: 3418
+anchor: publication, offset: 3430
+anchor: us, offset: 3610
+anchor: john, offset: 4558
+anchor: il, offset: 4604
+anchor: classification, offset: 5204
+anchor: abstract, offset: 6444
+anchor: a, offset: 6593
+anchor: an, offset: 6608
+anchor: individual, offset: 6641
+anchor: game, offset: 6669
+anchor: it, offset: 6680
+anchor: is a, offset: 6683
+anchor: vinyl, offset: 6712
+anchor: smooth, offset: 6743
+anchor: glass, offset: 6750
+anchor: screen, offset: 6756
+anchor: use, offset: 6783
+anchor: over, offset: 6813
+anchor: game control, offset: 6830
+anchor: control, offset: 6835
+anchor: acts, offset: 6863
+anchor: like, offset: 6868
+anchor: small, offset: 6875
+anchor: fence, offset: 6881
+anchor: the thumb, offset: 6901
+anchor: thumb, offset: 6905
+anchor: drift, offset: 6911
+anchor: onscreen button, offset: 7016
+anchor: button, offset: 7025
+anchor: better, offset: 7036
+anchor: contact, offset: 7050
+anchor: can, offset: 7079
+anchor: be, offset: 7083
+anchor: or, offset: 7860
+anchor: present, offset: 8244
+anchor: invention, offset: 8252
+anchor: mobile, offset: 8292
+anchor: more, offset: 8319
+anchor: the present, offset: 8337
+anchor: developing, offset: 8608
+anchor: a game, offset: 8619
+anchor: clear, offset: 8649
+anchor: me, offset: 8658
+anchor: have, offset: 8684
+anchor: tendency, offset: 8691
+anchor: due to, offset: 8750
+anchor: due, offset: 8750
+anchor: surface, offset: 8774
+anchor: i, offset: 8795
+anchor: set, offset: 8797
+anchor: set out, offset: 8797
+anchor: out, offset: 8801
+anchor: devise, offset: 8808
+anchor: method, offset: 8817
+anchor: stick, offset: 9121
+anchor: need, offset: 9167
+anchor: also played, offset: 9188
+anchor: hours, offset: 9205
+anchor: computer games, offset: 9211
+anchor: computer, offset: 9211
+anchor: wide range, offset: 9262
+anchor: range, offset: 9267
+anchor: cut, offset: 9276
+anchor: parts, offset: 9291
+anchor: settling, offset: 9304
+anchor: six, offset: 9320
+anchor: main, offset: 9324
+anchor: are, offset: 9353
+anchor: in, offset: 9367
+anchor: octagon, offset: 9644
+anchor: means, offset: 9662
+anchor: center, offset: 9733
+anchor: barrier, offset: 9849
+anchor: drifting, offset: 9907
+anchor: work, offset: 9966
+anchor: first, offset: 10016
+anchor: first person, offset: 10016
+anchor: first person shooter, offset: 10016
+anchor: person, offset: 10022
+anchor: shooter, offset: 10029
+anchor: isometric projection, offset: 10320
+anchor: isometric, offset: 10320
+anchor: projection, offset: 10330
+anchor: depicting, offset: 10341
+anchor: a set, offset: 10351
+anchor: as, offset: 10371
+anchor: look, offset: 10379
+anchor: while, offset: 10384
+anchor: sheet, offset: 10405
+anchor: cutting, offset: 10414
+anchor: an individual, offset: 10454
+anchor: once removed, offset: 10478
+anchor: mil, offset: 10760
+anchor: piece, offset: 10764
+anchor: flat, offset: 11001
+anchor: purpose, offset: 11426
+anchor: help, offset: 11440
+anchor: keep, offset: 11463
+anchor: play, offset: 11556
+anchor: come, offset: 11773
+anchor: touchscreen, offset: 12087
+anchor: finger, offset: 12141
+anchor: movement, offset: 12148
+anchor: slide, offset: 12287
+anchor: one of, offset: 12298
+anchor: one, offset: 12298
+anchor: over the, offset: 12539
+anchor: will, offset: 12586
+anchor: make, offset: 12591
+anchor: make contact, offset: 12591
+anchor: with the, offset: 12604
+anchor: then, offset: 12679
+anchor: as a, offset: 12684
+anchor: edge, offset: 12727
+anchor: travel, offset: 12757
+anchor: details, offset: 12773
+anchor: gates, offset: 12807
+anchor: zone, offset: 12844
+anchor: marking, offset: 12849
+anchor: compass, offset: 12870
+anchor: compass directions, offset: 12870
+anchor: button press, offset: 13090
+anchor: press, offset: 13097
+anchor: accuracy, offset: 13103
+anchor: touch, offset: 13146
+anchor: a player, offset: 13159
+anchor: player, offset: 13161
+anchor: know, offset: 13173
+anchor: position, offset: 13184
+anchor: above, offset: 13207
+anchor: result, offset: 13230
+anchor: the player, offset: 13237
+anchor: the game, offset: 13275
+anchor: deck, offset: 13515
+anchor: using, offset: 13827
+anchor: template, offset: 13859
+anchor: die, offset: 13901
+anchor: cut through, offset: 14095
+anchor: utility, offset: 14133
+anchor: popped out, offset: 14340
+anchor: assist, offset: 14407
+anchor: claim, offset: 14725
+anchor: feedback, offset: 14868
+anchor: apparatus, offset: 14877
+anchor: guide, offset: 15000
