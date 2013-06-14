@@ -53,7 +53,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 noinst_PROGRAMS = ltw$(EXEEXT) collection_link_finder$(EXEEXT) \
-	urlencoder$(EXEEXT)
+	urlencoder$(EXEEXT) wikify$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(noinst_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
@@ -99,7 +99,8 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	google_research_translator.$(OBJEXT) \
 	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
 	link_print.$(OBJEXT) urlcode.$(OBJEXT) session.$(OBJEXT) \
-	request.$(OBJEXT) anchor.$(OBJEXT) ltw.$(OBJEXT)
+	request.$(OBJEXT) anchor.$(OBJEXT) wikification.$(OBJEXT) \
+	ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -107,6 +108,10 @@ ltw_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_urlencoder_OBJECTS = urlencoder.$(OBJEXT) urlcode.$(OBJEXT)
 urlencoder_OBJECTS = $(am_urlencoder_OBJECTS)
 urlencoder_DEPENDENCIES =
+am_wikify_OBJECTS = wikify.$(OBJEXT) anchor.$(OBJEXT) \
+	wikification.$(OBJEXT)
+wikify_OBJECTS = $(am_wikify_OBJECTS)
+wikify_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -117,9 +122,9 @@ CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES) \
-	$(urlencoder_SOURCES)
+	$(urlencoder_SOURCES) $(wikify_SOURCES)
 DIST_SOURCES = $(collection_link_finder_SOURCES) $(ltw_SOURCES) \
-	$(urlencoder_SOURCES)
+	$(urlencoder_SOURCES) $(wikify_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -298,6 +303,7 @@ ltw_headers = \
 	$(SRC_DIR)/session.h \
 	$(SRC_DIR)/request.h \
 	$(SRC_DIR)/anchor.h \
+	$(SRC_DIR)/wikification.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -359,6 +365,7 @@ ltw_sources = \
 	$(SRC_DIR)/session.cpp \
 	$(SRC_DIR)/request.cpp \
 	$(SRC_DIR)/anchor.cpp \
+	$(SRC_DIR)/wikification.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 ltw_SOURCES = $(ltw_sources)
@@ -370,7 +377,13 @@ urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
 									 $(SRC_DIR)/urlcode.cpp
 
 urlencoder_LDADD = 
-urlenclode_CFLAGS = 
+urlencoder_CFLAGS = 
+wikify_SOURCES = $(TOOLS_DIR)/wikify.cpp \
+									 $(SRC_DIR)/anchor.cpp \
+									 $(SRC_DIR)/wikification.cpp \
+wikify_LDADD =
+
+wikify_CFLAGS = 
 all: all-am
 
 .SUFFIXES:
@@ -421,6 +434,9 @@ ltw$(EXEEXT): $(ltw_OBJECTS) $(ltw_DEPENDENCIES) $(EXTRA_ltw_DEPENDENCIES)
 urlencoder$(EXEEXT): $(urlencoder_OBJECTS) $(urlencoder_DEPENDENCIES) $(EXTRA_urlencoder_DEPENDENCIES) 
 	@rm -f urlencoder$(EXEEXT)
 	$(CXXLINK) $(urlencoder_OBJECTS) $(urlencoder_LDADD) $(LIBS)
+wikify$(EXEEXT): $(wikify_OBJECTS) $(wikify_DEPENDENCIES) $(EXTRA_wikify_DEPENDENCIES) 
+	@rm -f wikify$(EXEEXT)
+	$(CXXLINK) $(wikify_OBJECTS) $(wikify_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -483,6 +499,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlcode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlencoder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/webpage_retriever.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikification.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikify.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wikipedia_page.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wordnet.Po@am__quote@
@@ -1315,6 +1333,20 @@ anchor.obj: $(SRC_DIR)/anchor.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o anchor.obj `if test -f '$(SRC_DIR)/anchor.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/anchor.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/anchor.cpp'; fi`
 
+wikification.o: $(SRC_DIR)/wikification.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wikification.o -MD -MP -MF $(DEPDIR)/wikification.Tpo -c -o wikification.o `test -f '$(SRC_DIR)/wikification.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/wikification.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wikification.Tpo $(DEPDIR)/wikification.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wikification.cpp' object='wikification.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikification.o `test -f '$(SRC_DIR)/wikification.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/wikification.cpp
+
+wikification.obj: $(SRC_DIR)/wikification.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wikification.obj -MD -MP -MF $(DEPDIR)/wikification.Tpo -c -o wikification.obj `if test -f '$(SRC_DIR)/wikification.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wikification.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wikification.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wikification.Tpo $(DEPDIR)/wikification.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wikification.cpp' object='wikification.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikification.obj `if test -f '$(SRC_DIR)/wikification.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wikification.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wikification.cpp'; fi`
+
 ltw.o: $(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ltw.o -MD -MP -MF $(DEPDIR)/ltw.Tpo -c -o ltw.o `test -f '$(SRC_DIR)/ltw.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/ltw.Tpo $(DEPDIR)/ltw.Po
@@ -1342,6 +1374,20 @@ urlencoder.obj: $(TOOLS_DIR)/urlencoder.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(TOOLS_DIR)/urlencoder.cpp' object='urlencoder.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o urlencoder.obj `if test -f '$(TOOLS_DIR)/urlencoder.cpp'; then $(CYGPATH_W) '$(TOOLS_DIR)/urlencoder.cpp'; else $(CYGPATH_W) '$(srcdir)/$(TOOLS_DIR)/urlencoder.cpp'; fi`
+
+wikify.o: $(TOOLS_DIR)/wikify.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wikify.o -MD -MP -MF $(DEPDIR)/wikify.Tpo -c -o wikify.o `test -f '$(TOOLS_DIR)/wikify.cpp' || echo '$(srcdir)/'`$(TOOLS_DIR)/wikify.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wikify.Tpo $(DEPDIR)/wikify.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(TOOLS_DIR)/wikify.cpp' object='wikify.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikify.o `test -f '$(TOOLS_DIR)/wikify.cpp' || echo '$(srcdir)/'`$(TOOLS_DIR)/wikify.cpp
+
+wikify.obj: $(TOOLS_DIR)/wikify.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT wikify.obj -MD -MP -MF $(DEPDIR)/wikify.Tpo -c -o wikify.obj `if test -f '$(TOOLS_DIR)/wikify.cpp'; then $(CYGPATH_W) '$(TOOLS_DIR)/wikify.cpp'; else $(CYGPATH_W) '$(srcdir)/$(TOOLS_DIR)/wikify.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/wikify.Tpo $(DEPDIR)/wikify.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(TOOLS_DIR)/wikify.cpp' object='wikify.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikify.obj `if test -f '$(TOOLS_DIR)/wikify.cpp'; then $(CYGPATH_W) '$(TOOLS_DIR)/wikify.cpp'; else $(CYGPATH_W) '$(srcdir)/$(TOOLS_DIR)/wikify.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

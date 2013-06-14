@@ -69,6 +69,7 @@ ltw_headers = \
 	$(SRC_DIR)/session.h \
 	$(SRC_DIR)/request.h \
 	$(SRC_DIR)/anchor.h \
+	$(SRC_DIR)/wikification.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers)
@@ -131,9 +132,10 @@ ltw_sources = \
 	$(SRC_DIR)/session.cpp \
 	$(SRC_DIR)/request.cpp \
 	$(SRC_DIR)/anchor.cpp \
+	$(SRC_DIR)/wikification.cpp \
 	$(SRC_DIR)/ltw.cpp
 
-noinst_PROGRAMS = ltw collection_link_finder urlencoder
+noinst_PROGRAMS = ltw collection_link_finder urlencoder wikify
 
 ltw_SOURCES = $(ltw_sources)
 ltw_LDADD = ${LTW_LIBS}
@@ -145,4 +147,10 @@ collection_link_finder_SOURCES = $(TOOLS_DIR)/collection_link_finder.cpp
 urlencoder_SOURCES = $(TOOLS_DIR)/urlencoder.cpp \
 									 $(SRC_DIR)/urlcode.cpp
 urlencoder_LDADD =
-urlenclode_CFLAGS =							
+urlencoder_CFLAGS =			
+
+wikify_SOURCES = $(TOOLS_DIR)/wikify.cpp \
+									 $(SRC_DIR)/anchor.cpp \
+									 $(SRC_DIR)/wikification.cpp \
+wikify_LDADD =
+wikify_CFLAGS =								
