@@ -18,7 +18,8 @@ public:
 	virtual ~wikification();
 
 	static std::string linkify(const std::string& links_xml, const std::string& page);
-	static std::string linkify(const char *links_xml, const char *page);
+	static void linkify(const std::string& links_xml, const std::string& page, std::string& wikified_page);
+	static void linkify(const char *links_xml, const char *page, std::string& wikified_page);
 };
 
 } /* namespace QLINK */

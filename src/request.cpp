@@ -50,7 +50,7 @@ request::~request() {
 }
 
 void request::apply_links(const std::string& links_xml) {
-	wikified_page_ = wikification::linkify(links_xml, page_);
+	wikification::linkify(links_xml, page_, wikified_page_);
 	cerr << endl << "finished wikify page" << endl;
 }
 

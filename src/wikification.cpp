@@ -28,12 +28,13 @@ wikification::~wikification() {
 
 }
 
-std::string wikification::linkify(const std::string& links_xml, const std::string& page) {
-	linkify(links_xml.c_str(), page.c_str());
+void wikification::linkify(const std::string& links_xml, const std::string& page, std::string& wikified_page) {
+	linkify(links_xml.c_str(), page.c_str(), wikified_page);
 }
 
-std::string wikification::linkify(const char* links_xml,
-		const char* page) {
+void wikification::linkify(const char* links_xml,
+		const char* page, std::string& wikified_page) {
+
 	char *part = NULL;
 	long article_len = strlen(links_xml);
 	long part_len = 0;
@@ -133,7 +134,7 @@ std::string wikification::linkify(const char* links_xml,
 //					cerr << "last offset: " << last_offset << endl;
 //					if (last_offset == 604)
 //						cerr << endl;
-					cerr << part;
+//					cerr << part;
 #endif
 					delete [] part;
 					ss.str("");
@@ -150,7 +151,17 @@ std::string wikification::linkify(const char* links_xml,
 			}
 		}
 	}
-	return wikified_page_ss.str();
+#ifdef DEBUG
+	cerr << wikified_page_ss.str() << endl;
+#endif
+	wikified_page.append(wikified_page_ss.str());
+}
+
+std::string wikification::linkify(const std::string& links_xml,
+		const std::string& page) {
+	string wikified_page;
+	linkify(links_xml, page, wikified_page);
+	return	wikified_page;
 }
 
 } /* namespace QLINK */

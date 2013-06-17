@@ -4,3 +4,4 @@ http://www.lens.org/textserver/fulltext.html?patent=US_A1_2010223579&docdDbKey=U
 http%3a%2f%2fwww.lens.org%2ftextserver%2ffulltext.html%3fpatent%3dUS_A1_2013095301%26docdDbKey%3dUS_A1_2013095301%26query%3dipad%26language%3den%26stemming%3dtrue
 http%3a%2f%2fwww.lens.org%2ftextserver%2ffulltext.html%3fpatent%3dUS_A1_2010223579%26docdDbKey%3dUS_A1_2010223579%26query%3diphone%26language%3den%26stemming%3dtrue
 
+http://xlinkserver:8888/?page=http%3A%2F%2Fwww.lens.org%2Ftextserver%2Ffulltext.html%3Fquery%3D%26stemming%3Dtrue%26patent%3DUS_A1_2012088557%26type%3Dmerged%26lang%3Den
