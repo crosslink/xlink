@@ -81,7 +81,7 @@ void wikification::linkify(const char* links_xml,
 							 * the  anchor offset is one byte offset from the real offset
 							 * and I don't why, this is just a temporary fix
 							 */
-							anchor ancr(name, ++offset);
+							anchor ancr(name, offset);
 							ancr.add_target(target);
 							anchor_array.push_back(ancr);
 						}
@@ -126,7 +126,7 @@ void wikification::linkify(const char* links_xml,
 					last_offset = where + name.length();
 
 					stringstream ss;
-					ss << "<a href=\"http://en.wikipedia.org/w/api.php?curid=" << target << "\">" << anchor_name << "</a>";
+					ss << "<a href=\"http://en.wikipedia.org/w/index.php?curid=" << target << "\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
