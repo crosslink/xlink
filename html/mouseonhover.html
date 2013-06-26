@@ -1,0 +1,35 @@
+<!-- 
+	extracted from http://stackoverflow.com/questions/3559467/description-box-on-mouseover
+	
+	https://gist.github.com/csasbach/867744
+	
+	http://forrst.com/posts/Simple_pure_CSS_tooltip_with_arrow-BkY
+	
+	=== using this one ====
+	http://www.guiadainformatica.com/tooltip.html
+	<script type="text/javascript" src="http://www.guiadainformatica.com/wz_tooltip.js"></script>
+	
+	=== with ajax ===
+	http://www.javascriptkit.com/script/script2/ajaxtooltip.shtml
+ -->
+<html>
+<link rel="stylesheet" href="tooltip.css"/>
+<script type="text/javascript">
+var e = document.getElementById('parent');
+e.onmouseover = function() {
+  document.getElementById('popup').style.display = 'block';
+}
+e.onmouseout = function() {
+  document.getElementById('popup').style.display = 'none';
+}
+</script>
+<body>
+<script type="text/javascript" src="wz_tooltip.js"></script>
+<div id="parent">
+This is the main container.
+<div id="popup" style="display: none">some text here</div>
+</div>
+<a href="#" onmouseover="Tip('Tooltip text', SHADOW, true, TITLE, 'Título',CLOSEBTN, true, CLOSEBTNTEXT, 'x', STICKY, true, DURATION, 400)" >Fechar janela</a>
+<a href="index.htm" onmouseover="Tip('<a href=&quot;http://en.wikipedia.org&quot;>Wikipedia</a>', DELAY, 1000, STICKY, true)">simple tool tip</a> 
+</body>
+</html>
