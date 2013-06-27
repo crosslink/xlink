@@ -90,6 +90,9 @@ config. TitleFontColor	= '#ffffff'	// Color of title text - if '', BgColor (of t
 config. TitleFontFace	= ''		// If '' use FontFace (boldified)
 config. TitleFontSize	= ''		// If '' use FontSize
 config. Width			= 0 		// Tooltip width; 0 for automatic adaption to tooltip content
+config.Ajax				= false
+config.AjaxUrl			= '' 		// external url to load
+config.AjaxId				= ''		// element id for updating the content
 //=======  END OF TOOLTIP CONFIG, DO NOT CHANGE ANYTHING BELOW  ==============//
 
 
