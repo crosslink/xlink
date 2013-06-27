@@ -37,6 +37,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 For more details on the GNU Lesser General Public License,
 see http://www.gnu.org/copyleft/lesser.html
 */
+/*
+ * updated by Eric Tang
+ * 
+ * CHANGES LOG
+ * 
+ */
 
 var config = new Object();
 
@@ -96,7 +102,9 @@ config.AjaxId				= ''		// element id for updating the content
 //=======  END OF TOOLTIP CONFIG, DO NOT CHANGE ANYTHING BELOW  ==============//
 
 
-
+/*function ToolTip() {
+	
+}*/
 
 //======================  PUBLIC  ============================================//
 function Tip()
@@ -351,7 +359,7 @@ function tt_MkMainDiv()
 }
 function tt_MkMainDivHtm()
 {
-	return('<div id="WzTtDiV"></div>' +
+	return('<div id="ToolTipContainer"></div>' +
 			(tt_ie56 ? ('<iframe id="WzTtIfRm" src="javascript:false" scrolling="no" frameborder="0" style="filter:Alpha(opacity=0);position:absolute;top:0px;left:0px;display:none;"></iframe>')
 			: ''));
 }
@@ -359,12 +367,13 @@ function tt_MkMainDivDom()
 {
 	var el = document.createElement("div");
 	if(el)
-		el.id = "WzTtDiV";
+		el.id = "ToolTipContainer";
+	
 	return el;
 }
 function tt_GetMainDivRefs()
 {
-	tt_aElt[0] = tt_GetElt("WzTtDiV");
+	tt_aElt[0] = tt_GetElt("ToolTipContainer");
 	if(tt_ie56 && tt_aElt[0])
 	{
 		tt_aElt[tt_aElt.length - 1] = tt_GetElt("WzTtIfRm");
