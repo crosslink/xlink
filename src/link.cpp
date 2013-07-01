@@ -36,6 +36,8 @@
 #include "database_mysql.h"
 #include "google_research_translator.h"
 
+#include "xml.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -133,12 +135,7 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 
 //	while (this_term.find("  ") != string::npos)
 	find_and_replace(this_term, string("  "), string(" "));
-
-	find_and_replace(this_term, string("&"), string("&amp;"));
-//	find_and_replace(this_term, string("&lt;"), string("<"));
-//	find_and_replace(this_term, string("&gt;"), string(">"));
-	find_and_replace(this_term, string("\""), string("&quot;"));
-	find_and_replace(this_term, string("'"), string("&apos;"));
+	xmlify(this_term);
 
 	long this_offset = offset;
 	ANT_link_term *this_link_term = link_term;

@@ -404,7 +404,7 @@ function tt_IsW3cBox()
 	var css = tt_aElt[0].style;
 
 	css.padding = "10px";
-	css.width = "40px";
+	css.width = "100px";
 	tt_bBoxOld = (tt_GetDivW(tt_aElt[0]) == 40);
 	css.padding = "0px";
 	tt_ResetMainDiv();

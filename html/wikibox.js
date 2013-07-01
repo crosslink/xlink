@@ -1,3 +1,5 @@
+
+
 function loadXMLDoc(url)
 {
 	var xmlhttp;
@@ -20,12 +22,13 @@ function loadXMLDoc(url)
 	xmlhttp.send();
 }
 
-function showWikiBox() {
-	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=&quot;http://en.wikipedia.org&quot;>Wikipedia</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div></div>',
+function showWikiBox(url, anchor) {
+	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=' + url + '>' + \
+		'</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div></div>',
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
-	loadXMLDoc("http://localhost");
+	loadXMLDoc("/?api");
 //	var wikiAbstract = document.getElementById("wikiabstract");
 	
 /*	if (wikiAbstract) {

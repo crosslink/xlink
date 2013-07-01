@@ -126,7 +126,8 @@ void wikification::linkify(const char* links_xml,
 					last_offset = where + name.length();
 
 					stringstream ss;
-					ss << "<a href=\"http://en.wikipedia.org/w/index.php?curid=" << target << "\">" << anchor_name << "</a>";
+					string url = "http://en.wikipedia.org/w/index.php?curid=" + target;
+					ss << "<a href=\"" << url << "\" onmouseover=\"showWikiBox('" << url << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG

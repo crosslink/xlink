@@ -50,7 +50,21 @@ request::~request() {
 }
 
 void request::apply_links(const std::string& links_xml) {
+
+	/*
+	 *
+	 */
 	wikification::linkify(links_xml, page_, wikified_page_);
+
+	/*
+	 * adding tooltip scripts for anchors
+	 */
+	string::size_type pos = wikified_page_.find("<body>");
+	if (pos != string::npos && (pos + 6) < wikified_page_.length()) {
+		static string wikibox_scripts = "<script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n" + \
+				"<script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>";
+	}
+
 	cerr << endl << "finished wikify page" << endl;
 }
 
