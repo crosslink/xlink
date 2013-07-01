@@ -2,7 +2,7 @@
 
 AM_CPPFLAGS = -std=c++0x -pedantic -I $(srcdir)/include/ -DCROSSLINK
 
-LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @MYSQL_LIBS@
+LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql -lboost_regex @MYSQL_LIBS@ 
 #LTW_LIBS ==-lgcj
 
 SRC_DIR = src

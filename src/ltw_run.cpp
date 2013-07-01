@@ -297,23 +297,24 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 	 const char *external_page = NULL;
 	 char *result = NULL;
 
+	 stringstream page_buf;
 //	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
-		time_t t = ::time(0);   // get time now
-		struct tm * now = localtime( & t );
-		std::stringstream datetime;
-		datetime << (now->tm_year + 1900) << '-'
-				 << (now->tm_mon + 1) << '-'
-				 <<  now->tm_mday
-				 << " "
-				 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
+//		time_t t = ::time(0);   // get time now
+//		struct tm * now = localtime( & t );
+//		std::stringstream datetime;
+//		datetime << (now->tm_year + 1900) << '-'
+//				 << (now->tm_mon + 1) << '-'
+//				 <<  now->tm_mday
+//				 << " "
+//				 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
+//
 
-		stringstream page_buf;
-	//	page_buf << "Content-Type: text/html" << endl;
-		page_buf  << "<html><body>";
-		page_buf << datetime.str() <<endl;
-		page_buf << "<br>";
-		page_buf << "page url: " << page_url << endl;
-		page_buf << "</body></html>";
+//	//	page_buf << "Content-Type: text/html" << endl;
+//		page_buf  << "<html><body>";
+//		page_buf << datetime.str() <<endl;
+//		page_buf << "<br>";
+//		page_buf << "page url: " << page_url << endl;
+//		page_buf << "</body></html>";
 
 		 if (page_url) {
 			 external_page = instance_ptr_->check_request(page_url);

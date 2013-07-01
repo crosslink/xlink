@@ -25,6 +25,7 @@
 #include "wikification.h"
 
 #include <iostream>
+#include <boost/regex.hpp>
 
 using namespace std;
 
@@ -50,6 +51,8 @@ request::~request() {
 }
 
 void request::apply_links(const std::string& links_xml) {
+	static boost::regex pattern("<\\s+body\\s+>");
+	static string wikibox_scripts = string("<body><script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>");
 
 	/*
 	 *
@@ -59,10 +62,26 @@ void request::apply_links(const std::string& links_xml) {
 	/*
 	 * adding tooltip scripts for anchors
 	 */
-	string::size_type pos = wikified_page_.find("<body>");
-	if (pos != string::npos && (pos + 6) < wikified_page_.length()) {
-		static string wikibox_scripts = string("<script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>");
-		wikified_page_.insert(pos, wikibox_scripts);
+//	wikified_page_ = boost::regex_replace (wikified_page_, pattern, wikibox_scripts);
+	string::size_type pos; //= wikified_page_.find("body");
+	string::iterator it_pre, it_next;
+	while ((pos = wikified_page_.find("body")) != string::npos /*&& (pos + 4) < wikified_page_.length()*/) {
+		it_pre = wikified_page_.begin() + pos;
+		it_next = it_pre + 4;
+		--it_pre;
+//		++it_next;
+
+		while (it_pre != wikified_page_.begin() && isspace(*it_pre))
+			--it_pre;
+
+		while (it_next != wikified_page_.end() && isspace(*it_next))
+			++it_next;
+
+		if (*it_pre == '<' && *it_next == '>') {
+			wikified_page_.replace(it_pre, it_next, wikibox_scripts);
+			break;
+		}
+//		wikified_page_.insert(pos, wikibox_scripts);
 	}
 
 	cerr << endl << "finished wikify page" << endl;

@@ -1,7 +1,3 @@
-function processAbstract(text) {
-	
-}
-
 function loadXMLDoc(url)
 {
 	var xmlhttp;
@@ -25,9 +21,12 @@ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	xmlhttp.send();
 }
 
+function showWikiBox1() {
+	Tip("test", DELAY, 1000, STICKY, true);
+}
+
 function showWikiBox(lang, id, anchor) {
-	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + \
-		'</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div></div>',
+	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="http://localhost/ajaxload.gif" /> Fetching Abstract...</div></div>';
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
@@ -43,3 +42,7 @@ function showWikiBox(lang, id, anchor) {
 	}, 2000);
 	}*/
 }
+/*
+function processAbstract(text) {
+	return text;
+}*/
