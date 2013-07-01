@@ -10,16 +10,16 @@
 
 #include "string_utils.h"
 
-inline void un_xmlify(std:string& what) {
+inline void un_xmlify(std::string& what) {
 	find_and_replace(what, string("&lt;"), string("<"));
 	find_and_replace(what, string("&gt;"), string(">"));
 
-	find_and_replace(what, string("&amp;"), string("&"),);
+	find_and_replace(what, string("&amp;"), string("&"));
 	find_and_replace(what, string("&quot;"), string("\""));
 	find_and_replace(what, string("&apos;"), string("'"));
 }
 
-inline void xmlify(std:string& what) {
+inline void xmlify(std::string& what) {
 	find_and_replace(what, string("&lt;"), string("<"));
 	find_and_replace(what, string("&gt;"), string(">"));
 

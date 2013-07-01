@@ -61,8 +61,8 @@ void request::apply_links(const std::string& links_xml) {
 	 */
 	string::size_type pos = wikified_page_.find("<body>");
 	if (pos != string::npos && (pos + 6) < wikified_page_.length()) {
-		static string wikibox_scripts = "<script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n" + \
-				"<script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>";
+		static string wikibox_scripts = string("<script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>");
+		wikified_page_.insert(pos, wikibox_scripts);
 	}
 
 	cerr << endl << "finished wikify page" << endl;

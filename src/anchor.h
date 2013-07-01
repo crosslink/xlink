@@ -27,10 +27,10 @@
 #include <string>
 #include <vector>
 
-class target;
+#include "target.h"
 
 namespace QLINK {
-typedef 	target target_type;
+typedef 	target 	target_type;
 
 class anchor {
 private:
@@ -62,11 +62,11 @@ public:
 
 	bool operator<(const anchor &rhs_anchor) const { return this->get_offset() < rhs_anchor.get_offset(); }
 
-	std::vector<std::string>& get_targets() {
+	std::vector<target_type>& get_targets() {
 		return targets_;
 	}
 
-	const target_type &get_target(int index = 0) const { return targets_[0]; }
+	const target_type& get_target(int index = 0) const { return targets_[index]; }
 
 	void add_target(const target_type& target) {
 		targets_.push_back(target);

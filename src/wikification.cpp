@@ -100,7 +100,7 @@ void wikification::linkify(const char* links_xml,
 				for (int i = 0; i <anchor_array.size(); ++i) {
 					anchor &ancr = anchor_array[i];
 					const string &name = ancr.get_name();
-					const string &target = ancr.get_target();
+					const target &a_target = ancr.get_target();
 					const string::size_type where  = ancr.get_offset();
 					cerr << "anchor: " << name << " offset: " << where << endl;
 				}
@@ -124,7 +124,9 @@ void wikification::linkify(const char* links_xml,
 //					string::size_type where = page.find(ancr.get_name());
 //					if (where != string::npos) {
 //						page.replace(where, where + name.length(), ss.str());
-					part_len = where - last_offset;
+					if ((part_len = where - last_offset) < 0)
+						break;
+
 					part = new char[part_len + 1];
 					memcpy(part, page + last_offset, part_len);
 					part[part_len] = '\0';
@@ -133,8 +135,9 @@ void wikification::linkify(const char* links_xml,
 					last_offset = where + name.length();
 
 					stringstream ss;
-					string url = "http://en.wikipedia.org/w/index.php?curid=" + target;
-					ss << "<a href=\"" << url << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
+					stringstream url;
+					url << "http://en.wikipedia.org/w/index.php?curid=" << a_target.get_target();
+					ss << "<a href=\"" << url.str() << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
@@ -151,11 +154,12 @@ void wikification::linkify(const char* links_xml,
 //						cerr << "Couldn't find " << name << " in the article." << endl;
 //					}
 				}
-				part_len = article_len - last_offset;
-				part = new char[part_len + 1];
-				memcpy(part, page + last_offset, part_len);
-				wikified_page_ss << part;
-				delete [] part;
+				if ((part_len = article_len - last_offset) > 0) {
+					part = new char[part_len + 1];
+					memcpy(part, page + last_offset, part_len);
+					wikified_page_ss << part;
+					delete [] part;
+				}
 			}
 		}
 	}

@@ -100,7 +100,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
 	link_print.$(OBJEXT) urlcode.$(OBJEXT) session.$(OBJEXT) \
 	request.$(OBJEXT) anchor.$(OBJEXT) wikification.$(OBJEXT) \
-	ltw.$(OBJEXT)
+	target.$(OBJEXT) ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -109,7 +109,7 @@ am_urlencoder_OBJECTS = urlencoder.$(OBJEXT) urlcode.$(OBJEXT)
 urlencoder_OBJECTS = $(am_urlencoder_OBJECTS)
 urlencoder_DEPENDENCIES =
 am_wikify_OBJECTS = sys_file.$(OBJEXT) anchor.$(OBJEXT) \
-	wikification.$(OBJEXT) wikify.$(OBJEXT)
+	target.$(OBJEXT) wikification.$(OBJEXT) wikify.$(OBJEXT)
 wikify_OBJECTS = $(am_wikify_OBJECTS)
 wikify_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -241,7 +241,18 @@ AM_CPPFLAGS = -std=c++0x -pedantic -I $(srcdir)/include/ -DCROSSLINK
 LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @MYSQL_LIBS@
 #LTW_LIBS ==-lgcj
 SRC_DIR = src
+INCLUDE_DIR = include
 TOOLS_DIR = tools
+utils_header = \
+	$(INCLUDE_DIR)/extralib.h \
+	$(INCLUDE_DIR)/template_algo.h \
+	$(INCLUDE_DIR)/template_comparor.h \
+	$(INCLUDE_DIR)/pattern_singleton.h \
+	$(INCLUDE_DIR)/string_utils.h \
+	$(INCLUDE_DIR)/xml.h \
+	$(INCLUDE_DIR)/XML2TXT.h \
+	$(INCLUDE_DIR)/str.h 
+
 ltw_headers = \
 	$(SRC_DIR)/run.h \
 	$(SRC_DIR)/algorithm.h \
@@ -288,15 +299,11 @@ ltw_headers = \
 	$(SRC_DIR)/wikipedia.h \
 	$(SRC_DIR)/wikipedia_page.h \
 	$(SRC_DIR)/wordnet.h \
-	$(SRC_DIR)/string_utils.h \
-	$(SRC_DIR)/str.h \
-	$(SRC_DIR)/template_algo.h \
 	$(SRC_DIR)/database_mysql.h \
 	$(SRC_DIR)/google_translator.h \
 	$(SRC_DIR)/google_research_translator.h \
 	$(SRC_DIR)/translation.h \
 	$(SRC_DIR)/webpage_retriever.h \
-	$(SRC_DIR)/pattern_singleton.h \
 	$(SRC_DIR)/application_out.h \
 	$(SRC_DIR)/link_print.h \
 	$(SRC_DIR)/urlcode.h \
@@ -304,9 +311,10 @@ ltw_headers = \
 	$(SRC_DIR)/request.h \
 	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/wikification.h \
+	$(SRC_DIR)/target.h \
 	$(SRC_DIR)/system_info.h
 
-noinst_HEADERS = $(ltw_headers)
+noinst_HEADERS = $(ltw_headers) $(utils_header)
 ltw_sources = \
 	$(SRC_DIR)/sys_file.cpp \
 	$(SRC_DIR)/sys_files.cpp \
@@ -366,6 +374,7 @@ ltw_sources = \
 	$(SRC_DIR)/request.cpp \
 	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/wikification.cpp \
+	$(SRC_DIR)/target.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 ltw_SOURCES = $(ltw_sources)
@@ -380,8 +389,9 @@ urlencoder_LDADD =
 urlencoder_CFLAGS = 
 wikify_SOURCES = $(SRC_DIR)/sys_file.cpp \
 									 $(SRC_DIR)/anchor.cpp \
+									 $(SRC_DIR)/target.cpp \
 									 $(SRC_DIR)/wikification.cpp \
-									  $(TOOLS_DIR)/wikify.cpp
+									 $(TOOLS_DIR)/wikify.cpp
 
 wikify_LDADD = 
 wikify_CFLAGS = 
@@ -495,6 +505,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sys_files.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_call.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/system_info.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/target.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/topic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/translation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/urlcode.Po@am__quote@
@@ -1347,6 +1358,20 @@ wikification.obj: $(SRC_DIR)/wikification.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/wikification.cpp' object='wikification.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o wikification.obj `if test -f '$(SRC_DIR)/wikification.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/wikification.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/wikification.cpp'; fi`
+
+target.o: $(SRC_DIR)/target.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT target.o -MD -MP -MF $(DEPDIR)/target.Tpo -c -o target.o `test -f '$(SRC_DIR)/target.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/target.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/target.Tpo $(DEPDIR)/target.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/target.cpp' object='target.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o target.o `test -f '$(SRC_DIR)/target.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/target.cpp
+
+target.obj: $(SRC_DIR)/target.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT target.obj -MD -MP -MF $(DEPDIR)/target.Tpo -c -o target.obj `if test -f '$(SRC_DIR)/target.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/target.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/target.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/target.Tpo $(DEPDIR)/target.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/target.cpp' object='target.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o target.obj `if test -f '$(SRC_DIR)/target.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/target.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/target.cpp'; fi`
 
 ltw.o: $(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ltw.o -MD -MP -MF $(DEPDIR)/ltw.Tpo -c -o ltw.o `test -f '$(SRC_DIR)/ltw.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/ltw.cpp

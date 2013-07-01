@@ -8,6 +8,8 @@
 #ifndef TARGET_H_
 #define TARGET_H_
 
+#include <string>
+
 namespace QLINK {
 
 class target {

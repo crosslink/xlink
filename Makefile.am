@@ -6,7 +6,18 @@ LTW_LIBS = -lpthread -L$(srcdir)  -lcurl -latire_api -lWN  -L/usr/lib64/mysql @M
 #LTW_LIBS ==-lgcj
 
 SRC_DIR = src
+INCLUDE_DIR = include
 TOOLS_DIR = tools
+
+utils_header = 	\
+	$(INCLUDE_DIR)/extralib.h \
+	$(INCLUDE_DIR)/template_algo.h \
+	$(INCLUDE_DIR)/template_comparor.h \
+	$(INCLUDE_DIR)/pattern_singleton.h \
+	$(INCLUDE_DIR)/string_utils.h \
+	$(INCLUDE_DIR)/xml.h \
+	$(INCLUDE_DIR)/XML2TXT.h \
+	$(INCLUDE_DIR)/str.h 
 
 ltw_headers = \
 	$(SRC_DIR)/run.h \
@@ -54,15 +65,11 @@ ltw_headers = \
 	$(SRC_DIR)/wikipedia.h \
 	$(SRC_DIR)/wikipedia_page.h \
 	$(SRC_DIR)/wordnet.h \
-	$(SRC_DIR)/string_utils.h \
-	$(SRC_DIR)/str.h \
-	$(SRC_DIR)/template_algo.h \
 	$(SRC_DIR)/database_mysql.h \
 	$(SRC_DIR)/google_translator.h \
 	$(SRC_DIR)/google_research_translator.h \
 	$(SRC_DIR)/translation.h \
 	$(SRC_DIR)/webpage_retriever.h \
-	$(SRC_DIR)/pattern_singleton.h \
 	$(SRC_DIR)/application_out.h \
 	$(SRC_DIR)/link_print.h \
 	$(SRC_DIR)/urlcode.h \
@@ -70,9 +77,10 @@ ltw_headers = \
 	$(SRC_DIR)/request.h \
 	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/wikification.h \
+	$(SRC_DIR)/target.h \
 	$(SRC_DIR)/system_info.h
 
-noinst_HEADERS = $(ltw_headers)
+noinst_HEADERS = $(ltw_headers) $(utils_header)
 	
 ltw_sources = \
 	$(SRC_DIR)/sys_file.cpp \
@@ -133,6 +141,7 @@ ltw_sources = \
 	$(SRC_DIR)/request.cpp \
 	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/wikification.cpp \
+	$(SRC_DIR)/target.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 noinst_PROGRAMS = ltw collection_link_finder urlencoder wikify
@@ -151,8 +160,9 @@ urlencoder_CFLAGS =
 
 wikify_SOURCES = $(SRC_DIR)/sys_file.cpp \
 									 $(SRC_DIR)/anchor.cpp \
+									 $(SRC_DIR)/target.cpp \
 									 $(SRC_DIR)/wikification.cpp \
-									  $(TOOLS_DIR)/wikify.cpp
+									 $(TOOLS_DIR)/wikify.cpp
 									 
 wikify_LDADD =
 wikify_CFLAGS =								
