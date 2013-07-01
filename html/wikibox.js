@@ -1,34 +1,37 @@
-
+function processAbstract(text) {
+	
+}
 
 function loadXMLDoc(url)
 {
 	var xmlhttp;
 	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
 	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    {
-	    document.getElementById("wikiabstract").innerHTML=xmlhttp.responseText;
-	    }
-	  }
+{// code for IE6, IE5
+xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+		xmlhttp.onreadystatechange=function()
+	{
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{
+		var abs = processAbstract(xmlhttp.responseText)
+		ocument.getElementById("wikiabstract").innerHTML= abs;
+	}
+	}
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
 }
 
-function showWikiBox(url, anchor) {
-	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=' + url + '>' + \
+function showWikiBox(lang, id, anchor) {
+	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + \
 		'</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div></div>',
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
-	loadXMLDoc("/?api");
+	loadXMLDoc('http://en.wikipedia.org/w/api.php?action=parse&section=0&format=xml?7&pageid=' + id);
 //	var wikiAbstract = document.getElementById("wikiabstract");
 	
 /*	if (wikiAbstract) {
@@ -37,6 +40,6 @@ function showWikiBox(url, anchor) {
 	//		tt_aElt[0].innerHTML = "Crazy me";
 			wikiAbstract.innerHTML = "Crazy me";
 			
-	    }, 2000);
+	}, 2000);
 	}*/
 }

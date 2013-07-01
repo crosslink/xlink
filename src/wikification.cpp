@@ -7,6 +7,7 @@
 
 #include "wikification.h"
 #include "anchor.h"
+#include "target.h"
 
 #include <stpl/stpl_stream.h>
 #include <stpl/xml/stpl_xml.h>
@@ -73,7 +74,13 @@ void wikification::linkify(const char* links_xml,
 					if (link != NULL) {
 						string name = anchor_elem->get_attribute("name");
 						long	offset = atol(anchor_elem->get_attribute("offset").c_str());
-						string target = link->text();
+						string id = link->text();
+						string lang = anchor_elem->get_attribute("lang");
+
+						if (lang.length() == 0)
+							lang = "en";
+
+						target a_target(lang, id);
 
 						if (offset > 0) {
 							/*
@@ -82,7 +89,7 @@ void wikification::linkify(const char* links_xml,
 							 * and I don't why, this is just a temporary fix
 							 */
 							anchor ancr(name, offset);
-							ancr.add_target(target);
+							ancr.add_target(a_target);
 							anchor_array.push_back(ancr);
 						}
 					}
@@ -108,7 +115,7 @@ void wikification::linkify(const char* links_xml,
 				for (int i = 0; i < anchor_array.size(); ++i) {
 					anchor &ancr = anchor_array[i];
 					const string &name = ancr.get_name();
-					const string &target = ancr.get_target();
+					const target_type &a_target = ancr.get_target();
 					const string::size_type where  = ancr.get_offset();
 
 					if (where <= last_offset)
@@ -127,7 +134,7 @@ void wikification::linkify(const char* links_xml,
 
 					stringstream ss;
 					string url = "http://en.wikipedia.org/w/index.php?curid=" + target;
-					ss << "<a href=\"" << url << "\" onmouseover=\"showWikiBox('" << url << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
+					ss << "<a href=\"" << url << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG

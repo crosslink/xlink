@@ -27,8 +27,10 @@
 #include <string>
 #include <vector>
 
+class target;
+
 namespace QLINK {
-typedef 	std::string target_type;
+typedef 	target target_type;
 
 class anchor {
 private:
@@ -66,7 +68,7 @@ public:
 
 	const target_type &get_target(int index = 0) const { return targets_[0]; }
 
-	void add_target(const std::string &target) {
+	void add_target(const target_type& target) {
 		targets_.push_back(target);
 	}
 };
