@@ -29,6 +29,7 @@
 #include "google_research_translator.h"
 #include "webpage_retriever.h"
 #include "urlcode.h"
+#include "wikipedia.h"
 
 #include <string>
 #include <ctime>
@@ -278,6 +279,8 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		const char* url, const char* method, const char* version,
 		const char* upload_data, size_t* upload_data_size, void** con_cls) {
 
+	 cerr << "Attempt to answer the connection" << endl;
+	 
 	/*
 	 *  load necessary tables into memory and do some preparation work
 	 */
@@ -289,40 +292,56 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 //	  MHD_get_connection_values (connection, MHD_GET_ARGUMENT_KIND, parse_request_arguments,
 //	                             NULL);
 	// or if we know what we are looking for
-
-	 const char *page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
-
-	 cerr << "Attempt to answer the connection" << endl;
+	 int operation = OPERATION_NONE;
+	 stringstream page_buf;
 
 	 const char *external_page = NULL;
 	 char *result = NULL;
+	 
+	 if (strlen(url) == 1 && *url == '/') {
+		 const char *page_url = NULL;
+		 page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
+		 operation = OPERATION_WIKIFY;
+		 if (page_url != NULL)
+			 page_buf << instance_ptr_->check_request(page_url);
+		 /*
+		  * TODO
+		  * else then response with some error information
+		  */
+	 }
+	 else if (strlen(url) == 4 && strncmp(url, "/get") == 0) {
+		 const char *what = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "pageid");
+		 page_buf << wikipedia::get
+		 operation = OPERATION_WIKIAPI_ACCESS;
+	 }
+	 else {
+			time_t t = ::time(0);   // get time now
+			struct tm * now = localtime( & t );
+			std::stringstream datetime;
+			datetime << (now->tm_year + 1900) << '-'
+					 << (now->tm_mon + 1) << '-'
+					 <<  now->tm_mday
+					 << " "
+					 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
 
-	 stringstream page_buf;
+
+		//	page_buf << "Content-Type: text/html" << endl;
+			page_buf  << "<html><body>";
+			page_buf << datetime.str() <<endl;
+			page_buf << "<br>";
+			page_buf << "page url: " << page_url << endl;
+			page_buf << "</body></html>";
+	 }
+
 //	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
-//		time_t t = ::time(0);   // get time now
-//		struct tm * now = localtime( & t );
-//		std::stringstream datetime;
-//		datetime << (now->tm_year + 1900) << '-'
-//				 << (now->tm_mon + 1) << '-'
-//				 <<  now->tm_mday
-//				 << " "
-//				 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
-//
 
-//	//	page_buf << "Content-Type: text/html" << endl;
-//		page_buf  << "<html><body>";
-//		page_buf << datetime.str() <<endl;
-//		page_buf << "<br>";
-//		page_buf << "page url: " << page_url << endl;
-//		page_buf << "</body></html>";
-
-		 if (page_url) {
-			 external_page = instance_ptr_->check_request(page_url);
-	//			 result = strdup(external_page);
-	//		 free(decoded_url);
-		 }
-		if (external_page != NULL)
-			page_buf << external_page;
+//		 if (page_url) {
+//			 
+//	//			 result = strdup(external_page);
+//	//		 free(decoded_url);
+//		 }
+//		if (external_page != NULL)
+//			page_buf << external_page;
 
 		result = strdup(page_buf.str().c_str());
 //	 }
@@ -332,6 +351,10 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 
 //	response = MHD_create_response_from_buffer (strlen(result),
 //	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
+		return response_with_result(result);
+}
+
+int QLINK::ltw_run::response_with_result(const char* result) {
 	struct MHD_Response *response  = MHD_create_response_from_data (strlen(result),
 	                                            result,  MHD_NO, MHD_YES);
 

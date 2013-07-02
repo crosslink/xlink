@@ -80,3 +80,8 @@ std::pair<std::string, std::string> wikipedia::process_title(std::string& orig, 
 	trim_right(desc, " ");
 	return make_pair(title, desc);
 }
+
+std::string QLINK::wikipedia::get_article_abstract_by_id(std::string lang, std::string id) {
+	webpage_retriever page_fetcher;
+
+}

@@ -6,16 +6,17 @@ function loadXMLDoc(url)
 		xmlhttp=new XMLHttpRequest();
 	}
 	else
-{// code for IE6, IE5
-xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-}
-		xmlhttp.onreadystatechange=function()
-	{
-	if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	{
-		var abs = processAbstract(xmlhttp.responseText)
-		ocument.getElementById("wikiabstract").innerHTML= abs;
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
+	
+	xmlhttp.onreadystatechange = function()
+	{
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		{
+			var abs = processAbstract(xmlhttp.responseText);
+			document.getElementById("wikiabstract").innerHTML= abs;
+		}
 	}
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
@@ -30,7 +31,7 @@ function showWikiBox(lang, id, anchor) {
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
-	loadXMLDoc('http://en.wikipedia.org/w/api.php?action=parse&section=0&format=xml?7&pageid=' + id);
+	loadXMLDoc('/get?pageid=' + id);
 //	var wikiAbstract = document.getElementById("wikiabstract");
 	
 /*	if (wikiAbstract) {
@@ -41,6 +42,10 @@ function showWikiBox(lang, id, anchor) {
 			
 	}, 2000);
 	}*/
+}
+
+function processAbstract (text) {
+	return text
 }
 /*
 function processAbstract(text) {

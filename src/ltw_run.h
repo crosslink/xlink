@@ -43,6 +43,10 @@ namespace QLINK {
 	public:
 		typedef std::map<std::string, request *> request_type;
 
+		static const int								OPERATION_NONE = -1;
+		static const int								OPERATION_WIKIFY = 1;
+		static const int								OPERATION_WIKIAPI_ACCESS = 2;
+
 	private:
 		ltw_task											*task_;
 		struct MHD_Daemon						*daemon_;
@@ -78,6 +82,7 @@ namespace QLINK {
                 const char *method, const char *version,
                 const char *upload_data,
                 size_t *upload_data_size, void **con_cls);
+		static int response_with_result(const char *result);
 
 		void load_config(const char *config_file);
 		void load_config();
