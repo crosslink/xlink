@@ -12,10 +12,18 @@ function loadXMLDoc(url)
 	
 	xmlhttp.onreadystatechange = function()
 	{
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		xmlhttp.onreadystatechange = function()
 		{
-			var abs = processAbstract(xmlhttp.responseText);
-			document.getElementById("wikiabstract").innerHTML= abs;
+		    var text;
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+			{
+				text = processAbstract(xmlhttp.responseText);
+			}
+			else
+			{
+			    text = "Error in retrieving the abstract";
+			}
+			document.getElementById("wikiabstract").innerHTML= text;
 		}
 	}
 	xmlhttp.open("GET", url, true);
@@ -31,7 +39,7 @@ function showWikiBox(lang, id, anchor) {
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
-	loadXMLDoc('/get?pageid=' + id);
+	loadXMLDoc('/get?pageid=' + id + '&lang=' + lang);
 //	var wikiAbstract = document.getElementById("wikiabstract");
 	
 /*	if (wikiAbstract) {

@@ -40,6 +40,10 @@
 #include <sys/socket.h>
 #include <microhttpd.h>
 
+#include <sys/stat.h>
+#include <fcntl.h>
+
+
 using namespace std;
 
 QLINK::ltw_run* QLINK::ltw_run::instance_ptr_ = NULL;
@@ -297,6 +301,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 
 	 const char *external_page = NULL;
 	 char *result = NULL;
+	 int fd;
 	 
 	 if (strlen(url) == 1 && *url == '/') {
 		 const char *page_url = NULL;
@@ -309,39 +314,24 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		  * else then response with some error information
 		  */
 	 }
-	 else if (strlen(url) == 4 && strncmp(url, "/get") == 0) {
+	 else if (strlen(url) == 4 && strcmp(url, "/get") == 0) {
 		 const char *what = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "pageid");
-		 page_buf << wikipedia::get
+		 const char *lang = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "lang");
+
+		 if (what && lang) {
+			 page_buf << wikipedia::get_article_abstract_by_id(lang, what);
+		 }
+		 else
+			 create_info_page("pageid or lang is not specified!", page_buf);
 		 operation = OPERATION_WIKIAPI_ACCESS;
 	 }
-	 else {
-			time_t t = ::time(0);   // get time now
-			struct tm * now = localtime( & t );
-			std::stringstream datetime;
-			datetime << (now->tm_year + 1900) << '-'
-					 << (now->tm_mon + 1) << '-'
-					 <<  now->tm_mday
-					 << " "
-					 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
-
-
-		//	page_buf << "Content-Type: text/html" << endl;
-			page_buf  << "<html><body>";
-			page_buf << datetime.str() <<endl;
-			page_buf << "<br>";
-			page_buf << "page url: " << page_url << endl;
-			page_buf << "</body></html>";
+	 else if ((fd = look_for_static_file(url + 1)) > -1) {
+		 operation = OPERATION_STATIC_FILE;
+		 return response_with_result(connection, (void *)&fd, operation);
 	 }
-
-//	 if (result == 0 || strlen(result) == 0 || page_fetcher.get_response_code() != 200) {
-
-//		 if (page_url) {
-//			 
-//	//			 result = strdup(external_page);
-//	//		 free(decoded_url);
-//		 }
-//		if (external_page != NULL)
-//			page_buf << external_page;
+	 else {
+		 create_info_page(string("url: ") + url, page_buf);
+	 }
 
 		result = strdup(page_buf.str().c_str());
 //	 }
@@ -351,18 +341,60 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 
 //	response = MHD_create_response_from_buffer (strlen(result),
 //	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
-		return response_with_result(result);
+		return response_with_result(connection, result, operation);
 }
 
-int QLINK::ltw_run::response_with_result(const char* result) {
-	struct MHD_Response *response  = MHD_create_response_from_data (strlen(result),
-	                                            result,  MHD_NO, MHD_YES);
+int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void *result, int operation) {
+	struct MHD_Response *response  = NULL;
+	int fd;
+	switch (operation) {
+	case OPERATION_STATIC_FILE:
+		fd = *((int *)result);
+		struct stat sbuf;
+		if (0 != fstat (fd, &sbuf)) {
+			response =
+			    MHD_create_response_from_fd_at_offset (sbuf.st_size, fd, 0);
+			break;
+		}
+		return MHD_NO;
+	default:
+		response = MHD_create_response_from_data (strlen((char *)result),
+				(char *)result,  MHD_NO, MHD_YES);
+		free(result);
+		break;
+	}
+
 
     if (response == NULL) return MHD_NO;
 
 	MHD_add_response_header (response, "Content-Type", "text/html");
 	int ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
 	MHD_destroy_response (response);
-	free(result);
+
 	return ret;
+}
+
+void QLINK::ltw_run::create_info_page(std::string info, std::ostream& out) {
+	time_t t = ::time(0);   // get time now
+	struct tm * now = localtime( & t );
+	std::stringstream datetime;
+	datetime << (now->tm_year + 1900) << '-'
+			 << (now->tm_mon + 1) << '-'
+			 <<  now->tm_mday
+			 << " "
+			 << now->tm_hour << ':'  << now->tm_min << ':' << now->tm_sec;
+
+
+//	page_buf << "Content-Type: text/html" << endl;
+	out << "<html><body>";
+	out<< datetime.str() <<endl;
+	out<< "<br>";
+	out<< info << endl;
+	out<< "</body></html>";
+}
+
+int QLINK::ltw_run::look_for_static_file(const char *file) {
+	if (sys_file::exist(file))
+		return open(file, O_RDONLY);
+	return -1;
 }

@@ -22,6 +22,8 @@
  */
 
 #include "wikipedia.h"
+#include "webpage_retriever.h"
+
 #include "string_utils.h"
 
 #include <iostream>
@@ -83,5 +85,11 @@ std::pair<std::string, std::string> wikipedia::process_title(std::string& orig, 
 
 std::string QLINK::wikipedia::get_article_abstract_by_id(std::string lang, std::string id) {
 	webpage_retriever page_fetcher;
+	const char *page = NULL;
 
+	stringstream url_for_wikipedia_article_by_id;
+	url_for_wikipedia_article_by_id << "http://" << lang << ".wikipedia.org/w/api.php?action=parse&section=0&format=xml&pageid=" << id;
+	page = page_fetcher.retrieve(url_for_wikipedia_article_by_id.str().c_str());
+
+	return page;
 }

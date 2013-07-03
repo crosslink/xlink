@@ -46,6 +46,7 @@ namespace QLINK {
 		static const int								OPERATION_NONE = -1;
 		static const int								OPERATION_WIKIFY = 1;
 		static const int								OPERATION_WIKIAPI_ACCESS = 2;
+		static const int								OPERATION_STATIC_FILE = 3;
 
 	private:
 		ltw_task											*task_;
@@ -82,7 +83,10 @@ namespace QLINK {
                 const char *method, const char *version,
                 const char *upload_data,
                 size_t *upload_data_size, void **con_cls);
-		static int response_with_result(const char *result);
+		static int response_with_result(struct MHD_Connection* connection, void *result, int operation);
+
+		static void create_info_page(std::string info, std::ostream& out);
+		static int look_for_static_file(const char *file);
 
 		void load_config(const char *config_file);
 		void load_config();
