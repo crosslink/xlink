@@ -78,6 +78,7 @@ ltw_headers = \
 	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/wikification.h \
 	$(SRC_DIR)/target.h \
+	$(SRC_DIR)/mime.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers) $(utils_header)
@@ -142,6 +143,7 @@ ltw_sources = \
 	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/wikification.cpp \
 	$(SRC_DIR)/target.cpp \
+	$(SRC_DIR)/mime.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 noinst_PROGRAMS = ltw collection_link_finder urlencoder wikify

@@ -30,6 +30,7 @@
 #include "webpage_retriever.h"
 #include "urlcode.h"
 #include "wikipedia.h"
+#include "mime.h"
 
 #include <string>
 #include <ctime>
@@ -327,7 +328,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 	 }
 	 else if ((fd = look_for_static_file(url + 1)) > -1) {
 		 operation = OPERATION_STATIC_FILE;
-		 return response_with_result(connection, (void *)&fd, operation);
+		 return response_with_result(connection, (void *)&fd, operation, mime::get_mime_type(url));
 	 }
 	 else {
 		 create_info_page(string("url: ") + url, page_buf);
@@ -341,36 +342,41 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 
 //	response = MHD_create_response_from_buffer (strlen(result),
 //	                                            (void*) result,  MHD_RESPMEM_PERSISTENT);
-		return response_with_result(connection, result, operation);
+		return response_with_result(connection, result, operation, "text/html");
 }
 
-int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void *result, int operation) {
+int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void *result, int operation, const char *mime_type) {
 	struct MHD_Response *response  = NULL;
-	int fd;
+	int fd = -1;
 	switch (operation) {
 	case OPERATION_STATIC_FILE:
 		fd = *((int *)result);
 		struct stat sbuf;
-		if (0 != fstat (fd, &sbuf)) {
+		if (0 == fstat (fd, &sbuf)) {
 			response =
-			    MHD_create_response_from_fd_at_offset (sbuf.st_size, fd, 0);
-			break;
+			    MHD_create_response_from_fd (sbuf.st_size, fd);
+			MHD_add_response_header (response, "Content-Type", mime_type);
 		}
-		return MHD_NO;
+		break;
 	default:
 		response = MHD_create_response_from_data (strlen((char *)result),
 				(char *)result,  MHD_NO, MHD_YES);
+
+		MHD_add_response_header (response, "Content-Type", mime_type);
 		free(result);
 		break;
 	}
 
+	int ret;
+    if (response == NULL)
+    	ret =MHD_NO;
+    else {
+		ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
+		MHD_destroy_response (response);
+    }
 
-    if (response == NULL) return MHD_NO;
-
-	MHD_add_response_header (response, "Content-Type", "text/html");
-	int ret = MHD_queue_response (connection, MHD_HTTP_OK, response);
-	MHD_destroy_response (response);
-
+//	if (operation == OPERATION_STATIC_FILE && fd > 0)
+//		close(fd);
 	return ret;
 }
 

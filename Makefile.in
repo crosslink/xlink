@@ -100,7 +100,7 @@ am__objects_1 = sys_file.$(OBJEXT) sys_files.$(OBJEXT) \
 	webpage_retriever.$(OBJEXT) application_out.$(OBJEXT) \
 	link_print.$(OBJEXT) urlcode.$(OBJEXT) session.$(OBJEXT) \
 	request.$(OBJEXT) anchor.$(OBJEXT) wikification.$(OBJEXT) \
-	target.$(OBJEXT) ltw.$(OBJEXT)
+	target.$(OBJEXT) mime.$(OBJEXT) ltw.$(OBJEXT)
 am_ltw_OBJECTS = $(am__objects_1)
 ltw_OBJECTS = $(am_ltw_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -312,6 +312,7 @@ ltw_headers = \
 	$(SRC_DIR)/anchor.h \
 	$(SRC_DIR)/wikification.h \
 	$(SRC_DIR)/target.h \
+	$(SRC_DIR)/mime.h \
 	$(SRC_DIR)/system_info.h
 
 noinst_HEADERS = $(ltw_headers) $(utils_header)
@@ -375,6 +376,7 @@ ltw_sources = \
 	$(SRC_DIR)/anchor.cpp \
 	$(SRC_DIR)/wikification.cpp \
 	$(SRC_DIR)/target.cpp \
+	$(SRC_DIR)/mime.cpp \
 	$(SRC_DIR)/ltw.cpp
 
 ltw_SOURCES = $(ltw_sources)
@@ -490,6 +492,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltw_run.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltw_task.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltw_topic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mime.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/outgoing_link.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/outgoing_links.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/porter.Po@am__quote@
@@ -1372,6 +1375,20 @@ target.obj: $(SRC_DIR)/target.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/target.cpp' object='target.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o target.obj `if test -f '$(SRC_DIR)/target.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/target.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/target.cpp'; fi`
+
+mime.o: $(SRC_DIR)/mime.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT mime.o -MD -MP -MF $(DEPDIR)/mime.Tpo -c -o mime.o `test -f '$(SRC_DIR)/mime.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/mime.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/mime.Tpo $(DEPDIR)/mime.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/mime.cpp' object='mime.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o mime.o `test -f '$(SRC_DIR)/mime.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/mime.cpp
+
+mime.obj: $(SRC_DIR)/mime.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT mime.obj -MD -MP -MF $(DEPDIR)/mime.Tpo -c -o mime.obj `if test -f '$(SRC_DIR)/mime.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/mime.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/mime.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/mime.Tpo $(DEPDIR)/mime.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRC_DIR)/mime.cpp' object='mime.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o mime.obj `if test -f '$(SRC_DIR)/mime.cpp'; then $(CYGPATH_W) '$(SRC_DIR)/mime.cpp'; else $(CYGPATH_W) '$(srcdir)/$(SRC_DIR)/mime.cpp'; fi`
 
 ltw.o: $(SRC_DIR)/ltw.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ltw.o -MD -MP -MF $(DEPDIR)/ltw.Tpo -c -o ltw.o `test -f '$(SRC_DIR)/ltw.cpp' || echo '$(srcdir)/'`$(SRC_DIR)/ltw.cpp

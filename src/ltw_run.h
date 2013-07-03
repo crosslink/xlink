@@ -83,7 +83,7 @@ namespace QLINK {
                 const char *method, const char *version,
                 const char *upload_data,
                 size_t *upload_data_size, void **con_cls);
-		static int response_with_result(struct MHD_Connection* connection, void *result, int operation);
+		static int response_with_result(struct MHD_Connection* connection, void *result, int operation, const char *mime_type);
 
 		static void create_info_page(std::string info, std::ostream& out);
 		static int look_for_static_file(const char *file);
