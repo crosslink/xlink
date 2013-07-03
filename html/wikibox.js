@@ -1,12 +1,29 @@
+/******************************************************************************
+ * This file is part of the XLINK - The Link Discovery Toolkit.
+ * (c) Copyright 2013 Queensland University of Technology
+ *
+ * This file may be distributed and/or modified under the terms of the
+ * BSD 3-cause LICENSE appearing in the file BSD.txt included in the
+ * packaging of this file.
+ *
+ * This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+ * WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *******************************************************************************
+ *
+ * @author				Eric Tang
+ *
+ *******************************************************************************/
+
 function loadXMLDoc(url)
 {
 	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
+	if (window.XMLHttpRequest) // code for IE7+, Firefox, Chrome, Opera, Safari
+	{
 		xmlhttp=new XMLHttpRequest();
 	}
-	else
-	{// code for IE6, IE5
+	else // code for IE6, IE5
+	{
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
@@ -17,7 +34,7 @@ function loadXMLDoc(url)
 		    var text;
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 			{
-				text = processAbstract(xmlhttp.responseText);
+				text = xmlhttp.responseText;
 			}
 			else
 			{
@@ -41,21 +58,4 @@ function showWikiBox(lang, id, anchor) {
 	
 	loadXMLDoc('/get?pageid=' + id + '&lang=' + lang);
 //	var wikiAbstract = document.getElementById("wikiabstract");
-	
-/*	if (wikiAbstract) {
-		setTimeout(function() {
-//			$("#wikiabstract").load("abstract_test.txt");
-	//		tt_aElt[0].innerHTML = "Crazy me";
-			wikiAbstract.innerHTML = "Crazy me";
-			
-	}, 2000);
-	}*/
 }
-
-function processAbstract (text) {
-	return text
-}
-/*
-function processAbstract(text) {
-	return text;
-}*/

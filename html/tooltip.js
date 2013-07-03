@@ -96,9 +96,9 @@ config. TitleFontColor	= '#ffffff'	// Color of title text - if '', BgColor (of t
 config. TitleFontFace	= ''		// If '' use FontFace (boldified)
 config. TitleFontSize	= ''		// If '' use FontSize
 config. Width			= 0 		// Tooltip width; 0 for automatic adaption to tooltip content
-config.Ajax				= false
-config.AjaxUrl			= '' 		// external url to load
-config.AjaxId				= ''		// element id for updating the content
+config. Ajax				= false
+config. AjaxUrl			= '' 		// external url to load
+config. AjaxId				= ''		// element id for updating the content
 //=======  END OF TOOLTIP CONFIG, DO NOT CHANGE ANYTHING BELOW  ==============//
 
 
@@ -404,7 +404,7 @@ function tt_IsW3cBox()
 	var css = tt_aElt[0].style;
 
 	css.padding = "10px";
-	css.width = "100px";
+	css.width = "400px";
 	tt_bBoxOld = (tt_GetDivW(tt_aElt[0]) == 40);
 	css.padding = "0px";
 	tt_ResetMainDiv();
@@ -685,7 +685,7 @@ function tt_FormatTip()
 	}
 	else
 	{
-		tt_w = 0;
+		tt_w = 400;
 		dy = 0;
 	}
 

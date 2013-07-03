@@ -153,11 +153,11 @@ void find_and_replace( T& source, const T& find, const T& replace )
 
         size_t j = 0;
         size_t len = source.length();
+        size_t find_len = find.length();
         for (; j < len && (j = source.find(find, j)) != T::npos;)
         {
-                source.replace(j, len, replace);
+                source.replace(j, find_len, replace);
                 j += replace.length();
-                len = source.length();
         }
 }
 

@@ -28,6 +28,7 @@
 #include <utility>
 
 namespace QLINK {
+	typedef std::pair<long, long> bound_type;
 
 	struct wiki_entry{
 		long 			id;
@@ -43,6 +44,9 @@ namespace QLINK {
 
 		static std::pair<std::string, std::string> process_title(std::string& orig, bool lowercase/*, bool english_only*/);
 		static std::string get_article_abstract_by_id(std::string lang, std::string id);
+
+	private:
+		static bound_type get_article_abstract(std::string& page);
 	};
 
 }
