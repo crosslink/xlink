@@ -47,9 +47,10 @@ function loadXMLDoc(url)
 	xmlhttp.send();
 }
 
-function createLinks(lang, ids) {
+function createSeeAlsoLinks(lang, ids) {
 	var links_array = ids.split(";");
-	var links_html = '<div id="wikilinks">';
+	var links_html = ""; 
+	//'<div id="wikilinks">';
 
 	for (var i = 0; i < links_array.length; i++) {
 		var id_anchor = links_array[i].split(":");
@@ -61,12 +62,16 @@ function createLinks(lang, ids) {
 		links_html.concat(temp);
 	}
 	
-	links_html.concat('</div>');
+//	links_html.concat('</div>');
 }
 
-function showWikiBox(lang, ids) {
-	var links = createLinks(lang, ids);
-	wikiboxHtml = '<div id="wikibox">' + links + '<hr><div id="wikiabstract"><img src="http://localhost/ajaxload.gif" /> Fetching Abstract...</div></div>';
+function showWikiBox(lang, id, anchor, others) {
+	wikiboxHtml = '<div id="wikibox"><div id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div>';
+	if (others) {
+		var links = createSeeAlsoLinks(lang, ids);
+		('<div class="seealso"><hr><h3>See Also</h3><hr><br>' + links + '</div>');
+	}
+	wikiboxHtml.concat('</div>');
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	

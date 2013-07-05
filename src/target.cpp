@@ -12,7 +12,7 @@ namespace QLINK {
 target::target() {
 }
 
-target::target(std::string lang, std::string a_target) : lang_(lang), target_(a_target) {
+target::target(std::string lang, std::string a_target, std::string title) : lang_(lang), target_(a_target), title_(title) {
 }
 
 target::~target() {

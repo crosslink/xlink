@@ -68,6 +68,8 @@ public:
 
 	const target_type& get_target(int index = 0) const { return targets_[index]; }
 
+	int get_target_count() { return targets_.size(); }
+
 	void add_target(const target_type& target) {
 		targets_.push_back(target);
 	}

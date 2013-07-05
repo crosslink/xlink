@@ -16,10 +16,11 @@ class target {
 private:
 	std::string lang_;
 	std::string target_;
+	std::string title_;
 
 public:
 	target();
-	target(std::string lang, std::string a_target);
+	target(std::string lang, std::string a_target, std::string title);
 	virtual ~target();
 
 	const std::string& get_lang() const {
@@ -36,6 +37,14 @@ public:
 
 	void set_target(const std::string& target) {
 		target_ = target;
+	}
+
+	const std::string& get_title() const {
+		return title_;
+	}
+
+	void set_title(const std::string& title) {
+		title_ = title;
 	}
 };
 

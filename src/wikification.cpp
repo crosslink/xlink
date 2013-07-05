@@ -71,16 +71,18 @@ void wikification::linkify(const char* links_xml,
 				while (anchor_it != outgoing_links->iter_end()) {
 					element_type *anchor_elem = static_cast<element_type *>((*anchor_it));
 					element_type *link = anchor_elem->find_child("tofile");
+
+					string name = anchor_elem->get_attribute("name");
+					long	offset = atol(anchor_elem->get_attribute("offset").c_str());
 					if (link != NULL) {
-						string name = anchor_elem->get_attribute("name");
-						long	offset = atol(anchor_elem->get_attribute("offset").c_str());
 						string id = link->text();
-						string lang = anchor_elem->get_attribute("lang");
+						string title = link->get_attribute("title");
+						string lang = link->get_attribute("lang");
 
 						if (lang.length() == 0)
 							lang = "en";
 
-						target a_target(lang, id);
+						target a_target(lang, id, title);
 
 						if (offset > 0) {
 							/*
@@ -136,8 +138,17 @@ void wikification::linkify(const char* links_xml,
 
 					stringstream ss;
 					stringstream url;
+					stringstream ids;
 					url << "http://en.wikipedia.org/w/index.php?curid=" << a_target.get_target();
-					ss << "<a href=\"" << url.str() << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name <<"')\">" << anchor_name << "</a>";
+
+					for (int i = 1; i < ancr.get_target_count(); ++i) {
+						const target& tgt = ancr.get_target(i);
+						if (i > 1)
+							ids << ";";
+						ids << tgt.get_lang() <<":" << tgt.get_target() << ":" << (a_target.get_title().length() == 0) ? tgt.get_target() : tgt.get_title();
+					}
+
+					ss << "<a href=\"" << url.str() << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name << "', '"  << ids.str() <<"')\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
