@@ -47,15 +47,28 @@ function loadXMLDoc(url)
 	xmlhttp.send();
 }
 
-function showWikiBox1() {
-	Tip("test", DELAY, 1000, STICKY, true);
+function createLinks(lang, ids) {
+	var links_array = ids.split(";");
+	var links_html = '<div id="wikilinks">';
+
+	for (var i = 0; i < links_array.length; i++) {
+		var id_anchor = links_array[i].split(":");
+		var id = id_anchor[0];
+		var anchor = id_anchor[1];
+		var temp = '<a  class="wikibox" href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a>
+		if (i > 0)
+			links_html.concat('<br>');
+		links_html.concat(temp);
+	}
+	
+	links_html.concat('</div>');
 }
 
-function showWikiBox(lang, id, anchor) {
-	wikiboxHtml = '<div id="wikibox"><div id="wikilinks"><a href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a></div><br><hr><div style="font-style:italic" id="wikiabstract"><img src="http://localhost/ajaxload.gif" /> Fetching Abstract...</div></div>';
+function showWikiBox(lang, ids) {
+	var links = createLinks(lang, ids);
+	wikiboxHtml = '<div id="wikibox">' + links + '<hr><div id="wikiabstract"><img src="http://localhost/ajaxload.gif" /> Fetching Abstract...</div></div>';
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
 	loadXMLDoc('/get?pageid=' + id + '&lang=' + lang);
-//	var wikiAbstract = document.getElementById("wikiabstract");
 }

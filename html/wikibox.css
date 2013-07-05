@@ -1,10 +1,10 @@
 /*
-http://forrst.com/posts/Simple_pure_CSS_tooltip_with_arrow-BkY
+http://forrst.com/posts/Simple_pure_CSS_wikibox_with_arrow-BkY
 
 */
-.tooltip{display:inline;position:relative}
- .tooltip:hover{text-decoration:none}
- .tooltip:hover:after{
+ .wikibox{display:inline;position:relative}
+ .wikibox:hover{text-decoration:none}
+ .wikibox:hover:after{
    background:#111;
    background:rgba(0,0,0,.8);
    border-radius:5px;
@@ -18,7 +18,8 @@ http://forrst.com/posts/Simple_pure_CSS_tooltip_with_arrow-BkY
    white-space:nowrap;
    z-index:98
   }
-  .tooltip:hover:before{
+  
+  .wikibox:hover:before{
     border:solid;
     border-color:#111 transparent;
     border-width:6px 6px 0 6px;
