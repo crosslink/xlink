@@ -70,30 +70,36 @@ void wikification::linkify(const char* links_xml,
 
 				while (anchor_it != outgoing_links->iter_end()) {
 					element_type *anchor_elem = static_cast<element_type *>((*anchor_it));
-					element_type *link = anchor_elem->find_child("tofile");
 
-					string name = anchor_elem->get_attribute("name");
-					long	offset = atol(anchor_elem->get_attribute("offset").c_str());
-					if (link != NULL) {
-						string id = link->text();
-						string title = link->get_attribute("title");
-						string lang = link->get_attribute("lang");
+					entity_iterator link_it = anchor_elem->iter_begin();
+					while (link_it != anchor_elem->iter_end()) {
+						element_type *link = static_cast<element_type *>((*link_it));; //anchor_elem->find_child("tofile");
 
-						if (lang.length() == 0)
-							lang = "en";
+						string name = anchor_elem->get_attribute("name");
+						long	offset = atol(anchor_elem->get_attribute("offset").c_str());
+//						if (link != NULL) {
+							string id = link->text();
+							string title = link->get_attribute("title");
+							string lang = link->get_attribute("lang");
 
-						target a_target(lang, id, title);
+							if (lang.length() == 0)
+								lang = "en";
 
-						if (offset > 0) {
-							/*
-							 * TODO
-							 * the  anchor offset is one byte offset from the real offset
-							 * and I don't why, this is just a temporary fix
-							 */
-							anchor ancr(name, offset);
-							ancr.add_target(a_target);
-							anchor_array.push_back(ancr);
-						}
+							target a_target(lang, id, title);
+
+							if (offset > 0) {
+								/*
+								 * TODO
+								 * the  anchor offset is one byte offset from the real offset
+								 * and I don't why, this is just a temporary fix
+								 */
+								anchor ancr(name, offset);
+								ancr.add_target(a_target);
+								anchor_array.push_back(ancr);
+							}
+//						}
+
+						++link_it;
 					}
 					++anchor_it;
 				}

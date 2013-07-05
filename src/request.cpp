@@ -74,11 +74,13 @@ void request::apply_links(const std::string& links_xml) {
 		while (it_pre != wikified_page_.begin() && isspace(*it_pre))
 			--it_pre;
 
-		while (it_next != wikified_page_.end() && isspace(*it_next))
-			++it_next;
+		if (*it_pre == '<') {
+			while (it_next != wikified_page_.end() && *it_next != '>')
+				++it_next;
+//				while (isspace(*it_next))
 
-		if (*it_pre == '<' && *it_next == '>') {
-			wikified_page_.replace(it_pre, it_next, wikibox_scripts);
+			if (*it_next == '>')
+				wikified_page_.replace(it_pre, ++it_next, wikibox_scripts);
 			break;
 		}
 //		wikified_page_.insert(pos, wikibox_scripts);

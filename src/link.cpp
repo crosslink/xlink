@@ -18,7 +18,7 @@
  * link.cpp
  *
  *  Created on: Aug 3, 2009
- *, Andrew Trotman
+ *	@author orignially written by Andrew Trotman
  */
 
 #include "link.h"

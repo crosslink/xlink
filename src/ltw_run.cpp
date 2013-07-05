@@ -357,13 +357,13 @@ int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void
 			    MHD_create_response_from_fd (sbuf.st_size, fd);
 			MHD_add_response_header (response, "Content-Type", mime_type);
 		}
+		result = NULL;
 		break;
 	default:
 		response = MHD_create_response_from_data (strlen((char *)result),
 				(char *)result,  MHD_NO, MHD_YES);
 
 		MHD_add_response_header (response, "Content-Type", mime_type);
-		free(result);
 		break;
 	}
 
@@ -377,6 +377,8 @@ int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void
 
 //	if (operation == OPERATION_STATIC_FILE && fd > 0)
 //		close(fd);
+    if (result != NULL)
+		free(result);
 	return ret;
 }
 

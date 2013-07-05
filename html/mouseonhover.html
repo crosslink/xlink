@@ -15,8 +15,9 @@
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.2.min.js"></script>
  -->
 <html>
-<link rel="stylesheet" href="wikibox.css"/>
+<link rel="stylesheet" href="wikitip.css"/>
 <head>
+<script type="text/javascript" src="wikibox.js"></script>
 <!--  initial unsuccessful test  -->
 <!-- 
 <script type="text/javascript">
@@ -32,13 +33,12 @@ e.onmouseout = function() {
 </head>
 <body>
 <script type="text/javascript" src="tooltip.js"></script>
-<script type="text/javascript" src="wikibox.js"></script>
 <div id="parent">
 This is the main container.
 <div id="popup" style="display: none">some text here</div>
 </div>
 <a href="#" onmouseover="Tip('Tooltip text', SHADOW, true, TITLE, 'Título',CLOSEBTN, true, CLOSEBTNTEXT, 'x', STICKY, true, DURATION, 400)" >Fechar janela</a>
-<a href="#" onmouseover="showWikiBox1()" >Fechar janela 2</a>
+<a href="#" onmouseover="showWikiBox1()">Fechar janela 2</a>
 <a href="index.htm" onmouseover="showWikiBox('en', '33423', 'Tiananmen')">simple tool tip</a> 
 </body>
 </html>

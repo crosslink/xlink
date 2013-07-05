@@ -1,10 +1,10 @@
 /*
-http://forrst.com/posts/Simple_pure_CSS_wikibox_with_arrow-BkY
+http://forrst.com/posts/Simple_pure_CSS_wikitip_with_arrow-BkY
 
 */
- .wikibox{display:inline;position:relative}
- .wikibox:hover{text-decoration:none}
- .wikibox:hover:after{
+ .wikitip{display:inline;position:relative}
+ .wikitip:hover{text-decoration:none}
+ .wikitip:hover:after{
    background:#111;
    background:rgba(0,0,0,.8);
    border-radius:5px;
@@ -19,7 +19,7 @@ http://forrst.com/posts/Simple_pure_CSS_wikibox_with_arrow-BkY
    z-index:98
   }
   
-  .wikibox:hover:before{
+  .wikitip:hover:before{
     border:solid;
     border-color:#111 transparent;
     border-width:6px 6px 0 6px;
