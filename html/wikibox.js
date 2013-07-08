@@ -44,37 +44,34 @@ function loadXMLDoc(url)
 	xmlhttp.send();
 }
 
-function showWikiBox1() {
-	alert("do nothing");
-}
-
 function showWikiBox(lang, id, anchor, others) {
 	wikiboxHtml = '<div id="wikibox"><div id="wikititle"><h3>' + anchor + '</h3><hr></div><div id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div>';
 	if (others) {
-		var links = createSeeAlsoLinks(lang, others);
-		('<div class="seealso"><hr><h3>See Also</h3><hr><br>' + links + '</div>');
+		var links = createSeeAlsoLinks(others);
+		wikiboxHtml = wikiboxHtml.concat('<div class="seealso"><h3>See Also</h3><hr><br>' + links + '</div>');
 	}
-	wikiboxHtml.concat('</div>');
+	wikiboxHtml = wikiboxHtml.concat('</div>');
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
 	loadXMLDoc('/get?pageid=' + id + '&lang=' + lang);
 }
 
-function createSeeAlsoLinks(lang, others) {
-	var links_array = ids.split(";");
+function createSeeAlsoLinks(others) {
+	var links_array = others.split(";");
 	var links_html = ""; 
 	//'<div id="wikilinks">';
 
 	for (var i = 0; i < links_array.length; i++) {
 		var id_anchor = links_array[i].split(":");
-		var id = id_anchor[0];
-		var anchor = id_anchor[1];
+		var lang = id_anchor[0];
+		var id = id_anchor[1];
+		var anchor = id_anchor[2];
 		var temp = '<a  class="wikibox" href=&quot;http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a>';
 		if (i > 0)
-			links_html.concat('<br>');
-		links_html.concat(temp);
+			links_html = links_html.concat('<br>');
+		links_html = links_html.concat(temp);
 	}
-	
+	return links_html;
 //	links_html.concat('</div>');
 }

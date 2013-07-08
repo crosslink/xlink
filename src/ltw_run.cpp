@@ -377,8 +377,8 @@ int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void
 
 //	if (operation == OPERATION_STATIC_FILE && fd > 0)
 //		close(fd);
-    if (result != NULL)
-		free(result);
+//    if (result != NULL)
+//		free(result);
 	return ret;
 }
 
