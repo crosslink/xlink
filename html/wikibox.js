@@ -18,7 +18,7 @@
 function loadXMLDoc(url)
 {
 	var xmlhttp;
-	if (window.XMLHttpRequest) // code for IE7+, Firefox, Chrome, Opera, Safari
+	if (window.XMLHttpRequest) // code for IE7+, Firefox, Chrome, Opera, Safari, 
 	{
 		xmlhttp=new XMLHttpRequest();
 	}
@@ -29,19 +29,16 @@ function loadXMLDoc(url)
 	
 	xmlhttp.onreadystatechange = function()
 	{
-		xmlhttp.onreadystatechange = function()
+	    var text;
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 		{
-		    var text;
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-			{
-				text = xmlhttp.responseText;
-			}
-			else
-			{
-			    text = "Error in retrieving the abstract";
-			}
-			document.getElementById("wikiabstract").innerHTML= text;
+			text = xmlhttp.responseText;
 		}
+		else
+		{
+		    text = "Error in retrieving the abstract";
+		}
+		document.getElementById("wikiabstract").innerHTML= text;
 	}
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
@@ -51,12 +48,12 @@ function showWikiBox1() {
 	alert("do nothing");
 }
 
-function showWikiBox(lang, id, anchor) {
-	wikiboxHtml = '<div id="wikibox"><div id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div>';
-//	if (others) {
-//		var links = createSeeAlsoLinks(lang, others);
-//		('<div class="seealso"><hr><h3>See Also</h3><hr><br>' + links + '</div>');
-//	}
+function showWikiBox(lang, id, anchor, others) {
+	wikiboxHtml = '<div id="wikibox"><div id="wikititle"><h3>' + anchor + '</h3><hr></div><div id="wikiabstract"><img src="ajaxload.gif" /> Fetching Abstract...</div>';
+	if (others) {
+		var links = createSeeAlsoLinks(lang, others);
+		('<div class="seealso"><hr><h3>See Also</h3><hr><br>' + links + '</div>');
+	}
 	wikiboxHtml.concat('</div>');
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
@@ -64,7 +61,7 @@ function showWikiBox(lang, id, anchor) {
 	loadXMLDoc('/get?pageid=' + id + '&lang=' + lang);
 }
 
-function createSeeAlsoLinks(others) {
+function createSeeAlsoLinks(lang, others) {
 	var links_array = ids.split(";");
 	var links_html = ""; 
 	//'<div id="wikilinks">';
@@ -73,7 +70,7 @@ function createSeeAlsoLinks(others) {
 		var id_anchor = links_array[i].split(":");
 		var id = id_anchor[0];
 		var anchor = id_anchor[1];
-		var temp = '<a  class="wikibox" href=&quot;' + 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a>
+		var temp = '<a  class="wikibox" href=&quot;http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot;>' + anchor +	'</a>';
 		if (i > 0)
 			links_html.concat('<br>');
 		links_html.concat(temp);
