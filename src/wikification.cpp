@@ -37,7 +37,7 @@ void wikification::linkify(const char* links_xml,
 		const char* page, std::string& wikified_page) {
 
 	char *part = NULL;
-	long article_len = strlen(links_xml);
+	long article_len = strlen(page);
 	long part_len = 0;
 	stringstream wikified_page_ss("");
 
