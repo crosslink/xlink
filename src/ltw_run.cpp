@@ -303,8 +303,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 	 const char *external_page = NULL;
 	 char *result = NULL;
 	 int fd;
-	 
-	 if (strlen(url) == 1 && *url == '/') {
+	 	 if (strlen(url) == 1 && *url == '/') {
 		 const char *page_url = NULL;
 		 page_url = (char *)MHD_lookup_connection_value(connection, MHD_GET_ARGUMENT_KIND, "page");
 		 operation = OPERATION_WIKIFY;
@@ -377,8 +376,8 @@ int QLINK::ltw_run::response_with_result(struct MHD_Connection* connection, void
 
 //	if (operation == OPERATION_STATIC_FILE && fd > 0)
 //		close(fd);
-//    if (result != NULL)
-//		free(result);
+    if (result != NULL)
+		free(result);
 	return ret;
 }
 

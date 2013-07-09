@@ -118,19 +118,15 @@ void ltw_task::init()
 		break;
 	case LTW_ANT_CROSSLINK:
 		algor_out_ = new algorithm_ant_crosslink_this(this);
-		//topic_param_start = algor_out_->init();
 		break;
 	case LTW_PAGE_NAME:
 		algor_out_ = new algorithm_page_name(this);
-		//topic_param_start = algor_out_->init();
 		break;
 	case LTW_ANT_AND_PAGE:
 		algor_out_ = new algorithm_ant_link_this_and_page_name(this);
-		//topic_param_start = algor_out_->init();
 		break;
 	case LTW_ANT_AND_PAGE2:
 		algor_out_ = new algorithm_ant_link_this_and_page_name2(this);
-		//topic_param_start = algor_out_->init();
 		break;
 	case LTW_TANG:
 		//algor_out_ = new algorithm_ltw_tang();

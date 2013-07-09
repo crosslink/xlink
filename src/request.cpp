@@ -52,7 +52,7 @@ request::~request() {
 
 void request::apply_links(const std::string& links_xml) {
 	static boost::regex pattern("<\\s+body\\s+>");
-	static string wikibox_scripts = string("<body><script type=\"text/javascript\" src=\"http://localhost/tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"http://localhost/wikibox.js\"></script>");
+	static string wikibox_scripts = string("<body><script type=\"text/javascript\" src=\"tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"wikibox.js\"></script>");
 
 	/*
 	 *

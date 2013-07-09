@@ -174,6 +174,7 @@ void wikification::linkify(const char* links_xml,
 				if ((part_len = article_len - last_offset) > 0) {
 					part = new char[part_len + 1];
 					memcpy(part, page + last_offset, part_len);
+					part[part_len] = '\0';
 					wikified_page_ss << part;
 					delete [] part;
 				}
