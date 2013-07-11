@@ -63,33 +63,66 @@ function loadAbstract(id, lang, anchor) {
 }
 
 function showWikiBox(lang, id, anchor, others) {
+	
 	wikiboxHtml = '<div id="wikibox"><div id="wikititle"><h3>' + anchor + '</h3><hr></div><div id="wikiabstract"></div>';
-	if (others) {
-		var links = createSeeAlsoLinks(others);
-		wikiboxHtml = wikiboxHtml.concat('<div id="wikiseealso" class="seealso"><h3>See Also</h3><hr><br>' + links + '</div>');
-	}
+//	if (others) {
+//		var links = createSeeAlsoLinks(others);
+// 		' + links + '
+		wikiboxHtml = wikiboxHtml.concat('<br><div id="wikiseealso" class="seealso"><h3>See Also</h3><hr><div id="wiki-see-also-links"></div></div>');
+//	}
 	wikiboxHtml = wikiboxHtml.concat('</div>');
 	
 	Tip(wikiboxHtml, DELAY, 1000, STICKY, true);
 	
+	createSeeAlsoLinks(others);
+	
 	loadAbstract(id, lang, anchor);
 }
 
+function updateAbstract() {
+	var id_lang = this.title.split(":");
+	var anchor = this.innerHTML;
+	var lang = id_lang[0];
+	var id = id_lang[1];
+		
+	loadAbstract(id, lang, anchor); 
+}
+
 function createSeeAlsoLinks(others) {
+	var otherLinksDiv = document.getElementById("wiki-see-also-links");
 	var links_array = others.split(";");
 	var links_html = ""; 
 	//'<div id="wikilinks">';
 
-	for (var i = 0; i < links_array.length; i++) {
-		var id_anchor = links_array[i].split(":");
-		var lang = id_anchor[0];
-		var id = id_anchor[1];
-		var anchor = id_anchor[2];
-		var temp = '<a  class="wikibox" href=&quot;http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '&quot; onmouseover=&quot;loadAbstract(' + id +', ' + lang + ', ' + anchor + ')&quot;>' + anchor +	'</a>';
-		if (i > 0)
-			links_html = links_html.concat('<br>');
-		links_html = links_html.concat(temp);
+	if (otherLinksDiv) {	
+		while (otherLinksDiv.hasChildNodes()) {
+			otherLinksDiv.removeChild(otherLinksDiv.lastChild);
+		}
+		for (var i = 0; i < links_array.length; i++) {
+			var id_anchor = links_array[i].split(":");
+			var lang = id_anchor[0];
+			var id = id_anchor[1];
+			var anchor = id_anchor[2];
+			
+			var a = document.createElement('a');
+			var anchorText = document.createTextNode(anchor);
+			a.appendChild(anchorText);
+			a.title = lang + ':' + id;
+			a.href = 'http://' + lang +'.wikipedia.org/w/index.php?curid=' + id;
+			var onEvent = "loadAbstract('" + id +"', '" + lang + "', '" + anchor + "');";
+			a.onmouseover =updateAbstract
+//			a.hover = onEvent;
+			otherLinksDiv.appendChild(a);
+			
+	//		var temp = '<a  class="wikibox" href="http://' + lang +'.wikipedia.org/w/index.php?curid=' + id + '" onmouseover="loadAbstract(&quote;' + id +'&quote;, &quote;' + lang + '&quote;, &quote;' + anchor + '&quote;)">' + anchor +	'</a>';
+			if (links_array.length > (i + 1)) {
+	//			links_html = links_html.concat('<br>');
+				var lineBreak = document.createElement('br');
+				otherLinksDiv.appendChild(lineBreak);
+			}
+	//		links_html = links_html.concat(temp);
+		}
 	}
-	return links_html;
+//	return links_html;
 //	links_html.concat('</div>');
 }
