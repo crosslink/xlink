@@ -73,7 +73,7 @@ const char *webpage_retriever::ERROR_PAGE = "<html><title>Error</title><body>Int
 
 		  /* some servers don't like requests that are made without a user-agent
 			 field, so we provide one */
-		  curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "CROSSLINK/1.0 (http://ntcir.nii.ac.jp/CrossLink/)");
+		  curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "CROSSLINK/XLINK1.0 (https://github.com/crosslink/xlink) Mozilla/5.0 (Linux) AppleWebKit/534.30 (KHTML, like Gecko");
 		  curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
 	}
 
