@@ -70,36 +70,35 @@ void wikification::linkify(const char* links_xml,
 
 				while (anchor_it != outgoing_links->iter_end()) {
 					element_type *anchor_elem = static_cast<element_type *>((*anchor_it));
+					string name = anchor_elem->get_attribute("name");
+					long	offset = atol(anchor_elem->get_attribute("offset").c_str());
 
-					entity_iterator link_it = anchor_elem->iter_begin();
-					while (link_it != anchor_elem->iter_end()) {
-						element_type *link = static_cast<element_type *>((*link_it));; //anchor_elem->find_child("tofile");
+					if (offset > 0) {
+						/*
+						 * TODO
+						 * the  anchor offset is one byte offset from the real offset
+						 * and I don't why, this is just a temporary fix
+						 */
+						anchor_array.push_back(anchor(name, offset));
+						anchor& ancr = anchor_array.back(); //(name, offset);
 
-						string name = anchor_elem->get_attribute("name");
-						long	offset = atol(anchor_elem->get_attribute("offset").c_str());
-//						if (link != NULL) {
-							string id = link->text();
-							string title = link->get_attribute("title");
-							string lang = link->get_attribute("lang");
+						entity_iterator link_it = anchor_elem->iter_begin();
+						while (link_it != anchor_elem->iter_end()) {
+							element_type *link = static_cast<element_type *>((*link_it));; //anchor_elem->find_child("tofile");
 
-							if (lang.length() == 0)
-								lang = "en";
+	//						if (link != NULL) {
+								string id = link->text();
+								string title = link->get_attribute("title");
+								string lang = link->get_attribute("lang");
 
-							target a_target(lang, id, title);
+								if (lang.length() == 0)
+									lang = "en";
 
-							if (offset > 0) {
-								/*
-								 * TODO
-								 * the  anchor offset is one byte offset from the real offset
-								 * and I don't why, this is just a temporary fix
-								 */
-								anchor ancr(name, offset);
-								ancr.add_target(a_target);
-								anchor_array.push_back(ancr);
-							}
-//						}
-
-						++link_it;
+//								target a_target(lang, id, title);
+								ancr.add_target(target(lang, id, title));
+	//						}
+							++link_it;
+						}
 					}
 					++anchor_it;
 				}
@@ -108,9 +107,9 @@ void wikification::linkify(const char* links_xml,
 				for (int i = 0; i <anchor_array.size(); ++i) {
 					anchor &ancr = anchor_array[i];
 					const string &name = ancr.get_name();
-					const target &a_target = ancr.get_target();
+					const target &a_target = ancr.get_target(i);
 					const string::size_type where  = ancr.get_offset();
-					cerr << "anchor: " << name << " offset: " << where << endl;
+					cerr << "anchor: " << name << " offset: " << where << " target #: " << ancr.get_target_count() << endl;
 				}
 //					cerr << "anchor: " << name << " offset: " << where << endl;
 //					cerr << "last offset: " << last_offset << endl;
@@ -151,10 +150,17 @@ void wikification::linkify(const char* links_xml,
 						const target& tgt = ancr.get_target(i);
 						if (i > 1)
 							ids << ";";
-						ids << tgt.get_lang() <<":" << tgt.get_target() << ":" << (a_target.get_title().length() == 0) ? tgt.get_target() : tgt.get_title();
+						ids << tgt.get_lang() <<":" << tgt.get_target() << ":";
+						if  (a_target.get_title().length() == 0)
+							ids << tgt.get_target();
+						else
+							ids << tgt.get_title();
 					}
 
-					ss << "<a href=\"" << url.str() << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name << "', '"  << ids.str() <<"')\">" << anchor_name << "</a>";
+					ss << "<a href=\"" << url.str() << "\" onmouseover=\"showWikiBox('" << a_target.get_lang() << "', '" <<  a_target.get_target() << "', '" << anchor_name << "'";
+					if (ids.str().length() > 0)
+						ss << ", '"  << ids.str() <<"'";
+					ss << ")\">" << anchor_name << "</a>";
 
 					wikified_page_ss << part << ss.str();
 #ifdef DEBUG
@@ -182,7 +188,7 @@ void wikification::linkify(const char* links_xml,
 		}
 	}
 #ifdef DEBUG
-	cerr << wikified_page_ss.str() << endl;
+//	cerr << wikified_page_ss.str() << endl;
 #endif
 	wikified_page.append(wikified_page_ss.str());
 }

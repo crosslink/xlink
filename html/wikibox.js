@@ -18,13 +18,13 @@
 function getContentByUrl(url)
 {
 	var httpRequest;
-	if (window.httpRequestRequest) // for IE7+, Firefox, Chrome, Opera, Safari, 
+	if (window.XMLHttpRequest) // for IE7+, Firefox, Chrome, Opera, Safari, 
 	{
-		httpRequest = new httpRequestRequest();
+		httpRequest = new  XMLHttpRequest();
 	}
 	else // for IE6, IE5
 	{
-		httpRequest = new ActiveXObject("Microsoft.httpRequest");
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
 	httpRequest.onreadystatechange = function()

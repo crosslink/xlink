@@ -21,6 +21,7 @@ private:
 public:
 	target();
 	target(std::string lang, std::string a_target, std::string title);
+	target(const target& a_target);
 	virtual ~target();
 
 	const std::string& get_lang() const {

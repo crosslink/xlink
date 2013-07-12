@@ -261,6 +261,11 @@ bool link::print_anchor(topic *topic_ptr, long beps_to_print, bool id_or_name, a
 		}
 #endif
 
+#ifdef DEBUG
+		if (how_many_left < 4)
+			cerr << "anchor (" << this_term << ") has more than 1 link." << endl;
+#endif
+
 		//puts("\t\t\t</anchor>\n");
 		if (anchor_printed) {
 			stringbuffer << "\t\t\t</anchor> " << endl;
