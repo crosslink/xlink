@@ -21,8 +21,8 @@ AC_ARG_WITH(stpl,
             CXXFLAGS="$CXXFLAGS -I$withval"
           else
             AC_MSG_ERROR([Cannot stat directory $withval])
-          fi ], 
-          [] )
+          fi 
+        ] )
           
 AC_ARG_WITH(atire,
             AC_HELP_STRING([--with-atire]
@@ -30,7 +30,7 @@ AC_ARG_WITH(atire,
         [
             CFLAGS="$CFLAGS -DWITH_ATIRE"
             CXXFLAGS="$CXXFLAGS -DWITH_ATIRE"
-		] )          
+	] )          
           
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lant':
