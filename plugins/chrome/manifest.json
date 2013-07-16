@@ -6,12 +6,23 @@
   "version": "1.0",
 
   "permissions": [
-    "http://localhost:8888/"
+  	"activeTab",
+  	"tabs", 
+  	"http://*/*",
+    "https://*/*"
   ],
   
   "background": {
+  	"persistent": false,
     "scripts": ["wikifyme.js"]
   },
+  
+    "content_scripts": 
+    {
+      "matches": ["*"],
+      "css": ["wikifyme.css"],
+      "js": ["events.js"]
+    },
   
   "browser_action": {
     "default_icon": "icon.png",
