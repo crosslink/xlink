@@ -20,14 +20,16 @@
   
   "background": {
   	"persistent": false,
-    "scripts": ["background.js"]
+    "scripts": ["background.js", "events.js", "wikifyme.js"]
   },
   
     "content_scripts": [
 	    {
 	      "matches": ["*://*/"],
 	      "css": ["wikifyme.css"],
-	      "js": ["events.js", "wikifyme.js"]
+	      "js": ["tooltip.js"],
+	      "js": ["wikibox.js"],
+	      "run_at": "document_end"
 	    }
     ],
   
