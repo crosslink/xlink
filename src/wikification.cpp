@@ -104,13 +104,13 @@ void wikification::linkify(const char* links_xml,
 				}
 				std::sort(anchor_array.begin(), anchor_array.end());
 #ifdef DEBUG
-				for (int i = 0; i <anchor_array.size(); ++i) {
-					anchor &ancr = anchor_array[i];
-					const string &name = ancr.get_name();
-					const target &a_target = ancr.get_target(i);
-					const string::size_type where  = ancr.get_offset();
-					cerr << "anchor: " << name << " offset: " << where << " target #: " << ancr.get_target_count() << endl;
-				}
+//				for (int i = 0; i <anchor_array.size(); ++i) {
+//					anchor &ancr = anchor_array[i];
+//					const string &name = ancr.get_name();
+//					const target &a_target = ancr.get_target(i);
+//					const string::size_type where  = ancr.get_offset();
+//					cerr << "anchor: " << name << " offset: " << where << " target #: " << ancr.get_target_count() << endl;
+//				}
 //					cerr << "anchor: " << name << " offset: " << where << endl;
 //					cerr << "last offset: " << last_offset << endl;
 //					if (last_offset == 604)

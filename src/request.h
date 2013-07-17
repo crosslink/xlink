@@ -69,6 +69,8 @@ public:
 
 	void apply_links(const std::string& links_xml);
 
+	void inject_javascript(std::string& what);
+
 	const std::string& get_url() const {
 		return url_;
 	}
