@@ -1,6 +1,6 @@
 debugger;
 
-var wikification_server = "centos6.qut.edu.au";
+var wikification_server = "centos6.qut.edu.au:8888";
 var wikification_request_url = "http://" + wikification_server + "/?page=";
 
 function AlertMe(url) {
@@ -8,7 +8,8 @@ function AlertMe(url) {
 }
 
 function UpdateDocument(newHtml) {
-	document.write(newHtml);
+	if (newHtml)
+		document.write(newHtml);
 }
 
 if (url_to_wikify) {

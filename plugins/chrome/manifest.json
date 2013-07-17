@@ -14,8 +14,9 @@
   "permissions": [
   	"activeTab",
   	"tabs", 
-  	"http://*/*",
-    "https://*/*"
+  	"http://centos6.qut.edu.au:8888/",
+  	"http://*/",
+    "https://*/"
   ],
   
   "background": {
@@ -31,7 +32,7 @@
 	      "js": ["tooltip.js"],
 	      "js": ["wikibox.js"],
 	      "js": ["wikifyme.js"],
-	      "run_at": "document_end"
+	      "run_at": "document_start"
 	    }
     ],
   

@@ -16,7 +16,11 @@
  *******************************************************************************/
 
 function setInfo(text) {
-	document.getElementById("wikiabstract").innerHTML= text;
+	var wikiAbstractElem = document.getElementById("wikiabstract");
+	if (text)
+		wikiAbstractElem.innerHTML= text;
+	else
+		wikiAbstractElem.innerHTML= "Error in retrieving the abstract";
 }
 
 function displayProgress(info) {
