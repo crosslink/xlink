@@ -15,35 +15,6 @@
  *
  *******************************************************************************/
 
-function getContentByUrl(url)
-{
-	var httpRequest;
-	if (window.XMLHttpRequest) // for IE7+, Firefox, Chrome, Opera, Safari, 
-	{
-		httpRequest = new  XMLHttpRequest();
-	}
-	else // for IE6, IE5
-	{
-		httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	httpRequest.onreadystatechange = function()
-	{
-	    var text;
-		if (httpRequest.readyState == 4 && httpRequest.status == 200)
-		{
-			text = httpRequest.responseText;
-		}
-		else
-		{
-		    text = "Error in retrieving the abstract";
-		}
-		setInfo(text);
-	}
-	httpRequest.open("GET", url, true);
-	httpRequest.send();
-}
-
 function setInfo(text) {
 	document.getElementById("wikiabstract").innerHTML= text;
 }
@@ -59,7 +30,7 @@ function displayProgress(info) {
 
 function loadAbstract(id, lang, anchor) {
 	displayProgress(anchor);
-	getContentByUrl('/get?pageid=' + id + '&lang=' + lang);
+	getContentByUrl('/get?pageid=' + id + '&lang=' + lang, setInfo);
 }
 
 function showWikiBox(lang, id, anchor, others) {
