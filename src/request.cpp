@@ -63,12 +63,13 @@ void request::apply_links(const std::string& links_xml) {
 	 * adding tooltip scripts for anchors
 	 */
 //	wikified_page_ = boost::regex_replace (wikified_page_, pattern, wikibox_scripts);
-	string::size_type pos; //= wikified_page_.find("body");
+	string::size_type pos = 0; //= wikified_page_.find("body");
 	string::iterator it_pre, it_next;
-	while ((pos = wikified_page_.find("body")) != string::npos /*&& (pos + 4) < wikified_page_.length()*/) {
+	while ((pos = wikified_page_.find("body", pos)) != string::npos && (pos + 4) < wikified_page_.length()) {
 		it_pre = wikified_page_.begin() + pos;
 		it_next = it_pre + 4;
 		--it_pre;
+		pos += 4;
 //		++it_next;
 
 		while (it_pre != wikified_page_.begin() && isspace(*it_pre))

@@ -32,7 +32,7 @@ function getContentByUrl(url)
 	    var text;
 		if (httpRequest.readyState == 4 && httpRequest.status == 200)
 		{
-			text = httpRequest.responseText;
+		    text = httpRequest.responseText;
 		}
 		else
 		{
@@ -45,7 +45,8 @@ function getContentByUrl(url)
 }
 
 function setInfo(text) {
-	document.getElementById("wikiabstract").innerHTML= text;
+	if (text)
+		document.getElementById("wikiabstract").innerHTML= text;
 }
 
 function displayProgress(info) {
