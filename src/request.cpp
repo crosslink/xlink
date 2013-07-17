@@ -52,7 +52,7 @@ request::~request() {
 
 void request::apply_links(const std::string& links_xml) {
 	static boost::regex pattern("<\\s+body\\s+>");
-	static string wikibox_scripts = string("<body><script type=\"text/javascript\" src=\"tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"wikibox.js\"></script>");
+//	static string wikibox_scripts = string("<body><script type=\"text/javascript\" src=\"tooltip.js\"></script>\n <script type=\"text/javascript\" src=\"wikibox.js\"></script>");
 
 	/*
 	 *
@@ -63,6 +63,11 @@ void request::apply_links(const std::string& links_xml) {
 	 * adding tooltip scripts for anchors
 	 */
 //	wikified_page_ = boost::regex_replace (wikified_page_, pattern, wikibox_scripts);
+
+	cerr << endl << "finished wikify page" << endl;
+}
+
+void request::inject_javascript(std::string& what) {
 	string::size_type pos = 0; //= wikified_page_.find("body");
 	string::iterator it_pre, it_next;
 	while ((pos = wikified_page_.find("body", pos)) != string::npos && (pos + 4) < wikified_page_.length()) {
@@ -81,13 +86,13 @@ void request::apply_links(const std::string& links_xml) {
 //				while (isspace(*it_next))
 
 			if (*it_next == '>')
-				wikified_page_.replace(it_pre, ++it_next, wikibox_scripts);
+				wikified_page_.replace(it_pre, ++it_next, what/*wikibox_scripts*/);
 			break;
 		}
 //		wikified_page_.insert(pos, wikibox_scripts);
 	}
-
-	cerr << endl << "finished wikify page" << endl;
 }
 
-} /* namespace QLINK */
+}
+
+ /* namespace QLINK */

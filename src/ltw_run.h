@@ -33,6 +33,7 @@
 
 #include <microhttpd.h>
 #include <map>
+#include <string>
 
 namespace QLINK {
 
@@ -49,12 +50,15 @@ namespace QLINK {
 		static const int								OPERATION_STATIC_FILE = 3;
 
 	private:
-		ltw_task											*task_;
-		struct MHD_Daemon						*daemon_;
+		ltw_task										*task_;
+		struct MHD_Daemon								*daemon_;
 
 		static ltw_run									*instance_ptr_;
 
-		request_type										requests_;
+		request_type									requests_;
+
+		bool											inject_js_;
+		std::string										inject_js_what_;
 
 	public:
 		ltw_run();

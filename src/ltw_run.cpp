@@ -111,6 +111,10 @@ void QLINK::ltw_run::load_config()
 		corpus_txt::instance().load_teara_map();
 	}
 
+	if (inject_js_ = (get_config().get_value("inject_js") == "true"))
+		inject_js_what_ = get_config().get_value("inject_js_text");
+
+
 	if (get_config().get_value("load_on_startup") == "true")
 		this->global_initialise();
 
@@ -264,6 +268,9 @@ const char *QLINK::ltw_run::check_request(const char *page_url) {
 		 string links_xml = aout_->to_string();
 		 rsq_ptr->apply_links(links_xml);
 
+		 if (inject_js_)
+			 rsq_ptr->inject_javascript(inject_js_what_);
+
 //				 requests [page_url] = rsq;
 	 }
 
@@ -284,7 +291,7 @@ int QLINK::ltw_run::response_request(void* cls, struct MHD_Connection* connectio
 		const char* url, const char* method, const char* version,
 		const char* upload_data, size_t* upload_data_size, void** con_cls) {
 
-	 cerr << "Attempt to answer the connection" << endl;
+	 cerr << "Attempt to answer the request: " << url << endl;
 	 
 	/*
 	 *  load necessary tables into memory and do some preparation work
