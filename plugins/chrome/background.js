@@ -29,10 +29,15 @@
 //		                     'data'  : tab.url
 //		             }, function(response) {});
 //				 });
+				
 				chrome.tabs.executeScript(tab.id, {file: "ajax.js"}, function() {
-					 chrome.tabs.executeScript(tab.id, {code: "var url_to_wikify = " + JSON.stringify(tab.url)}, function () {
-						 chrome.tabs.executeScript(tab.id, {file: "wikifyme.js"});
-					 });
+					chrome.tabs.executeScript(tab.id, {file: "wikibox.js"}, function() {
+						chrome.tabs.executeScript(tab.id, {file: "tooltip.js"}, function() {
+							 chrome.tabs.executeScript(tab.id, {code: "var url_to_wikify = " + JSON.stringify(tab.url)}, function () {
+								 chrome.tabs.executeScript(tab.id, {file: "wikifyme.js"});
+							 });
+						});
+					});
 				});
 			}
 //				 chrome.tabs.executeScript(null, {code: "AlertMe"});

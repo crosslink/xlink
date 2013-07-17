@@ -21,18 +21,16 @@
   
   "background": {
   	"persistent": false,
-    "scripts": ["background.js", "events.js", "ajax.js"]
+    "scripts": ["background.js", "events.js"]
   },
   
     "content_scripts": [
 	    {
 	      "matches": ["*://*/"],
 	      "css": ["wikifyme.css"],
-	      "js": ["ajax.js"],
-	      "js": ["tooltip.js"],
-	      "js": ["wikibox.js"],
-	      "js": ["wikifyme.js"],
-	      "run_at": "document_start"
+	      "js": ["ajax.js", "wikibox.js", "tooltip.js", "wikifyme.js"],
+	      "all_frames" : true,
+	      "run_at": "document_end"
 	    }
     ],
   
