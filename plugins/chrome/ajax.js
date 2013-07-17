@@ -15,10 +15,31 @@
  *
  *******************************************************************************/
 
-function ListeningEvent(request, sender, response)
+function getContentByUrl(url, callback)
 {
-  if (request.action == 'AlertMe')
-	  AlertMe(request.data);
+	var httpRequest;
+	if (window.XMLHttpRequest) // for IE7+, Firefox, Chrome, Opera, Safari, 
+	{
+		httpRequest = new  XMLHttpRequest();
+	}
+	else // for IE6, IE5
+	{
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	httpRequest.onreadystatechange = function()
+	{
+	    var text;
+		if (httpRequest.readyState == 4 && httpRequest.status == 200)
+		{
+			text = httpRequest.responseText;
+		}
+		else
+		{
+		    text = "Error in retrieving the abstract";
+		}
+		callback(text);
+	}
+	httpRequest.open("GET", url, true);
+	httpRequest.send();
 }
- 
-chrome.extension.onMessage.addListener(ListeningEvent);

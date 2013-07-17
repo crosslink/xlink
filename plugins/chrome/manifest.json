@@ -3,7 +3,7 @@
 
   "name": "WikifyMe",
   "description": "WikifyMe extension wikifys web pages (news, blog, etc.) by generating anchors, which are linked to Wikipedia pages, in articles.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   
   "icons": { 
   		"16": "icon16.png",
@@ -20,13 +20,14 @@
   
   "background": {
   	"persistent": false,
-    "scripts": ["background.js", "events.js"]
+    "scripts": ["background.js", "events.js", "ajax.js"]
   },
   
     "content_scripts": [
 	    {
 	      "matches": ["*://*/"],
 	      "css": ["wikifyme.css"],
+	      "js": ["ajax.js"],
 	      "js": ["tooltip.js"],
 	      "js": ["wikibox.js"],
 	      "js": ["wikifyme.js"],
